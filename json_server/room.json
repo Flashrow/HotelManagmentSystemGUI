@@ -1,0 +1,39 @@
+{
+  "rooms": [
+    {
+      "id": 1,
+      "name": "Apartament",
+      "size": 4,
+      "price": 250.0,
+      "imageURL": "https://fromsmash.com/",
+      "beds": [
+        {
+          "type": "single",
+          "count": 2
+        },
+        {
+          "type": "double",
+          "count": 3
+        }
+      ],
+      "rooms": [
+        {
+          "type": "livingroom",
+          "count": 1
+        },
+        {
+          "type": "bedroom",
+          "count": 1
+        },
+        {
+          "type": "bathroom",
+          "count": 1
+        },
+        {
+          "type": "kitchen",
+          "count": 1
+        }
+      ]
+    }
+  ]
+}
