@@ -49,7 +49,9 @@ class LoginScreenComponent extends StatelessWidget {
               //flex: 3,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(topRight: Radius.circular(20), bottomRight: Radius.circular(20)),
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20),
+                      bottomRight: Radius.circular(20)),
                   color: Colors.white,
                 ),
                 child: Column(
@@ -79,11 +81,16 @@ class LoginScreenComponent extends StatelessWidget {
                                 fillColor: Colors.white,
                                 filled: true,
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: myColors.themeData.colorScheme.primary),
+                                  borderSide: BorderSide(
+                                      color: myColors
+                                          .themeData.colorScheme.primary),
                                 ),
                                 hintText: 'Podaj adres email',
                                 contentPadding: EdgeInsets.all(4),
                               ),
+                              onChanged: (text) {
+                                print('email: $text');
+                              },
                             ),
                           )
                         ],
@@ -110,11 +117,16 @@ class LoginScreenComponent extends StatelessWidget {
                                 fillColor: Colors.white,
                                 filled: true,
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: myColors.themeData.colorScheme.primary),
+                                  borderSide: BorderSide(
+                                      color: myColors
+                                          .themeData.colorScheme.primary),
                                 ),
                                 hintText: 'Podaj hasło',
                                 contentPadding: EdgeInsets.all(4),
                               ),
+                              onChanged: (passwordText) {
+                                print('password: $passwordText');
+                              },
                             ),
                           )
                         ],

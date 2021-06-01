@@ -16,34 +16,62 @@ class ClientStayWidget extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width,
               alignment: Alignment.center,
-              child: Text('Pobyt', style: TextStyle(color: Colors.white)),
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  child: Text('05.05.2021'),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('Pobyt', style: TextStyle(color: Colors.white)),
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
                 ),
-                Container(
-                  child: Text('12.05.2021'),
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+            ),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
+                  ),
+                  color: Colors.white,
                 ),
-              ],
-            ),
-            Container(
-              child: Text('Bużyńska-Stromowicz Anna'),
-            ),
-            Container(
-              child: Text('Polska'),
-            ),
-            Container(
-              child: Text('Pokój 105'),
-            ),
-            Container(
-              child: Text('Typ Standard'),
-            ),
-            Container(
-              child: Text('Łóżka 5'),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            child: Text('05.05.2021'),
+                          ),
+                          Container(
+                            child: Text('12.05.2021'),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        child: Text('Bużyńska-Stromowicz Anna'),
+                      ),
+                      Container(
+                        child: Text('Polska'),
+                      ),
+                      Container(
+                        child: Text('Pokój 105'),
+                      ),
+                      Container(
+                        child: Text('Typ Standard'),
+                      ),
+                      Container(
+                        child: Text('Łóżka 5'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ],
         ),

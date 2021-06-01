@@ -31,7 +31,7 @@ class SingleBed extends Bed {
   final int? count;
   @override
   String toString() {
-    return "pojedyńcze";
+    return "pojedyncze";
   }
 }
 
@@ -43,7 +43,7 @@ class MatrimonialBed extends Bed {
 
   @override
   String toString() {
-    return "małżeśnkie";
+    return "małżeńskie";
   }
 }
 

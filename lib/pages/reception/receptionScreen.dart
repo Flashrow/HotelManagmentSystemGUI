@@ -156,23 +156,38 @@ class ReceptionScreen extends StatelessWidget {
                             children: [
                               ClientTopBar(),
                               Expanded(
-                                child: Row(
-                                  children: [
-                                    ClientDataWidget(),
-                                    ClientStayWidget(),
-                                  ],
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(10),
+                                      bottomRight: Radius.circular(10),
+                                    ),
+                                    color: Colors.red,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Expanded(
+                                        child: Row(
+                                          children: [
+                                            ClientDataWidget(),
+                                            ClientStayWidget(),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Row(
+                                          children: [
+                                            Expanded(child: Container()),
+                                            Expanded(child: ClientFoodWidget()),
+                                            Expanded(child: Container()),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(child: Container()),
+                                    ],
+                                  ),
                                 ),
                               ),
-                              Expanded(
-                                child: Row(
-                                  children: [
-                                    Expanded(child: Container()),
-                                    Expanded(child: ClientFoodWidget()),
-                                    Expanded(child: Container()),
-                                  ],
-                                ),
-                              ),
-                              Expanded(child: Container()),
                             ],
                           ),
                         ),

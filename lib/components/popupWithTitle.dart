@@ -25,6 +25,7 @@ class PopupWithTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: Colors.white,
       titlePadding: EdgeInsets.all(0),
       contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 16),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -41,7 +42,7 @@ class PopupWithTitle extends StatelessWidget {
           child: Row(
             children: [
               Icon(
-                Icons.add,
+                icon,
                 color: Colors.white,
               ),
               SizedBox(width: 8),
@@ -54,7 +55,6 @@ class PopupWithTitle extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           content,
-          SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

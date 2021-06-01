@@ -15,39 +15,67 @@ class ClientDataWidget extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width,
               alignment: Alignment.center,
-              child: Text('Dane', style: TextStyle(color: Colors.white)),
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  child: Text('Anna'),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('Dane', style: TextStyle(color: Colors.white)),
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
                 ),
-                Container(
-                  child: Text('+48 005 984 648'),
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+            ),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
+                  ),
+                  color: Colors.white,
                 ),
-              ],
-            ),
-            Container(
-              child: Text('Bużyńska-Stromowicz'),
-            ),
-            Container(
-              child: Text('Polska'),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  child: Text('Kraków'),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            child: Text('Anna'),
+                          ),
+                          Container(
+                            child: Text('+48 005 984 648'),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        child: Text('Bużyńska-Stromowicz'),
+                      ),
+                      Container(
+                        child: Text('Polska'),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            child: Text('Kraków'),
+                          ),
+                          Container(
+                            child: Text('40-743'),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        child: Text('plac Piastów Srastów 2132 blabla'),
+                      ),
+                    ],
+                  ),
                 ),
-                Container(
-                  child: Text('40-743'),
-                ),
-              ],
-            ),
-            Container(
-              child: Text('plac Piastów Srastów 2132 blabla'),
+              ),
             ),
           ],
         ),
