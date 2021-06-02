@@ -6,5 +6,7 @@ class Auth {
   String get token => _token;
 
   bool isAuthorized = false;
+
+  Auth();
   //final UserProvider user = UserProvider(Dio(BaseOptions(contentType: "application/json")));
 }
