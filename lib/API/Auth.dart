@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:hotel_management_system/API/UserProvider.dart';
+import 'package:hotel_management_system/API/UserApiProvider.dart';
 
 class Auth {
   String _token = "";
