@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'UserApiProvider.dart';
+part of 'UserApiClient.dart';
 
 // **************************************************************************
 // RetrofitGenerator
 // **************************************************************************
 
-class _UserApiProvider implements UserApiProvider {
-  _UserApiProvider(this._dio, {this.baseUrl}) {
+class _UserApiClient implements UserApiClient {
+  _UserApiClient(this._dio, {this.baseUrl}) {
     baseUrl ??= 'http://127.0.0.1:8080/';
   }
 
