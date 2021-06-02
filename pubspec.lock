@@ -415,9 +415,11 @@ packages:
   retrofit_generator:
     dependency: "direct dev"
     description:
-      name: retrofit_generator
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: generator
+      ref: master
+      resolved-ref: "16e567715b6a440f3b5135ed63f717e62f149f6f"
+      url: "https://github.com/trevorwang/retrofit.dart"
+    source: git
     version: "2.0.0"
   shelf:
     dependency: transitive

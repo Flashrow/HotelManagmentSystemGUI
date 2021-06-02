@@ -4,12 +4,12 @@ import 'package:retrofit/retrofit.dart';
 
 import 'ApiClient.dart';
 
-// part 'UserProvider.g.dart';
+part 'UserProvider.g.dart';
 
-// @RestApi(baseUrl: 'http://localhost:5000/')
-// abstract class UserProvider {
-//   factory UserProvider(Dio dio, {String baseUrl}) = _UserProvider;
+@RestApi(baseUrl: 'http://localhost:5000/')
+abstract class UserProvider {
+  factory UserProvider(Dio dio, {String baseUrl}) = _UserProvider;
 
-//   @GET(Apis.auth)
-//   Future<dynamic> getUsers();
-// }
+  @GET(Apis.auth)
+  Future<dynamic> getUsers();
+}

@@ -44,6 +44,13 @@ dev_dependencies:
   retrofit_generator: ^2.0.0
   built_value_generator: ^8.0.6
 
+dependency_overrides:
+  retrofit_generator:
+    git:
+      url: https://github.com/trevorwang/retrofit.dart
+      ref: master
+      path: generator
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

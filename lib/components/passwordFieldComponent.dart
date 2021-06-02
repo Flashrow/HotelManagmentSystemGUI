@@ -3,9 +3,9 @@ import 'package:hotel_management_system/utils/colorTheme.dart';
 
 class PasswordTextField extends StatelessWidget {
   const PasswordTextField({
-    Key key,
-    this.titleText,
-    this.hintText,
+    Key? key,
+    required this.titleText,
+    required this.hintText,
     //this.onChange,
   }) : super(key: key);
 
@@ -39,8 +39,7 @@ class PasswordTextField extends StatelessWidget {
                 //hoverColor: Colors.transparent,
                 filled: false,
                 enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      BorderSide(color: myColors.themeData.colorScheme.primary),
+                  borderSide: BorderSide(color: myColors.themeData.colorScheme.primary),
                 ),
                 hintText: hintText,
                 contentPadding: EdgeInsets.all(8),
