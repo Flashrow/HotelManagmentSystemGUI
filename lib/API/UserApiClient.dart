@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:hotel_management_system/API/Apis.dart';
 import 'package:hotel_management_system/AppConfig.dart';
 import 'package:hotel_management_system/models/StaffUser/StaffUser.dart';
+import 'package:hotel_management_system/models/User/UserDetails.dart';
 import 'package:retrofit/retrofit.dart';
 
 import 'ApiClient.dart';
@@ -16,5 +17,5 @@ abstract class UserApiClient {
   Future<dynamic> login(@Field() String email, @Field() String password);
 
   @POST(Apis.userDetails)
-  Future<dynamic> getUserDetails();
+  Future<UserDetails> getUserDetails();
 }
