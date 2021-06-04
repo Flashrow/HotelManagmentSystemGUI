@@ -31,12 +31,13 @@ class ReportDamageDialog extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.fromLTRB(36, 16, 36, 16),
             child: TextField(
               maxLines: 6,
               decoration: new InputDecoration(
                 hintText: "Opis",
                 enabledBorder: new OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
                   borderSide:
                       new BorderSide(color: Theme.of(context).primaryColor),
                 ),
