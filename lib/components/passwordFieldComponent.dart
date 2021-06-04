@@ -3,9 +3,9 @@ import 'package:hotel_management_system/utils/colorTheme.dart';
 
 class PasswordTextField extends StatelessWidget {
   const PasswordTextField({
-    Key key,
-    this.titleText,
-    this.hintText,
+    Key? key,
+    this.titleText = "Title",
+    this.hintText = "Hint",
     //this.onChange,
   }) : super(key: key);
 

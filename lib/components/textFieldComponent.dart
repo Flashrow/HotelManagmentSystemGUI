@@ -3,9 +3,9 @@ import 'package:hotel_management_system/utils/colorTheme.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
-    Key key,
-    this.titleText,
-    this.hintText,
+    Key? key,
+    this.titleText = "Title",
+    this.hintText = "Hint",
     //this.onChange,
   }) : super(key: key);
 
