@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_management_system/components/filledRoundedButton.dart';
 import 'package:hotel_management_system/components/navigationComponent.dart';
+import 'package:hotel_management_system/components/outlinedRoundedButton.dart';
 import 'package:hotel_management_system/components/topBar.dart';
-import 'package:hotel_management_system/pages/reception/components/clientDataWidget.dart';
-import 'package:hotel_management_system/pages/reception/components/clientFoodWidget.dart';
+import 'package:hotel_management_system/pages/reception/payment_components/clientDataWidget.dart';
+import 'package:hotel_management_system/pages/reception/payment_components/clientFoodWidget.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
 
-import 'components/clientStayWidget.dart';
-import 'components/clientTopBarWidget.dart';
+import 'edit_components/editClientWidget.dart';
+import 'payment_components/clientPaymentWidget.dart';
+import 'payment_components/clientStayWidget.dart';
+import 'payment_components/clientTopBarWidget.dart';
 
 class ReceptionScreen extends StatelessWidget {
   const ReceptionScreen({Key? key}) : super(key: key);
@@ -150,47 +154,7 @@ class ReceptionScreen extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 5,
-                        child: Padding(
-                          padding: const EdgeInsets.all(32.0),
-                          child: Column(
-                            children: [
-                              ClientTopBar(),
-                              Expanded(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(10),
-                                      bottomRight: Radius.circular(10),
-                                    ),
-                                    color: Colors.red,
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Expanded(
-                                        child: Row(
-                                          children: [
-                                            ClientDataWidget(),
-                                            ClientStayWidget(),
-                                          ],
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Row(
-                                          children: [
-                                            Expanded(child: Container()),
-                                            Expanded(child: ClientFoodWidget()),
-                                            Expanded(child: Container()),
-                                          ],
-                                        ),
-                                      ),
-                                      Expanded(child: Container()),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        child: EditClientWidget(),
                       ),
                     ],
                   ),
