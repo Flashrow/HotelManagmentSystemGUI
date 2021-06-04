@@ -14,5 +14,5 @@ class AuthProvider extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(covariant InheritedWidget oldWidget) => false;
+  bool updateShouldNotify(AuthProvider oldWidget) => oldWidget.auth.isAuthorized != auth.isAuthorized;
 }

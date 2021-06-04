@@ -18,4 +18,19 @@ abstract class UserApiClient {
 
   @POST(Apis.userDetails)
   Future<UserDetails> getUserDetails();
+
+  @POST(Apis.signUp)
+  Future<dynamic> signUp({
+    @Field() required String email,
+    @Field() required String password,
+    @Field() String adress = "",
+    @Field() String city = "",
+    @Field() String country = "",
+    @Field() required String name,
+    @Field() String number = "",
+    @Field() String postCode = "",
+    @Field() required String repeatedEmail,
+    @Field() required String repeatedPassword,
+    @Field() required String surname,
+  });
 }

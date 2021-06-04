@@ -44,6 +44,43 @@ class _UserApiClient implements UserApiClient {
     return value;
   }
 
+  @override
+  Future<dynamic> signUp(
+      {required email,
+      required password,
+      adress = "",
+      city = "",
+      country = "",
+      required name,
+      number = "",
+      postCode = "",
+      required repeatedEmail,
+      required repeatedPassword,
+      required surname}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = {
+      'email': email,
+      'password': password,
+      'adress': adress,
+      'city': city,
+      'country': country,
+      'name': name,
+      'number': number,
+      'postCode': postCode,
+      'repeatedEmail': repeatedEmail,
+      'repeatedPassword': repeatedPassword,
+      'surname': surname
+    };
+    final _result = await _dio.fetch(_setStreamType<dynamic>(
+        Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
+            .compose(_dio.options, '/clients/signup',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||
