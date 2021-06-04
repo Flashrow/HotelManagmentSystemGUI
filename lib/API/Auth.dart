@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:hotel_management_system/API/UserApiClient.dart';
 import 'package:hotel_management_system/models/User/UserDetails.dart';
+import 'package:hotel_management_system/utils/exceptions/ApiException.dart';
 
 class Auth {
   String _token = "";
@@ -40,12 +41,12 @@ class Auth {
   Future<Auth> signUp({
     required String email,
     required String password,
-    String adress = "",
-    String city = "",
-    String country = "",
+    required String address,
+    required String city,
+    required String country,
     required String name,
-    String number = "",
-    String postCode = "",
+    required String number,
+    required String postCode,
     required String repeatedEmail,
     required String repeatedPassword,
     required String surname,
@@ -59,7 +60,7 @@ class Auth {
         name: name,
         number: number,
         postCode: postCode,
-        adress: adress,
+        address: address,
         city: city,
         country: country,
         repeatedEmail: repeatedEmail,
@@ -81,23 +82,5 @@ class Auth {
     isAuthorized = true;
     _dio.options.headers["Authorization"] = _token;
     _userClient = UserApiClient(_dio);
-  }
-}
-
-class ApiException implements Exception {
-  String? statusCode;
-  String? msg;
-  String? path;
-  DioError error;
-
-  ApiException(this.error) {
-    statusCode = error.response!.statusCode.toString();
-    msg = error.response!.data['message'];
-    path = error.response!.data['path'];
-  }
-
-  @override
-  String toString() {
-    return msg ?? "Api exception";
   }
 }

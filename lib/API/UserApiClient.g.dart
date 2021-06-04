@@ -48,12 +48,12 @@ class _UserApiClient implements UserApiClient {
   Future<dynamic> signUp(
       {required email,
       required password,
-      adress = "",
-      city = "",
-      country = "",
+      required address,
+      required city,
+      required country,
       required name,
-      number = "",
-      postCode = "",
+      required number,
+      required postCode,
       required repeatedEmail,
       required repeatedPassword,
       required surname}) async {
@@ -62,7 +62,7 @@ class _UserApiClient implements UserApiClient {
     final _data = {
       'email': email,
       'password': password,
-      'adress': adress,
+      'address': address,
       'city': city,
       'country': country,
       'name': name,
