@@ -32,7 +32,7 @@ main() {
         postCode: "string",
       );
     } catch (e) {
-      print((e as ApiException).msg);
+      print(e);
     }
   });
 }

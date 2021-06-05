@@ -6,6 +6,8 @@ import 'package:hotel_management_system/API/UserApiClient.dart';
 import 'package:hotel_management_system/models/User/UserDetails.dart';
 import 'package:hotel_management_system/utils/exceptions/ApiException.dart';
 
+import 'package:hotel_management_system/utils/utils.dart';
+
 class Auth {
   String _token = "";
   String get token => _token;
@@ -21,21 +23,21 @@ class Auth {
     _userClient = UserApiClient(_dio);
   }
 
-  Future<Auth> signIn(String email, String password) async {
+  Future<UserDetails> signIn(String email, String password) async {
     try {
-      _token = await _userClient.login(email, password);
-      _setAuthorization();
+      _token = await callApi<String>(_userClient.login(email, password));
     } catch (e) {
-      print(e);
-      throw ("Auth failed");
+      throw e;
     }
+
+    _setAuthorization();
+
     try {
-      currentUser = await _userClient.getUserDetails();
+      currentUser = await callApi(_userClient.getUserDetails());
     } catch (e) {
-      print(e);
-      throw ("Couldn't download user details");
+      throw e;
     }
-    return this;
+    return currentUser!;
   }
 
   Future<Auth> signUp({
@@ -51,10 +53,8 @@ class Auth {
     required String repeatedPassword,
     required String surname,
   }) async {
-    String msg = "";
-
     try {
-      msg = await _userClient.signUp(
+      await callApi<dynamic>(_userClient.signUp(
         email: email,
         password: password,
         name: name,
@@ -66,14 +66,10 @@ class Auth {
         repeatedEmail: repeatedEmail,
         repeatedPassword: repeatedPassword,
         surname: surname,
-      );
-    } catch (obj) {
-      switch (obj.runtimeType) {
-        case DioError:
-          throw ApiException(obj as DioError);
-      }
+      ));
+    } catch (e) {
+      throw (e);
     }
-    if (msg != "Zarejestrowany") throw ("Signup failed: " + msg);
 
     return this;
   }
