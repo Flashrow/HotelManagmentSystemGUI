@@ -2,13 +2,14 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:hotel_management_system/API/UserApiClient.dart';
 import 'package:hotel_management_system/models/User/UserDetails.dart';
 import 'package:hotel_management_system/utils/exceptions/ApiException.dart';
 
 import 'package:hotel_management_system/utils/utils.dart';
 
-class Auth {
+class Auth with ChangeNotifier {
   String _token = "";
   String get token => _token;
 
@@ -18,8 +19,8 @@ class Auth {
   late UserApiClient _userClient;
   UserDetails? currentUser;
 
-  Auth() {
-    _dio = Dio();
+  Auth(Dio dio) {
+    _dio = dio;
     _userClient = UserApiClient(_dio);
   }
 
@@ -78,5 +79,6 @@ class Auth {
     isAuthorized = true;
     _dio.options.headers["Authorization"] = _token;
     _userClient = UserApiClient(_dio);
+    notifyListeners();
   }
 }

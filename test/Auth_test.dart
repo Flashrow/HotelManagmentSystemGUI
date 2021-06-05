@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 
 main() {
   test("Auth sign in test", () async {
-    Auth auth = new Auth();
+    Auth auth = new Auth(new Dio());
     try {
       await auth.signIn("string", "string");
     } catch (e) {
@@ -16,7 +16,7 @@ main() {
   });
 
   test("Auth sign up test", () async {
-    Auth auth = new Auth();
+    Auth auth = new Auth(new Dio());
     try {
       await auth.signUp(
         email: "string",
