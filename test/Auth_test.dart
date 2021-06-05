@@ -1,11 +1,13 @@
 import 'package:dio/dio.dart';
+import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/API/Auth.dart';
 import 'package:hotel_management_system/utils/exceptions/ApiException.dart';
 import 'package:test/test.dart';
 
 main() {
   test("Auth sign in test", () async {
-    Auth auth = new Auth();
+    ApiClient api = new ApiClient();
+    Auth auth = api.auth;
     try {
       await auth.signIn("string", "string");
     } catch (e) {
@@ -16,7 +18,7 @@ main() {
   });
 
   test("Auth sign up test", () async {
-    Auth auth = new Auth();
+    Auth auth = new Auth(new Dio());
     try {
       await auth.signUp(
         email: "string",
@@ -32,7 +34,7 @@ main() {
         postCode: "string",
       );
     } catch (e) {
-      print((e as ApiException).msg);
+      print(e);
     }
   });
 }
