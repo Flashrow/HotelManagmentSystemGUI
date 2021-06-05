@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/AppConfig.dart';
 import 'package:hotel_management_system/components/topBar.dart';
 import 'package:hotel_management_system/pages/guest/popup/cancelReservationDialog.dart';
@@ -12,11 +13,21 @@ import 'package:hotel_management_system/pages/guest/guestScreen.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
 import 'package:hotel_management_system/pages/register/registerScreen.dart';
 import 'package:hotel_management_system/pages/register/registerScreenComponent.dart';
+import 'package:provider/provider.dart';
 
 import 'components/navigationComponent.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ApiClient>(
+          create: (_) => ApiClient(),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

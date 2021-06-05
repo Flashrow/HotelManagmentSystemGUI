@@ -39,6 +39,7 @@ dependencies:
   built_collection: ^5.0.0
   jwt_decode: ^0.3.1
   json_annotation: ^4.0.0
+  provider: ^5.0.0
 
 dev_dependencies:
   test: ^1.17.5

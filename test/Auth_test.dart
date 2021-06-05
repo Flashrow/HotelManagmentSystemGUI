@@ -1,11 +1,13 @@
 import 'package:dio/dio.dart';
+import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/API/Auth.dart';
 import 'package:hotel_management_system/utils/exceptions/ApiException.dart';
 import 'package:test/test.dart';
 
 main() {
   test("Auth sign in test", () async {
-    Auth auth = new Auth(new Dio());
+    ApiClient api = new ApiClient();
+    Auth auth = api.auth;
     try {
       await auth.signIn("string", "string");
     } catch (e) {
