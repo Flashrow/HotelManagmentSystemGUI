@@ -25,12 +25,8 @@ class UserNotLoggedInComponent extends StatelessWidget {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  // borderRadius: BorderRadius.only(
-                  //   topLeft: Radius.circular(20),
-                  //   bottomLeft: Radius.circular(20),
-                  // ),
                   image: DecorationImage(
-                    image: AssetImage('assets/loginPhoto.png'),
+                    image: AssetImage('images/bedAsset.png'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -39,113 +35,27 @@ class UserNotLoggedInComponent extends StatelessWidget {
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                // decoration: BoxDecoration(
-                //   borderRadius: BorderRadius.only(
-                //       topRight: Radius.circular(20),
-                //       bottomRight: Radius.circular(20)),
-                //   color: Colors.white,
-                // ),
                 child: Column(
                   children: [
                     Container(
                       padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                      child: HeadingText(text: 'Dashboard'),
+                      child: HeadingText(text: 'Rezerwacja'),
                     ),
-                    Row(
-                      //crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        CustomTextField(
-                          titleText: 'Imię',
-                          hintText: 'Podaj imię',
-                          //onChange: () => {},
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        CustomTextField(
-                          titleText: 'Nazwisko',
-                          hintText: 'Podaj nazwisko',
-                          //onChange: () => {},
-                        ),
-                      ],
+                    Expanded(child: Container()),
+                    Text(
+                      "Zaloguj się by dokonać rezerwacji",
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
                     ),
-                    Row(
-                      //crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        CustomTextField(
-                          titleText: 'Email',
-                          hintText: 'Podaj adres email',
-                          //onChange: () => {},
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        CustomTextField(
-                          titleText: 'Powtórz email',
-                          hintText: 'Podaj adres email',
-                          //onChange: () => {},
-                        ),
-                      ],
+                    SizedBox(
+                      height: 20,
                     ),
-                    Row(
-                      //crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        CustomTextField(
-                          titleText: 'Numer telefonu',
-                          hintText: 'Podaj numer telefonu',
-                          //onChange: () => {},
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        CustomTextField(
-                          titleText: 'Kod pocztowy',
-                          hintText: 'Podaj kod pocztowy',
-                          //onChange: () => {},
-                        ),
-                      ],
+                    FilledRoundedButton(
+                      buttonText: 'zaloguj się',
+                      onPresesd: () => {},
                     ),
-                    Row(
-                      //crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        PasswordTextField(
-                          titleText: 'Hasło',
-                          hintText: 'Podaj hasło',
-                          //onChange: () => {},
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        PasswordTextField(
-                          titleText: 'Powtórz hasło',
-                          hintText: 'Podaj hasło',
-                          //onChange: () => {},
-                        ),
-                      ],
-                    ),
-                    Row(
-                      //crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        CustomTextField(
-                          titleText: 'Kraj',
-                          hintText: 'Podaj kraj',
-                          //onChange: () => {},
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        CustomTextField(
-                          titleText: 'Miasto',
-                          hintText: 'Podaj miasto',
-                          //onChange: () => {},
-                        ),
-                      ],
-                    ),
-                    CustomTextField(
-                      titleText: 'Adres',
-                      hintText: 'Podaj adres',
-                      //onChange: () => {},
-                    ),
+                    Expanded(child: Container()),
                   ],
                 ),
               ),
