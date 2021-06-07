@@ -6,8 +6,8 @@ import 'package:hotel_management_system/components/textFieldComponent.dart';
 import 'package:hotel_management_system/components/passwordFieldComponent.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
 
-class RegisterScreenComponent extends StatelessWidget {
-  const RegisterScreenComponent({Key? key}) : super(key: key);
+class UserNotLoggedInComponent extends StatelessWidget {
+  const UserNotLoggedInComponent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
