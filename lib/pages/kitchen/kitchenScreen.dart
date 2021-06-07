@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'kitchenCardsContainer.dart';
 import 'mealButtons.dart';
+import 'mealList.dart';
 
 class KitchenScreen extends StatelessWidget {
   const KitchenScreen({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class KitchenScreen extends StatelessWidget {
             SizedBox(height: 50),
             MealButtons(),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   flex: 4,
@@ -26,28 +28,7 @@ class KitchenScreen extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 6,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Specjalne",
-                            style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
-                          ),
-                          SizedBox(height: 16.0),
-                          Container(
-                            height: 1.0,
-                            alignment: Alignment.topCenter,
-                            color: Theme.of(context).primaryColor,
-                          )
-                        ],
-                      )
-                    ],
-                  ),
+                  child: MealList(),
                 ),
               ],
             )
