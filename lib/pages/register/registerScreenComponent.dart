@@ -1,11 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:hotel_management_system/bloc/client_bloc.dart';
 import 'package:hotel_management_system/components/HeadingText.dart';
 import 'package:hotel_management_system/components/filledRoundedButton.dart';
 import 'package:hotel_management_system/components/outlinedRoundedButton.dart';
 import 'package:hotel_management_system/components/textFieldComponent.dart';
 import 'package:hotel_management_system/components/passwordFieldComponent.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreenComponent extends StatefulWidget {
   const RegisterScreenComponent({Key? key}) : super(key: key);
@@ -21,6 +23,8 @@ class _RegisterScreenComponentState extends State<RegisterScreenComponent> {
   @override
   Widget build(BuildContext context) {
     ColorTheme myColors = ColorTheme();
+    final bloc = Provider.of<ClientBloc>(context);
+
     return Center(
       child: Container(
         decoration: BoxDecoration(
@@ -49,99 +53,154 @@ class _RegisterScreenComponentState extends State<RegisterScreenComponent> {
                     ),
                     Row(
                       children: [
-                        CustomTextField(
-                          titleText: 'Imię',
-                          hintText: 'Podaj imię',
-                          //onChange: () => {},
+                        StreamBuilder<String>(
+                          stream: bloc.name,
+                          builder: (context, snapshot) {
+                            return CustomTextField(
+                              titleText: 'Imię',
+                              hintText: 'Podaj imię',
+                              onChange: bloc.changeName,
+                            );
+                          }
                         ),
                         SizedBox(
                           width: 20,
                         ),
-                        CustomTextField(
-                          titleText: 'Nazwisko',
-                          hintText: 'Podaj nazwisko',
-                          //onChange: () => {},
+                        StreamBuilder<String>(
+                          stream: bloc.surname,
+                          builder: (context, snapshot) {
+                            return CustomTextField(
+                              titleText: 'Nazwisko',
+                              hintText: 'Podaj nazwisko',
+                              onChange: bloc.changeSurname,
+                            );
+                          }
                         ),
                       ],
                     ),
                     Row(
                       //crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        CustomTextField(
-                          titleText: 'Email',
-                          hintText: 'Podaj adres email',
-                          //onChange: () => {},
+                        StreamBuilder<String>(
+                          stream: bloc.email,
+                          builder: (context, snapshot) {
+                            return CustomTextField(
+                              titleText: 'Email',
+                              hintText: 'Podaj adres email',
+                              onChange: bloc.changeEmail,
+                            );
+                          }
                         ),
                         SizedBox(
                           width: 20,
                         ),
-                        CustomTextField(
-                          titleText: 'Powtórz email',
-                          hintText: 'Podaj adres email',
-                          //onChange: () => {},
+                        StreamBuilder<String>(
+                          stream: bloc.repeatedEmail,
+                          builder: (context, snapshot) {
+                            return CustomTextField(
+                              titleText: 'Powtórz email',
+                              hintText: 'Podaj adres email',
+                              onChange: bloc.changeRepeatedEmail,
+                            );
+                          }
                         ),
                       ],
                     ),
                     Row(
                       //crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        CustomTextField(
-                          titleText: 'Numer telefonu',
-                          hintText: 'Podaj numer telefonu',
-                          //onChange: () => {},
+                        StreamBuilder<String>(
+                          stream: bloc.number,
+                          builder: (context, snapshot) {
+                            return CustomTextField(
+                              titleText: 'Numer telefonu',
+                              hintText: 'Podaj numer telefonu',
+                              onChange: bloc.changeNumber,
+                            );
+                          }
                         ),
                         SizedBox(
                           width: 20,
                         ),
-                        CustomTextField(
-                          titleText: 'Kod pocztowy',
-                          hintText: 'Podaj kod pocztowy',
-                          //onChange: () => {},
+                        StreamBuilder<String>(
+                          stream: bloc.postCode,
+                          builder: (context, snapshot) {
+                            return CustomTextField(
+                              titleText: 'Kod pocztowy',
+                              hintText: 'Podaj kod pocztowy',
+                              onChange: bloc.changePostCode,
+                            );
+                          }
                         ),
                       ],
                     ),
                     Row(
                       //crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        PasswordTextField(
-                          titleText: 'Hasło',
-                          hintText: 'Podaj hasło',
-                          //onChange: () => {},
+                        StreamBuilder<String>(
+                          stream: bloc.password,
+                          builder: (context, snapshot) {
+                            return PasswordTextField(
+                              titleText: 'Hasło',
+                              hintText: 'Podaj hasło',
+                              onChange: bloc.changePassword,
+                            );
+                          }
                         ),
                         SizedBox(
                           width: 20,
                         ),
-                        PasswordTextField(
-                          titleText: 'Powtórz hasło',
-                          hintText: 'Podaj hasło',
-                          //onChange: () => {},
+                        StreamBuilder<String>(
+                          stream: bloc.repeatedPassword,
+                          builder: (context, snapshot) {
+                            return PasswordTextField(
+                              titleText: 'Powtórz hasło',
+                              hintText: 'Podaj hasło',
+                              onChange: bloc.changeRepeatedPassword,
+                            );
+                          }
                         ),
                       ],
                     ),
                     Row(
                       //crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        CustomTextField(
-                          titleText: 'Kraj',
-                          hintText: 'Podaj kraj',
-                          //onChange: () => {},
+                        StreamBuilder<String>(
+                          stream: bloc.country,
+                          builder: (context, snapshot) {
+                            return CustomTextField(
+                              titleText: 'Kraj',
+                              hintText: 'Podaj kraj',
+                              onChange: bloc.changeCountry,
+                            );
+                          }
                         ),
                         SizedBox(
                           width: 20,
                         ),
-                        CustomTextField(
-                          titleText: 'Miasto',
-                          hintText: 'Podaj miasto',
-                          //onChange: () => {},
+                        StreamBuilder<String>(
+                          stream: bloc.city,
+                          builder: (context, snapshot) {
+                            return CustomTextField(
+                              titleText: 'Miasto',
+                              hintText: 'Podaj miasto',
+                              onChange: bloc.changeCity,
+                            );
+                          }
                         ),
                       ],
                     ),
                     Row(
                       children: [
-                        CustomTextField(
-                          titleText: 'Adres',
-                          hintText: 'Podaj adres',
-                          //onChange: () => {},
+                        StreamBuilder<String>(
+                          stream: bloc.address,
+                          builder: (context, snapshot) {
+                            return CustomTextField(
+                              titleText: 'Adres',
+                              hintText: 'Podaj adres',
+                              onChange: bloc.changeAddress,
+                            );
+                          }
                         ),
                       ],
                     ),
@@ -206,7 +265,7 @@ class _RegisterScreenComponentState extends State<RegisterScreenComponent> {
                           ),
                           FilledRoundedButton(
                             buttonText: 'stwórz konto',
-                            onPresesd: () => {},
+                            onPresesd: bloc.submitClient,
                           ),
                         ],
                       ),

@@ -6,12 +6,12 @@ class PasswordTextField extends StatelessWidget {
     Key? key,
     this.titleText = "Title",
     this.hintText = "Hint",
-    //this.onChange,
+    this.onChange,
   }) : super(key: key);
 
   final String titleText;
   final String hintText;
-  //final Function onChange;
+  final void Function(String)? onChange;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class PasswordTextField extends StatelessWidget {
                 hintText: hintText,
                 contentPadding: EdgeInsets.all(8),
               ),
-              //onChanged: onChange,
+              onChanged: onChange,
             )
           ],
         ),
