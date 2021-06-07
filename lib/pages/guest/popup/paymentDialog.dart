@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/components/popupWithTitle.dart';
 
-class PaymentDialog extends StatelessWidget {
+class PaymentDialog extends StatefulWidget {
   const PaymentDialog({Key? key}) : super(key: key);
+
+  @override
+  _PaymentDialogState createState() => _PaymentDialogState();
+}
+
+class _PaymentDialogState extends State<PaymentDialog> {
+  int radioGroup = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +21,83 @@ class PaymentDialog extends StatelessWidget {
       content: Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
         child: Column(
-          children:[
-            Text("Wybierz metodę płatności")
-            
-          ]
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(width: 700),
+            Text("Wybierz metodę płatności"),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Radio(
+                        value: 1,
+                        groupValue: radioGroup,
+                        onChanged: (T) {
+                          setState(() {
+                            radioGroup = T as int;
+                          });
+                        },
+                      ),
+                      Text("Przelewy24"),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Radio(
+                        value: 2,
+                        groupValue: radioGroup,
+                        onChanged: (T) {
+                          setState(() {
+                            radioGroup = T as int;
+                          });
+                        },
+                      ),
+                      Text("PayU"),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Radio(
+                        value: 3,
+                        groupValue: radioGroup,
+                        onChanged: (T) {
+                          setState(() {
+                            radioGroup = T as int;
+                          });
+                        },
+                      ),
+                      Text("VISA"),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Radio(
+                        value: 4,
+                        groupValue: radioGroup,
+                        onChanged: (T) {
+                          setState(() {
+                            radioGroup = T as int;
+                          });
+                        },
+                      ),
+                      Text("Dotpay"),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 40, 16),
+              child: SizedBox(
+                width: double.infinity,
+                child: Text("Przejdź do płatności",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:hotel_management_system/components/roundButton.dart';
 
 class PopupWithTitle extends StatelessWidget {
-  const PopupWithTitle(
-      {Key? key,
-      this.title = "Title",
-      this.icon = Icons.add,
-      this.content = const Text("Content"),
-      this.button1Text = "button1",
-      this.button2Text = "button2",
-      this.onButton1Pressed,
-      this.onButton2Pressed })
-      : super(key: key);
+  const PopupWithTitle({
+    Key? key,
+    this.title = "Title",
+    this.icon = Icons.add,
+    this.content = const Text("Content"),
+    this.button1Text = "button1",
+    this.button2Text = "button2",
+    this.onButton1Pressed,
+    this.onButton2Pressed,
+    this.buttons = true,
+  }) : super(key: key);
 
   final String title;
   final IconData icon;
@@ -21,9 +22,30 @@ class PopupWithTitle extends StatelessWidget {
   final String button2Text;
   final Function? onButton1Pressed;
   final Function? onButton2Pressed;
+  final bool buttons;
 
   @override
   Widget build(BuildContext context) {
+    Widget buttonsSpace = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        TextButton(
+          onPressed: onButton1Pressed as void Function()?,
+          child: Text(
+            button1Text.toUpperCase(),
+          ),
+        ),
+        RoundButton(
+          text: button2Text.toUpperCase(),
+          onPressed: onButton2Pressed,
+        ),
+      ],
+    );
+
+    if (!buttons) {
+      buttonsSpace = Container();
+    }
+
     return AlertDialog(
       backgroundColor: Colors.white,
       titlePadding: EdgeInsets.all(0),
@@ -55,21 +77,7 @@ class PopupWithTitle extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           content,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TextButton(
-                onPressed: onButton1Pressed as void Function()?,
-                child: Text(
-                  button1Text.toUpperCase(),
-                ),
-              ),
-              RoundButton(
-                text: button2Text.toUpperCase(),
-                onPressed: onButton2Pressed,
-              ),
-            ],
-          )
+          buttonsSpace,
         ],
       ),
     );
