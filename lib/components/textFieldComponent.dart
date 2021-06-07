@@ -33,12 +33,10 @@ class CustomTextField extends StatelessWidget {
             TextField(
               style: TextStyle(color: Colors.black87),
               decoration: InputDecoration(
-                //fillColor: Colors.transparent,
-                //focusColor: Colors.transparent,
-                //hoverColor: Colors.transparent,
                 filled: false,
                 enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: myColors.themeData.colorScheme.primary),
+                  borderSide:
+                      BorderSide(color: myColors.themeData.colorScheme.primary),
                 ),
                 hintText: hintText,
                 contentPadding: EdgeInsets.all(8),
