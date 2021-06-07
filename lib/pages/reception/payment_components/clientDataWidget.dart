@@ -1,7 +1,23 @@
 import 'package:flutter/material.dart';
 
 class ClientDataWidget extends StatelessWidget {
-  const ClientDataWidget({Key? key}) : super(key: key);
+  final String name;
+  final String surname;
+  final String phoneNumber;
+  final String country;
+  final String city;
+  final String postCode;
+  final String streetName;
+  const ClientDataWidget(
+      {Key? key,
+      required this.name,
+      required this.phoneNumber,
+      required this.surname,
+      required this.country,
+      required this.city,
+      required this.postCode,
+      required this.streetName})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,36 +60,36 @@ class ClientDataWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          child: Text('Anna'),
+                          child: Text(this.name),
                         ),
                         Expanded(
-                          child: Text('+48 005 984 648'),
+                          child: Text(this.phoneNumber),
                         ),
                       ],
                     ),
                     SizedBox(height: 10),
                     Container(
-                      child: Text('Bużyńska-Stromowicz'),
+                      child: Text(this.surname),
                     ),
                     SizedBox(height: 10),
                     Container(
-                      child: Text('Polska'),
+                      child: Text(this.country),
                     ),
                     SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          child: Text('Kraków'),
+                          child: Text(this.city),
                         ),
                         Expanded(
-                          child: Text('40-743'),
+                          child: Text(this.postCode),
                         ),
                       ],
                     ),
                     SizedBox(height: 10),
                     Container(
-                      child: Text('plac Piastów Srastów 2132 blabla'),
+                      child: Text(this.streetName),
                     ),
                   ],
                 ),

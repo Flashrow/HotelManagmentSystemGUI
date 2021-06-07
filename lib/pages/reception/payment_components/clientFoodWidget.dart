@@ -1,7 +1,29 @@
 import 'package:flutter/material.dart';
 
 class ClientFoodWidget extends StatelessWidget {
-  const ClientFoodWidget({Key? key}) : super(key: key);
+  final int dayNumber;
+  final int dayPrice;
+  final int breakfastPrice;
+  final int breakfastNumber;
+  final int dinnerPrice;
+  final int dinnerNumber;
+  final int supperPrice;
+  final int supperNumber;
+  final int dinnerSupperPrice;
+  final int dinnerSupperNumber;
+  const ClientFoodWidget(
+      {Key? key,
+      required this.dayNumber,
+      required this.dayPrice,
+      required this.breakfastPrice,
+      required this.breakfastNumber,
+      required this.dinnerPrice,
+      required this.dinnerNumber,
+      required this.supperPrice,
+      required this.supperNumber,
+      required this.dinnerSupperPrice,
+      required this.dinnerSupperNumber})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +70,11 @@ class ClientFoodWidget extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Container(
-                                        child: Text('Dni'),
+                                        child: Text(''),
                                       ),
                                       SizedBox(height: 10),
                                       Container(
-                                        child: Text('Nocleg'),
+                                        child: Text('Dni'),
                                       ),
                                       SizedBox(height: 10),
                                       Container(
@@ -79,27 +101,27 @@ class ClientFoodWidget extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Container(
-                                        child: Text('5'),
+                                        child: Text(''),
                                       ),
                                       SizedBox(height: 10),
                                       Container(
-                                        child: Text('250'),
+                                        child: Text(this.dayNumber.toString()),
                                       ),
                                       SizedBox(height: 10),
                                       Container(
-                                        child: Text('25'),
+                                        child: Text(this.breakfastNumber.toString()),
                                       ),
                                       SizedBox(height: 10),
                                       Container(
-                                        child: Text('15'),
+                                        child: Text(this.dinnerNumber.toString()),
                                       ),
                                       SizedBox(height: 10),
                                       Container(
-                                        child: Text('10'),
+                                        child: Text(this.dinnerSupperNumber.toString()),
                                       ),
                                       SizedBox(height: 10),
                                       Container(
-                                        child: Text('15'),
+                                        child: Text(this.supperNumber.toString()),
                                       ),
                                       SizedBox(height: 10),
                                     ],
@@ -110,27 +132,59 @@ class ClientFoodWidget extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Container(
-                                        child: Text(''),
+                                        child: Text('Cena'),
                                       ),
                                       SizedBox(height: 10),
                                       Container(
-                                        child: Text('1250zl'),
+                                        child: Text((this.dayPrice).toString() + 'zl'),
                                       ),
                                       SizedBox(height: 10),
                                       Container(
-                                        child: Text('125zl'),
+                                        child: Text((this.breakfastPrice).toString() + 'zl'),
                                       ),
                                       SizedBox(height: 10),
                                       Container(
-                                        child: Text('75zl'),
+                                        child: Text((this.dinnerPrice).toString() + 'zl'),
                                       ),
                                       SizedBox(height: 10),
                                       Container(
-                                        child: Text('50zl'),
+                                        child: Text((this.dinnerSupperPrice).toString() + 'zl'),
                                       ),
                                       SizedBox(height: 10),
                                       Container(
-                                        child: Text('75zl'),
+                                        child: Text((this.supperPrice).toString() + 'zl'),
+                                      ),
+                                      SizedBox(height: 10),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        child: Text('Suma'),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Container(
+                                        child: Text((this.dayPrice * this.dayNumber).toString() + 'zl'),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Container(
+                                        child: Text((this.breakfastPrice * this.breakfastNumber).toString() + 'zl'),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Container(
+                                        child: Text((this.dinnerPrice * this.dinnerNumber).toString() + 'zl'),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Container(
+                                        child:
+                                            Text((this.dinnerSupperPrice * this.dinnerSupperNumber).toString() + 'zl'),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Container(
+                                        child: Text((this.supperPrice * this.supperNumber).toString() + 'zl'),
                                       ),
                                       SizedBox(height: 10),
                                     ],
@@ -153,7 +207,14 @@ class ClientFoodWidget extends StatelessWidget {
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(4.0),
-                                    child: Text('7511zł', style: TextStyle(color: Colors.white)),
+                                    child: Text(
+                                        (this.dayNumber * this.dayPrice +
+                                                this.breakfastNumber * this.breakfastPrice +
+                                                this.dinnerNumber * this.dinnerPrice +
+                                                this.dinnerSupperNumber * this.dinnerSupperPrice +
+                                                this.supperPrice * this.supperNumber)
+                                            .toString(),
+                                        style: TextStyle(color: Colors.white)),
                                   ),
                                 ),
                               ],

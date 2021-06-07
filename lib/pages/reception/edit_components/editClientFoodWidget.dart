@@ -1,7 +1,29 @@
 import 'package:flutter/material.dart';
 
 class EditClientFoodWidget extends StatelessWidget {
-  const EditClientFoodWidget({Key? key}) : super(key: key);
+  final int dayNumber;
+  final int dayPrice;
+  final int breakfastPrice;
+  final int breakfastNumber;
+  final int dinnerPrice;
+  final int dinnerNumber;
+  final int supperPrice;
+  final int supperNumber;
+  final int dinnerSupperPrice;
+  final int dinnerSupperNumber;
+  const EditClientFoodWidget({
+    Key? key,
+    required this.dayPrice,
+    required this.dayNumber,
+    required this.breakfastPrice,
+    required this.breakfastNumber,
+    required this.dinnerPrice,
+    required this.dinnerNumber,
+    required this.supperPrice,
+    required this.supperNumber,
+    required this.dinnerSupperPrice,
+    required this.dinnerSupperNumber,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,117 +70,109 @@ class EditClientFoodWidget extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Container(
-                                        child: Text('Dni'),
+                                        child: TextFormField(
+                                          initialValue: this.dayNumber.toString(),
+                                          textAlign: TextAlign.center,
+                                          decoration: InputDecoration(
+                                            labelText: 'Ilość dni',
+                                          ),
+                                        ),
                                       ),
-                                      SizedBox(height: 10),
                                       Container(
-                                        child: Text('Nocleg'),
+                                        child: TextFormField(
+                                          initialValue: this.dayNumber.toString(),
+                                          textAlign: TextAlign.center,
+                                          decoration: InputDecoration(
+                                            labelText: 'Śniadania',
+                                          ),
+                                        ),
                                       ),
-                                      SizedBox(height: 10),
                                       Container(
-                                        child: Text('Ś'),
+                                        child: TextFormField(
+                                          initialValue: this.dinnerNumber.toString(),
+                                          textAlign: TextAlign.center,
+                                          decoration: InputDecoration(
+                                            labelText: 'Obiady',
+                                          ),
+                                        ),
                                       ),
-                                      SizedBox(height: 10),
                                       Container(
-                                        child: Text('O'),
+                                        child: TextFormField(
+                                          initialValue: this.dinnerSupperNumber.toString(),
+                                          textAlign: TextAlign.center,
+                                          decoration: InputDecoration(
+                                            labelText: 'Obiado-Kolacje',
+                                          ),
+                                        ),
                                       ),
-                                      SizedBox(height: 10),
                                       Container(
-                                        child: Text('O-K'),
+                                        child: TextFormField(
+                                          initialValue: this.supperNumber.toString(),
+                                          textAlign: TextAlign.center,
+                                          decoration: InputDecoration(
+                                            labelText: 'Kolacje',
+                                          ),
+                                        ),
                                       ),
-                                      SizedBox(height: 10),
-                                      Container(
-                                        child: Text('K'),
-                                      ),
-                                      SizedBox(height: 10),
                                     ],
                                   ),
                                 ),
+                                SizedBox(width: 10),
                                 Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Container(
-                                        child: Text('5'),
+                                        child: TextFormField(
+                                          initialValue: this.dayPrice.toString(),
+                                          textAlign: TextAlign.center,
+                                          decoration: InputDecoration(
+                                            labelText: 'Cena Noclegu',
+                                          ),
+                                        ),
                                       ),
-                                      SizedBox(height: 10),
                                       Container(
-                                        child: Text('250'),
+                                        child: TextFormField(
+                                          initialValue: this.breakfastPrice.toString(),
+                                          textAlign: TextAlign.center,
+                                          decoration: InputDecoration(
+                                            labelText: 'Cena Śniadania',
+                                          ),
+                                        ),
                                       ),
-                                      SizedBox(height: 10),
                                       Container(
-                                        child: Text('25'),
+                                        child: TextFormField(
+                                          initialValue: this.dinnerPrice.toString(),
+                                          textAlign: TextAlign.center,
+                                          decoration: InputDecoration(
+                                            labelText: 'Cena Obiadu',
+                                          ),
+                                        ),
                                       ),
-                                      SizedBox(height: 10),
                                       Container(
-                                        child: Text('15'),
+                                        child: TextFormField(
+                                          initialValue: this.dinnerSupperPrice.toString(),
+                                          textAlign: TextAlign.center,
+                                          decoration: InputDecoration(
+                                            labelText: 'Cena Obiado-Kolacji',
+                                          ),
+                                        ),
                                       ),
-                                      SizedBox(height: 10),
                                       Container(
-                                        child: Text('10'),
+                                        child: TextFormField(
+                                          initialValue: this.supperPrice.toString(),
+                                          textAlign: TextAlign.center,
+                                          decoration: InputDecoration(
+                                            labelText: 'Cena Kolacji',
+                                          ),
+                                        ),
                                       ),
-                                      SizedBox(height: 10),
-                                      Container(
-                                        child: Text('15'),
-                                      ),
-                                      SizedBox(height: 10),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        child: Text(''),
-                                      ),
-                                      SizedBox(height: 10),
-                                      Container(
-                                        child: Text('1250zl'),
-                                      ),
-                                      SizedBox(height: 10),
-                                      Container(
-                                        child: Text('125zl'),
-                                      ),
-                                      SizedBox(height: 10),
-                                      Container(
-                                        child: Text('75zl'),
-                                      ),
-                                      SizedBox(height: 10),
-                                      Container(
-                                        child: Text('50zl'),
-                                      ),
-                                      SizedBox(height: 10),
-                                      Container(
-                                        child: Text('75zl'),
-                                      ),
-                                      SizedBox(height: 10),
                                     ],
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  child: Text('Suma'),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                    color: Theme.of(context).colorScheme.secondary,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Text('7511zł', style: TextStyle(color: Colors.white)),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
                         ],
                       ),
                     ),

@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
 
 class EditClientStayWidget extends StatelessWidget {
-  const EditClientStayWidget({Key? key}) : super(key: key);
+  final String stayStart;
+  final String stayEnd;
+  final String roomNumber;
+  final String roomType;
+  final String bedsNumber;
+  const EditClientStayWidget({
+    Key? key,
+    required this.stayStart,
+    required this.stayEnd,
+    required this.roomNumber,
+    required this.roomType,
+    required this.bedsNumber,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +58,7 @@ class EditClientStayWidget extends StatelessWidget {
                       children: [
                         Expanded(
                           child: TextFormField(
-                            initialValue: '05.05.2021',
+                            initialValue: this.stayStart,
                             decoration: InputDecoration(
                               labelText: 'Początek pobytu',
                             ),
@@ -55,7 +67,7 @@ class EditClientStayWidget extends StatelessWidget {
                         SizedBox(width: 5),
                         Expanded(
                           child: TextFormField(
-                            initialValue: '12.05.2021',
+                            initialValue: this.stayEnd,
                             decoration: InputDecoration(
                               labelText: 'Koniec pobytu',
                             ),
@@ -68,7 +80,7 @@ class EditClientStayWidget extends StatelessWidget {
                       children: [
                         Expanded(
                           child: TextFormField(
-                            initialValue: '105',
+                            initialValue: this.roomNumber,
                             decoration: InputDecoration(
                               labelText: 'Pokój',
                             ),
@@ -77,7 +89,7 @@ class EditClientStayWidget extends StatelessWidget {
                         SizedBox(width: 5),
                         Expanded(
                           child: TextFormField(
-                            initialValue: 'Standard',
+                            initialValue: this.roomType,
                             decoration: InputDecoration(
                               labelText: 'Typ',
                             ),
@@ -87,7 +99,7 @@ class EditClientStayWidget extends StatelessWidget {
                     ),
                     Container(
                       child: TextFormField(
-                        initialValue: '5',
+                        initialValue: this.bedsNumber,
                         decoration: InputDecoration(
                           labelText: 'Łóżka',
                         ),

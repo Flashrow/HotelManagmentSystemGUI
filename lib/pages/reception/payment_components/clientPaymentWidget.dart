@@ -30,14 +30,34 @@ class ClientPaymentWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    ClientDataWidget(),
+                    ClientDataWidget(
+                      city: 'city',
+                      country: 'country',
+                      name: 'name',
+                      phoneNumber: 'phoneNumber',
+                      postCode: 'postCode',
+                      streetName: 'streetName',
+                      surname: 'surname',
+                    ),
                     ClientStayWidget(),
                   ],
                 ),
                 Row(
                   children: [
                     Expanded(child: Container()),
-                    Expanded(child: ClientFoodWidget()),
+                    Expanded(
+                        child: ClientFoodWidget(
+                      breakfastNumber: 5,
+                      breakfastPrice: 50,
+                      dayNumber: 5,
+                      dayPrice: 250,
+                      dinnerNumber: 5,
+                      dinnerPrice: 50,
+                      dinnerSupperNumber: 1,
+                      dinnerSupperPrice: 75,
+                      supperNumber: 4,
+                      supperPrice: 40,
+                    )),
                     Expanded(child: Container()),
                   ],
                 ),

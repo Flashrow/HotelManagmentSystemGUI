@@ -30,14 +30,40 @@ class EditClientWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    EditClientDataWidget(),
-                    EditClientStayWidget(),
+                    EditClientDataWidget(
+                      name: "name",
+                      surname: "surname",
+                      city: 'city',
+                      country: 'country',
+                      phoneNumber: 'phoneNumber',
+                      postCode: 'postCode',
+                      streetName: 'streetName',
+                    ),
+                    EditClientStayWidget(
+                      bedsNumber: 'bedsNumber',
+                      roomNumber: 'roomNumber',
+                      roomType: 'roomType',
+                      stayEnd: 'stayEnd',
+                      stayStart: 'stayStart',
+                    ),
                   ],
                 ),
                 Row(
                   children: [
                     Expanded(child: Container()),
-                    Expanded(child: EditClientFoodWidget()),
+                    Expanded(
+                        child: EditClientFoodWidget(
+                      breakfastNumber: 5,
+                      breakfastPrice: 25,
+                      dayNumber: 5,
+                      dayPrice: 250,
+                      dinnerPrice: 25,
+                      dinnerNumber: 5,
+                      dinnerSupperNumber: 5,
+                      dinnerSupperPrice: 25,
+                      supperNumber: 5,
+                      supperPrice: 25,
+                    )),
                     Expanded(child: Container()),
                   ],
                 ),

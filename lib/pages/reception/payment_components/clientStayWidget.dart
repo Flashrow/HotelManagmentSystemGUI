@@ -41,24 +41,9 @@ class ClientStayWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text('05.05.2021'),
-                        ),
-                        Expanded(
-                          child: Text('12.05.2021'),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
                     Container(
-                      child: Text('Bużyńska-Stromowicz Anna'),
-                    ),
-                    SizedBox(height: 10),
-                    Container(
-                      child: Text('Polska'),
+                      child: Text('05.05.2021' + ' - ' + '12.05.2021'),
+                      alignment: Alignment.center,
                     ),
                     SizedBox(height: 10),
                     Row(

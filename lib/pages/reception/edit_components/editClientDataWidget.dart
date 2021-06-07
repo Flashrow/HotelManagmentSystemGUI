@@ -1,7 +1,23 @@
 import 'package:flutter/material.dart';
 
 class EditClientDataWidget extends StatelessWidget {
-  const EditClientDataWidget({Key? key}) : super(key: key);
+  final String name;
+  final String surname;
+  final String phoneNumber;
+  final String country;
+  final String city;
+  final String postCode;
+  final String streetName;
+  const EditClientDataWidget(
+      {Key? key,
+      required this.name,
+      required this.phoneNumber,
+      required this.surname,
+      required this.country,
+      required this.city,
+      required this.postCode,
+      required this.streetName})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +62,7 @@ class EditClientDataWidget extends StatelessWidget {
                       children: [
                         Expanded(
                           child: TextFormField(
-                            initialValue: 'Anna',
+                            initialValue: this.name,
                             decoration: InputDecoration(labelText: "Imie"),
                             onChanged: (text) {},
                           ),
@@ -54,7 +70,7 @@ class EditClientDataWidget extends StatelessWidget {
                         SizedBox(width: 5),
                         Expanded(
                           child: TextFormField(
-                            initialValue: '+48 005 984 648',
+                            initialValue: this.phoneNumber,
                             decoration: InputDecoration(labelText: "Numer Telefonu"),
                           ),
                         ),
@@ -62,13 +78,13 @@ class EditClientDataWidget extends StatelessWidget {
                     ),
                     Container(
                       child: TextFormField(
-                        initialValue: 'Bużyńska-Stromowicz',
+                        initialValue: this.surname,
                         decoration: InputDecoration(labelText: "Nazwisko"),
                       ),
                     ),
                     Container(
                       child: TextFormField(
-                        initialValue: 'Polska',
+                        initialValue: this.country,
                         decoration: InputDecoration(labelText: "Kraj"),
                       ),
                     ),
@@ -77,14 +93,14 @@ class EditClientDataWidget extends StatelessWidget {
                       children: [
                         Expanded(
                           child: TextFormField(
-                            initialValue: 'Kraków',
+                            initialValue: this.city,
                             decoration: InputDecoration(labelText: "Miasto"),
                           ),
                         ),
                         SizedBox(width: 5),
                         Expanded(
                           child: TextFormField(
-                            initialValue: '40-743',
+                            initialValue: this.postCode,
                             decoration: InputDecoration(labelText: "Kod Pocztowy"),
                           ),
                         ),
@@ -92,7 +108,7 @@ class EditClientDataWidget extends StatelessWidget {
                     ),
                     Container(
                       child: TextFormField(
-                        initialValue: 'plac Piastów Srastów 2132 blabla',
+                        initialValue: this.streetName,
                         decoration: InputDecoration(labelText: "Adres"),
                       ),
                     ),

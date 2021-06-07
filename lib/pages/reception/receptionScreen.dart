@@ -12,11 +12,27 @@ import 'payment_components/clientPaymentWidget.dart';
 import 'payment_components/clientStayWidget.dart';
 import 'payment_components/clientTopBarWidget.dart';
 
-class ReceptionScreen extends StatelessWidget {
+class ReceptionScreen extends StatefulWidget {
   const ReceptionScreen({Key? key}) : super(key: key);
 
   @override
+  _ReceptionScreenState createState() => _ReceptionScreenState();
+}
+
+class _ReceptionScreenState extends State<ReceptionScreen> {
+  bool myWidget = false;
+  @override
   Widget build(BuildContext context) {
+    var swapWidget;
+    if (myWidget == true) {
+      swapWidget = new EditClientWidget();
+    } else {
+      swapWidget = new ClientPaymentWidget();
+    }
+
+    var myTile = ListTile(
+      title: swapWidget,
+    );
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Row(
@@ -114,7 +130,7 @@ class ReceptionScreen extends StatelessWidget {
                                                     children: [
                                                       IconButton(
                                                         icon: Icon(Icons.restaurant_menu_outlined),
-                                                        onPressed: () => {print("restaurant_menu_outlined")},
+                                                        onPressed: () => {"restaurant_menu_outlined"},
                                                         splashRadius: 25,
                                                       ),
                                                       IconButton(
@@ -124,12 +140,26 @@ class ReceptionScreen extends StatelessWidget {
                                                       ),
                                                       IconButton(
                                                         icon: Icon(Icons.attach_money),
-                                                        onPressed: () => {print("attach_money")},
+                                                        onPressed: () => {
+                                                          if (myWidget == true)
+                                                            setState(() {
+                                                              myWidget = false;
+                                                            })
+                                                          else
+                                                            print("attach_money")
+                                                        },
                                                         splashRadius: 25,
                                                       ),
                                                       IconButton(
                                                         icon: Icon(Icons.edit_outlined),
-                                                        onPressed: () => {print("edit_outlined")},
+                                                        onPressed: () => {
+                                                          if (myWidget == false)
+                                                            setState(() {
+                                                              myWidget = true;
+                                                            })
+                                                          else
+                                                            print("edit_outlined")
+                                                        },
                                                         splashRadius: 25,
                                                       ),
                                                     ],
@@ -154,7 +184,11 @@ class ReceptionScreen extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 5,
-                        child: EditClientWidget(),
+                        child: ListView(
+                          children: <Widget>[
+                            myTile,
+                          ],
+                        ),
                       ),
                     ],
                   ),
