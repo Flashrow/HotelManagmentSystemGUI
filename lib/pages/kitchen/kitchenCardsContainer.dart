@@ -15,19 +15,23 @@ class KitchenCardsContainer extends StatelessWidget {
         spacing: 20.0,
         children: [
           KitchenCard(
-            title: "Wszyscy",
+            title: "Wszysthie",
             count: 40,
           ),
           KitchenCard(
-            title: "Wszyscy",
+            title: "Standart",
             count: 40,
           ),
           KitchenCard(
-            title: "Wszyscy",
+            title: "Wegetariańskie",
             count: 40,
           ),
           KitchenCard(
-            title: "Wszyscy",
+            title: "Wegańskie",
+            count: 40,
+          ),
+          KitchenCard(
+            title: "Specjalne",
             count: 40,
           ),
         ],

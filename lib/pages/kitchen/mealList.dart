@@ -35,7 +35,14 @@ class MealList extends StatelessWidget {
           Column(
             //shrinkWrap: true,
             children: [
-              RoomListTile(),
+              RoomListTile(
+                id: 1,
+                roomNumber: "102",
+              ),
+              RoomListTile(
+                id: 2,
+                roomNumber: "103",
+              ),
             ],
           )
         ],
@@ -45,7 +52,10 @@ class MealList extends StatelessWidget {
 }
 
 class RoomListTile extends StatelessWidget {
-  const RoomListTile({Key? key}) : super(key: key);
+  const RoomListTile({Key? key, required this.id, required this.roomNumber}) : super(key: key);
+
+  final int id;
+  final String roomNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +64,7 @@ class RoomListTile extends StatelessWidget {
       alignment: Alignment.topLeft,
       padding: EdgeInsets.all(16),
       child: Text(
-        "Pokój 102",
+        'Pokój $roomNumber',
         style: TextStyle(color: Colors.white),
       ),
     );
