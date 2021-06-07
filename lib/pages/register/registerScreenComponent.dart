@@ -23,13 +23,7 @@ class _RegisterScreenComponentState extends State<RegisterScreenComponent> {
     ColorTheme myColors = ColorTheme();
     return Center(
       child: Container(
-        //margin: EdgeInsets.fromLTRB(300, 200, 300, 200),
-        //width: 900,
-        //height: 500,
         decoration: BoxDecoration(
-          //border: Border.all(
-          //  color: Colors.black,
-          //),
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
         child: Row(
@@ -37,10 +31,6 @@ class _RegisterScreenComponentState extends State<RegisterScreenComponent> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  // borderRadius: BorderRadius.only(
-                  //   topLeft: Radius.circular(20),
-                  //   bottomLeft: Radius.circular(20),
-                  // ),
                   image: DecorationImage(
                     image: AssetImage('assets/loginPhoto.png'),
                     fit: BoxFit.cover,
@@ -51,12 +41,6 @@ class _RegisterScreenComponentState extends State<RegisterScreenComponent> {
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                // decoration: BoxDecoration(
-                //   borderRadius: BorderRadius.only(
-                //       topRight: Radius.circular(20),
-                //       bottomRight: Radius.circular(20)),
-                //   color: Colors.white,
-                // ),
                 child: Column(
                   children: [
                     Container(
@@ -64,7 +48,6 @@ class _RegisterScreenComponentState extends State<RegisterScreenComponent> {
                       child: HeadingText(text: 'Dashboard'),
                     ),
                     Row(
-                      //crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         CustomTextField(
                           titleText: 'Imię',
@@ -227,80 +210,7 @@ class _RegisterScreenComponentState extends State<RegisterScreenComponent> {
                           ),
                         ],
                       ),
-                    )
-                    // Container(
-                    //   padding: EdgeInsets.fromLTRB(40, 80, 40, 0),
-                    //   //height: 50,
-                    //   child: CustomTextField(
-                    //     titleText: 'Test',
-                    //     hintText: 'Dupa',
-                    //     //onChange: () => {},
-                    //   ),
-                    // ),
-                    // Container(
-                    //   padding: EdgeInsets.fromLTRB(40, 20, 40, 50),
-                    //   //height: 50,
-                    //   child: Column(
-                    //     crossAxisAlignment: CrossAxisAlignment.stretch,
-                    //     children: [
-                    //       Text(
-                    //         "Hasło",
-                    //         style: TextStyle(
-                    //           color: myColors.themeData.colorScheme.primary,
-                    //           fontSize: 12,
-                    //           fontFamily: 'RobotoMono',
-                    //         ),
-                    //       ),
-                    //       Material(
-                    //         child: TextField(
-                    //           style: TextStyle(color: Colors.black87),
-                    //           decoration: InputDecoration(
-                    //             fillColor: Colors.white,
-                    //             filled: true,
-                    //             enabledBorder: UnderlineInputBorder(
-                    //               borderSide: BorderSide(
-                    //                   color: myColors
-                    //                       .themeData.colorScheme.primary),
-                    //             ),
-                    //             hintText: 'Podaj hasło',
-                    //             contentPadding: EdgeInsets.all(4),
-                    //           ),
-                    //           onChanged: (passwordText) {
-                    //             print('password: $passwordText');
-                    //           },
-                    //         ),
-                    //       )
-                    //     ],
-                    //   ),
-                    // ),
-                    // FilledRoundedButton(
-                    //   buttonText: 'stwórz konto',
-                    //   onPresesd: () => {},
-                    // ),
-                    // Container(
-                    //   padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                    //   child: RichText(
-                    //     text: TextSpan(
-                    //       text: 'Nie masz konta? ',
-                    //       style: TextStyle(
-                    //         color: Colors.black,
-                    //         fontSize: 12,
-                    //         fontFamily: 'RobotoMono',
-                    //       ),
-                    //       children: <TextSpan>[
-                    //         TextSpan(
-                    //             text: 'Zarejestruj się',
-                    //             recognizer: TapGestureRecognizer()
-                    //               ..onTap = () {
-                    //                 print('Button clicked');
-                    //               },
-                    //             style: TextStyle(
-                    //               color: myColors.themeData.colorScheme.primary,
-                    //             ))
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
+                    ),
                   ],
                 ),
               ),
