@@ -2,6 +2,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
 
+class NavigationName {
+  String buttonName;
+  String buttonRoute;
+  NavigationName({required this.buttonName, required this.buttonRoute});
+}
+
 class NavigationComponent extends StatefulWidget {
   NavigationComponent({Key? key}) : super(key: key);
 
@@ -10,6 +16,32 @@ class NavigationComponent extends StatefulWidget {
 }
 
 class _NavigationComponentState extends State<NavigationComponent> {
+  List<NavigationName> navigationList = [
+    NavigationName(
+      buttonName: "Reception",
+      buttonRoute: "Reception",
+    ),
+    NavigationName(
+      buttonName: "Kitchen",
+      buttonRoute: "Kitchen",
+    ),
+    NavigationName(
+      buttonName: "Login",
+      buttonRoute: "Login",
+    ),
+    NavigationName(
+      buttonName: "Guest",
+      buttonRoute: "Guest",
+    ),
+    NavigationName(
+      buttonName: "FrontPage",
+      buttonRoute: "FrontPage",
+    ),
+    NavigationName(
+      buttonName: "Register",
+      buttonRoute: "Register",
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -34,15 +66,15 @@ class _NavigationComponentState extends State<NavigationComponent> {
               flex: 4,
               child: Container(
                 child: ListView.builder(
-                  itemCount: 5,
+                  itemCount: navigationList.length,
                   itemBuilder: (context, index) {
                     return ListTile(
                       title: Text(
-                        'Basic text: ' + index.toString(),
+                        navigationList[index].buttonName,
                         style: TextStyle(color: Colors.white),
                       ),
                       leading: Icon(Icons.home, color: Colors.white),
-                      onTap: () => {},
+                      onTap: () => {Navigator.pushNamed(context, navigationList[index].buttonRoute)},
                     );
                   },
                 ),
