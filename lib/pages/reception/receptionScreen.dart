@@ -13,21 +13,56 @@ import 'payment_components/clientStayWidget.dart';
 import 'payment_components/clientTopBarWidget.dart';
 
 class ReceptionScreen extends StatefulWidget {
-  const ReceptionScreen({Key? key}) : super(key: key);
+  late String name = "Name";
+  late String surname = "Surname";
+  late String phoneNumber;
+  late String country;
+  late String city;
+  late String postCode;
+  late String streetName;
+  ReceptionScreen(
+      {Key? key,
+      String? name,
+      String? surname,
+      String? phoneNumber,
+      String? country,
+      String? city,
+      String? postCode,
+      String? streetName})
+      : super(key: key);
 
   @override
   _ReceptionScreenState createState() => _ReceptionScreenState();
 }
 
 class _ReceptionScreenState extends State<ReceptionScreen> {
+  List<String> names = <String>[
+    "name1",
+    "name2",
+    "name3",
+    "name4",
+    "name5",
+    "name6",
+    "name7",
+    "name8",
+    "name9",
+    "name10",
+    "name11",
+    "name12",
+    "name13",
+    "name14",
+    "name15",
+    "name16"
+  ];
   bool myWidget = false;
+  String clientName = "tempclient";
   @override
   Widget build(BuildContext context) {
     var swapWidget;
     if (myWidget == true) {
-      swapWidget = new EditClientWidget();
+      swapWidget = new EditClientWidget(key: UniqueKey(), clientName: clientName);
     } else {
-      swapWidget = new ClientPaymentWidget();
+      swapWidget = new ClientPaymentWidget(key: UniqueKey(), clientName: clientName);
     }
 
     var myTile = ListTile(
@@ -104,7 +139,7 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
                                   flex: 2,
                                   child: Container(
                                     child: ListView.builder(
-                                      itemCount: 20,
+                                      itemCount: 15,
                                       itemBuilder: (context, index) {
                                         return ListTile(
                                           title: InkWell(
@@ -117,7 +152,7 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
                                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                     children: [
                                                       Text('101'),
-                                                      Text('Kowalski Dawid'),
+                                                      Text(names[index]),
                                                       Text('+48 111 222 333'),
                                                       Text('05.05.2021'),
                                                     ],
@@ -143,10 +178,15 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
                                                         onPressed: () => {
                                                           if (myWidget == true)
                                                             setState(() {
+                                                              clientName = names[index];
                                                               myWidget = false;
                                                             })
                                                           else
-                                                            print("attach_money")
+                                                            {
+                                                              setState(() {
+                                                                clientName = names[index];
+                                                              })
+                                                            }
                                                         },
                                                         splashRadius: 25,
                                                       ),
@@ -155,10 +195,15 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
                                                         onPressed: () => {
                                                           if (myWidget == false)
                                                             setState(() {
+                                                              clientName = names[index];
                                                               myWidget = true;
                                                             })
                                                           else
-                                                            print("edit_outlined")
+                                                            {
+                                                              setState(() {
+                                                                clientName = names[index];
+                                                              })
+                                                            }
                                                         },
                                                         splashRadius: 25,
                                                       ),

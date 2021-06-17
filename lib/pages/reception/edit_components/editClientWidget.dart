@@ -7,8 +7,10 @@ import 'editClientStayWidget.dart';
 import 'editClientTopBarWidget.dart';
 
 class EditClientWidget extends StatelessWidget {
+  final String clientName;
   const EditClientWidget({
     Key? key,
+    required this.clientName,
   }) : super(key: key);
 
   @override
@@ -31,7 +33,7 @@ class EditClientWidget extends StatelessWidget {
                 Row(
                   children: [
                     EditClientDataWidget(
-                      name: "name",
+                      name: clientName,
                       surname: "surname",
                       city: 'city',
                       country: 'country',

@@ -6,11 +6,18 @@ import 'clientFoodWidget.dart';
 import 'clientStayWidget.dart';
 import 'clientTopBarWidget.dart';
 
-class ClientPaymentWidget extends StatelessWidget {
+class ClientPaymentWidget extends StatefulWidget {
+  final String clientName;
   const ClientPaymentWidget({
     Key? key,
+    required this.clientName,
   }) : super(key: key);
 
+  @override
+  _ClientPaymentWidgetState createState() => _ClientPaymentWidgetState();
+}
+
+class _ClientPaymentWidgetState extends State<ClientPaymentWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,7 +40,7 @@ class ClientPaymentWidget extends StatelessWidget {
                     ClientDataWidget(
                       city: 'city',
                       country: 'country',
-                      name: 'name',
+                      name: widget.clientName,
                       phoneNumber: 'phoneNumber',
                       postCode: 'postCode',
                       streetName: 'streetName',
