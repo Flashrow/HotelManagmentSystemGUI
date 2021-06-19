@@ -50,11 +50,41 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                       child: HeadingText(text: 'Rezerwacja'),
                     ),
                     Expanded(child: Container()),
-                    Text(
-                      "Apartament karmazynowy",
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
+                    Row(
+                      children: [
+                        Expanded(child: Container()),
+                        Text(
+                          "Apartament karmazynowy",
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        SizedBox(
+                          height: 24,
+                          width: 24,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('images/people_outline.png'),
+                                //fit: BoxFit.fitHeight,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "2",
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                        Expanded(child: Container()),
+                      ],
                     ),
                     SizedBox(
                       height: 20,
@@ -103,6 +133,21 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                             Text("Łączna ilość dni:"),
                             Expanded(child: Container()),
                             Text("2137"),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            SizedBox(
+                              height: 24,
+                              width: 24,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage('images/today.png'),
+                                    //fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
