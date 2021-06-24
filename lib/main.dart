@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/components/MainContainer.dart';
 import 'package:hotel_management_system/pages/frontPage/FrontPage.dart';
+import 'package:hotel_management_system/pages/guest/guestMainscreenWidget.dart';
 import 'package:hotel_management_system/pages/guest/guestScreen.dart';
+import 'package:hotel_management_system/pages/guest/guestStayScreenWidget.dart';
 import 'package:hotel_management_system/pages/kitchen/kitchenScreen.dart';
 import 'package:hotel_management_system/pages/login/loginScreen.dart';
 import 'package:hotel_management_system/pages/reception/receptionScreen.dart';
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: colorTheme.themeData,
-      initialRoute: 'Reception',
+      initialRoute: 'Login',
       routes: {
         'Reception': (context) => ReceptionScreen(),
         'Kitchen': (context) => KitchenScreen(),
@@ -40,6 +42,8 @@ class MyApp extends StatelessWidget {
         'Guest': (context) => GuestScreen(),
         'FrontPage': (context) => FrontPage(),
         'Register': (context) => RegisterScreen(),
+        'Guest/Home': (context) => GuestMainScreenWidget(),
+        'Guest/Stay': (context) => GuestStayScreenWidget(),
       },
       home: MainContainer(
         child: KitchenScreen(),

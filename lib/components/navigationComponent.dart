@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
+import 'package:hotel_management_system/utils/whoAmI.dart';
 
 class NavigationName {
   String buttonName;
@@ -16,32 +17,7 @@ class NavigationComponent extends StatefulWidget {
 }
 
 class _NavigationComponentState extends State<NavigationComponent> {
-  List<NavigationName> navigationList = [
-    NavigationName(
-      buttonName: "Reception",
-      buttonRoute: "Reception",
-    ),
-    NavigationName(
-      buttonName: "Kitchen",
-      buttonRoute: "Kitchen",
-    ),
-    NavigationName(
-      buttonName: "Login",
-      buttonRoute: "Login",
-    ),
-    NavigationName(
-      buttonName: "Guest",
-      buttonRoute: "Guest",
-    ),
-    NavigationName(
-      buttonName: "FrontPage",
-      buttonRoute: "FrontPage",
-    ),
-    NavigationName(
-      buttonName: "Register",
-      buttonRoute: "Register",
-    ),
-  ];
+  List<NavigationName> navigationList = WhatRoleAmI.getNavigation();
   @override
   Widget build(BuildContext context) {
     return Material(

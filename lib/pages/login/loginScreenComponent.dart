@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hotel_management_system/components/HeadingText.dart';
 import 'package:hotel_management_system/components/filledRoundedButton.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
+import 'package:hotel_management_system/utils/whoAmI.dart';
 
 class LoginScreenComponent extends StatelessWidget {
   const LoginScreenComponent({Key? key}) : super(key: key);
@@ -49,9 +50,7 @@ class LoginScreenComponent extends StatelessWidget {
               //flex: 3,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(20),
-                      bottomRight: Radius.circular(20)),
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(20), bottomRight: Radius.circular(20)),
                   color: Colors.white,
                 ),
                 child: Column(
@@ -81,9 +80,7 @@ class LoginScreenComponent extends StatelessWidget {
                                 fillColor: Colors.white,
                                 filled: true,
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: myColors
-                                          .themeData.colorScheme.primary),
+                                  borderSide: BorderSide(color: myColors.themeData.colorScheme.primary),
                                 ),
                                 hintText: 'Podaj adres email',
                                 contentPadding: EdgeInsets.all(4),
@@ -117,9 +114,7 @@ class LoginScreenComponent extends StatelessWidget {
                                 fillColor: Colors.white,
                                 filled: true,
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: myColors
-                                          .themeData.colorScheme.primary),
+                                  borderSide: BorderSide(color: myColors.themeData.colorScheme.primary),
                                 ),
                                 hintText: 'Podaj hasło',
                                 contentPadding: EdgeInsets.all(4),
@@ -134,7 +129,7 @@ class LoginScreenComponent extends StatelessWidget {
                     ),
                     FilledRoundedButton(
                       buttonText: 'zaloguj się',
-                      onPresesd: () => {},
+                      onPresesd: () => {Navigator.pushNamed(context, WhatRoleAmI.getPath())},
                     ),
                     Container(
                       padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
@@ -151,7 +146,7 @@ class LoginScreenComponent extends StatelessWidget {
                                 text: 'Zarejestruj się',
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    print('Button clicked');
+                                    Navigator.pushNamed(context, "Register");
                                   },
                                 style: TextStyle(
                                   color: myColors.themeData.colorScheme.primary,
