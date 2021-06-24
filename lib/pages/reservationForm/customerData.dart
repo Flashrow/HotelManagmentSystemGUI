@@ -6,6 +6,14 @@ import 'package:hotel_management_system/components/outlinedRoundedButton.dart';
 import 'package:hotel_management_system/components/textFieldComponent.dart';
 import 'package:hotel_management_system/components/passwordFieldComponent.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
+import 'dart:convert';
+
+enum Food { breakfast, lunch, dinner, lunchDinner }
+
+class Meal {
+  final Food foodType;
+  Meal(this.foodType);
+}
 
 class CustomerData extends StatefulWidget {
   const CustomerData({Key? key}) : super(key: key);
@@ -15,10 +23,20 @@ class CustomerData extends StatefulWidget {
 }
 
 class _CustomerDataState extends State<CustomerData> {
-  bool breakfast = false;
-  bool lunch = false;
-  bool dinner = false;
-  bool lunchDinner = false;
+  bool boolBreakfast = false;
+  bool boolLunch = false;
+  bool boolDinner = false;
+  bool boolLunchDinner = false;
+  List<Meal> meals = [];
+
+  void onCategorySelected(bool selected, Food foodType) {
+    if (selected == true) {
+      meals.add(Meal(foodType));
+    } else {
+      meals.removeLast();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,11 +55,13 @@ class _CustomerDataState extends State<CustomerData> {
                 Row(
                   children: [
                     Checkbox(
-                      value: breakfast,
+                      value: boolBreakfast,
                       onChanged: (bool? agreementValue) {
                         setState(() {
-                          breakfast = agreementValue!;
+                          boolBreakfast = agreementValue!;
                         });
+                        onCategorySelected(boolBreakfast, Food.breakfast);
+                        //print(meals);
                       },
                       activeColor: Theme.of(context).colorScheme.primary,
                     ),
@@ -54,11 +74,13 @@ class _CustomerDataState extends State<CustomerData> {
                       ),
                     ),
                     Checkbox(
-                      value: lunch,
+                      value: boolLunch,
                       onChanged: (bool? agreementValue) {
                         setState(() {
-                          lunch = agreementValue!;
+                          boolLunch = agreementValue!;
                         });
+                        onCategorySelected(boolLunch, Food.lunch);
+                        //print(meals);
                       },
                       activeColor: Theme.of(context).colorScheme.primary,
                     ),
@@ -76,11 +98,13 @@ class _CustomerDataState extends State<CustomerData> {
                 Row(
                   children: [
                     Checkbox(
-                      value: lunchDinner,
+                      value: boolLunchDinner,
                       onChanged: (bool? agreementValue) {
                         setState(() {
-                          lunchDinner = agreementValue!;
+                          boolLunchDinner = agreementValue!;
                         });
+                        onCategorySelected(boolLunchDinner, Food.lunchDinner);
+                        //print(meals);
                       },
                       activeColor: Theme.of(context).colorScheme.primary,
                     ),
@@ -93,11 +117,13 @@ class _CustomerDataState extends State<CustomerData> {
                       ),
                     ),
                     Checkbox(
-                      value: dinner,
+                      value: boolDinner,
                       onChanged: (bool? agreementValue) {
                         setState(() {
-                          dinner = agreementValue!;
+                          boolDinner = agreementValue!;
                         });
+                        onCategorySelected(boolDinner, Food.dinner);
+                        //print(meals);
                       },
                       activeColor: Theme.of(context).colorScheme.primary,
                     ),
