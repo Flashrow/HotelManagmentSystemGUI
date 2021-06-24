@@ -1,8 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/components/HeadingText.dart';
 import 'package:hotel_management_system/components/filledRoundedButton.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreenComponent extends StatelessWidget {
   const LoginScreenComponent({Key? key}) : super(key: key);
@@ -10,6 +13,7 @@ class LoginScreenComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ColorTheme myColors = ColorTheme();
+    ApiClient apiClient = context.read<ApiClient>();
     return Center(
       child: Container(
         //margin: EdgeInsets.fromLTRB(300, 200, 300, 200),
@@ -89,7 +93,7 @@ class LoginScreenComponent extends StatelessWidget {
                                 contentPadding: EdgeInsets.all(4),
                               ),
                               onChanged: (text) {
-                                print('email: $text');
+                                print('email: ');
                               },
                             ),
                           )
@@ -125,7 +129,7 @@ class LoginScreenComponent extends StatelessWidget {
                                 contentPadding: EdgeInsets.all(4),
                               ),
                               onChanged: (passwordText) {
-                                print('password: $passwordText');
+                                print('password: ');
                               },
                             ),
                           )
@@ -134,7 +138,9 @@ class LoginScreenComponent extends StatelessWidget {
                     ),
                     FilledRoundedButton(
                       buttonText: 'zaloguj się',
-                      onPresesd: () => {},
+                      onPresesd: () => {
+                          print(apiClient.auth.signIn("client", "string"))
+                      },
                     ),
                     Container(
                       padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
@@ -154,7 +160,8 @@ class LoginScreenComponent extends StatelessWidget {
                                     print('Button clicked');
                                   },
                                 style: TextStyle(
-                                  color: myColors.themeData.colorScheme.primary,
+                                  color:
+                                      myColors.themeData.colorScheme.primary,
                                 ))
                           ],
                         ),
