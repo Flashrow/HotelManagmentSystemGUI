@@ -1,50 +1,40 @@
-import 'package:built_collection/built_collection.dart';
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
-import 'package:hotel_management_system/models/Room/RoomTypes.dart';
 import 'package:equatable/equatable.dart';
-import 'package:built_value/built_value.dart';
-
-import 'Bed.dart';
 
 class Room extends Equatable {
   int? id;
-  String? name;
+  String? description;
   int? size;
+  int? floor;
   double? price;
-  List<Bed>? beds;
-  List<RoomType>? rooms;
-  List<DateTime>? blackoutDays;
-  Uri? imageURL;
+  int? number;
 
-  Room({this.id, this.name, this.size, this.beds, this.rooms, this.blackoutDays, this.imageURL, this.price});
+  Room({this.id, this.description, this.size, this.price, this.floor, this.number});
 
   @override
-  List<Object?> get props => [id, name, size, price, beds, rooms, blackoutDays];
+  List<Object?> get props => [id, description, size, price, floor, number];
 
   static Room fromJson(dynamic json) {
-    List<dynamic> bedsJson = json['beds'];
-    List<Bed> bedsList = [];
+    // List<dynamic> bedsJson = json['beds'];
+    // List<Bed> bedsList = [];
 
-    bedsJson.forEach((value) {
-      bedsList.add(Bed.fromJson(value));
-    });
+    // bedsJson.forEach((value) {
+    //   bedsList.add(Bed.fromJson(value));
+    // });
 
-    List<dynamic> roomsJson = json['rooms'];
-    List<RoomType> roomsList = [];
+    // List<dynamic> roomsJson = json['rooms'];
+    // List<RoomType> roomsList = [];
 
-    roomsJson.forEach((value) {
-      roomsList.add(RoomType.fromJson(value));
-    });
+    // roomsJson.forEach((value) {
+    //   roomsList.add(RoomType.fromJson(value));
+    // });
 
     return Room(
       id: json['id'],
-      name: json['name'],
+      description: json['description'],
       size: json['size'],
       price: double.parse(json['price'].toString()),
-      imageURL: Uri.parse(json['imageURL']),
-      beds: bedsList,
-      rooms: roomsList,
+      number: json['number'],
+      floor: json['floor'],
     );
   }
 }
