@@ -22,13 +22,62 @@ class _RoomsApiClient implements RoomsApiClient {
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<List<dynamic>>(_setStreamType<List<Room>>(
         Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-            .compose(_dio.options, '/users/login',
+            .compose(_dio.options, '/rooms/getAllRooms',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
         .map((dynamic i) => Room.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
+  }
+
+  @override
+  Future<HttpResponse<dynamic>> addRoom(newRoom) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(newRoom.toJson());
+    final _result = await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(
+        Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
+            .compose(_dio.options, '/rooms/addRoom',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<BlackoutTimeDTO> getRoomBlackoutDays(roomId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BlackoutTimeDTO>(
+            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/rooms/$roomId/blackoutDays',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = BlackoutTimeDTO.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<HttpResponse<dynamic>> addReview(roomId, date, content) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'date': date,
+      r'content': content
+    };
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(
+        Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
+            .compose(_dio.options, '/rooms/$roomId/addReview',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

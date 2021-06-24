@@ -6,4 +6,5 @@ class Apis {
   static const String signUp = '$clients/signup';
   static const String rooms = '/rooms';
   static const String getAllRooms = '$rooms/getAllRooms';
+  static const String addRoom = '$rooms/addRoom';
 }
