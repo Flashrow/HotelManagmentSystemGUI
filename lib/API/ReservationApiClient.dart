@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:hotel_management_system/API/Apis.dart';
 import 'package:hotel_management_system/AppConfig.dart';
+import 'package:hotel_management_system/models/ClientFoodPreference.dart';
 import 'package:hotel_management_system/models/DTO/AddReservationDTO.dart';
+import 'package:hotel_management_system/models/Payment.dart';
+import 'package:hotel_management_system/models/Reservation.dart';
 import 'package:hotel_management_system/models/Residence.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -17,12 +20,13 @@ abstract class ReservationApiClient {
   @GET(Apis.getMyResidences)
   Future<List<Residence>> getMyResidences();
 
-  // @POST(Apis.addRoom)
-  // Future<HttpResponse> addRoom(@Body() NewRoomDTO newRoom);
+  @GET(Apis.getReservation)
+  Future<Reservation> getReservation(@Path('id') int reservationId);
 
-  // @GET(Apis.rooms + "/{id}/blackoutDays")
-  // Future<BlackoutTimeDTO> getRoomBlackoutDays(@Path('id') int roomId);
+  @POST(Apis.addFoodPreference)
+  Future<ClientFoodPreference> addFoodPreference(
+      @Query('reservationId') int reservatonId, @Query('preference') String preference);
 
-  // @POST(Apis.rooms + "/{id}/addReview")
-  // Future<HttpResponse> addReview(@Path('id') int roomId, @Query('date') String date, @Query('content') String content);
+  @POST(Apis.addPayment)
+  Future<Payment> addPayment(@Query('reservationId') int reservatonId, @Query('amount') double amount);
 }
