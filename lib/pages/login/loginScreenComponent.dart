@@ -12,6 +12,9 @@ class LoginScreenComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String currentPassword = "";
+    String currentUsername = "";
+
     ColorTheme myColors = ColorTheme();
     ApiClient apiClient = context.read<ApiClient>();
     return Center(
@@ -93,7 +96,8 @@ class LoginScreenComponent extends StatelessWidget {
                                 contentPadding: EdgeInsets.all(4),
                               ),
                               onChanged: (text) {
-                                print('email: ');
+                                print('email: $text');
+                                currentUsername = text;
                               },
                             ),
                           )
@@ -129,7 +133,8 @@ class LoginScreenComponent extends StatelessWidget {
                                 contentPadding: EdgeInsets.all(4),
                               ),
                               onChanged: (passwordText) {
-                                print('password: ');
+                                currentPassword = passwordText;
+                                print('password: $passwordText');
                               },
                             ),
                           )
@@ -138,9 +143,8 @@ class LoginScreenComponent extends StatelessWidget {
                     ),
                     FilledRoundedButton(
                       buttonText: 'zaloguj się',
-                      onPresesd: () => {
-                          print(apiClient.auth.signIn("client", "string"))
-                      },
+                      onPresesd: () =>
+                          {print(apiClient.auth.signIn(currentUsername, currentPassword))},
                     ),
                     Container(
                       padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
@@ -160,8 +164,7 @@ class LoginScreenComponent extends StatelessWidget {
                                     print('Button clicked');
                                   },
                                 style: TextStyle(
-                                  color:
-                                      myColors.themeData.colorScheme.primary,
+                                  color: myColors.themeData.colorScheme.primary,
                                 ))
                           ],
                         ),
