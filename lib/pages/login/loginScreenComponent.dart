@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/components/HeadingText.dart';
 import 'package:hotel_management_system/components/filledRoundedButton.dart';
@@ -12,6 +13,10 @@ class LoginScreenComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _passwordController =
+        new TextEditingController();
+    final TextEditingController _loginController = new TextEditingController();
+
     String currentPassword = "";
     String currentUsername = "";
 
@@ -83,6 +88,7 @@ class LoginScreenComponent extends StatelessWidget {
                           ),
                           Material(
                             child: TextField(
+                              controller: _loginController,
                               style: TextStyle(color: Colors.black87),
                               decoration: InputDecoration(
                                 fillColor: Colors.white,
@@ -120,7 +126,9 @@ class LoginScreenComponent extends StatelessWidget {
                           ),
                           Material(
                             child: TextField(
+                              controller: _passwordController,
                               style: TextStyle(color: Colors.black87),
+                              obscureText: true,
                               decoration: InputDecoration(
                                 fillColor: Colors.white,
                                 filled: true,
@@ -143,8 +151,15 @@ class LoginScreenComponent extends StatelessWidget {
                     ),
                     FilledRoundedButton(
                       buttonText: 'zaloguj się',
-                      onPresesd: () =>
-                          {print(apiClient.auth.signIn(currentUsername, currentPassword))},
+                      onPresesd: () => {
+                        print(apiClient.auth
+                            .signIn(currentUsername, currentPassword)
+                            .catchError((error) => {
+                                  _passwordController.clear(),
+                                  _loginController.clear(),
+                                  showErrorToast(error.toString()),
+                                }))
+                      },
                     ),
                     Container(
                       padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
@@ -177,6 +192,17 @@ class LoginScreenComponent extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void showErrorToast(String message) {
+    Fluttertoast.showToast(
+      webBgColor: "#ff1744",
+      webPosition: "center",
+      msg: message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 3,
     );
   }
 }
