@@ -41,6 +41,8 @@ dependencies:
   json_annotation: ^4.0.0
   group_button: ^2.2.2
   rxdart: ^0.27.1
+  crypto: ^3.0.1
+  fluttertoast: ^8.0,7
 
 dev_dependencies:
   test: ^1.17.5
