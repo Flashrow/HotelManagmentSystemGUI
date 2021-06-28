@@ -3,7 +3,7 @@ import 'package:hotel_management_system/components/navigationComponent.dart';
 enum MyRole { ROLE_ADMIN, ROLE_CLIENT, ROLE_STAFF, ROLE_MANAGER, ROLE_KITCHEN, ROLE_ROOM_SERVICE, ROLE_RECEPTION }
 
 class WhatRoleAmI {
-  static MyRole myRole = MyRole.ROLE_CLIENT;
+  static MyRole myRole = MyRole.ROLE_RECEPTION;
   static String getPath() {
     var tempRole = WhatRoleAmI.myRole;
     switch (tempRole) {

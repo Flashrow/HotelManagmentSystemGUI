@@ -3,11 +3,13 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:hotel_management_system/API/Apis.dart';
 import 'package:hotel_management_system/API/UserApiClient.dart';
 import 'package:hotel_management_system/models/User/UserDetails.dart';
 import 'package:hotel_management_system/utils/exceptions/ApiException.dart';
 
 import 'package:hotel_management_system/utils/utils.dart';
+import 'package:hotel_management_system/utils/whoAmI.dart';
 
 class Auth with ChangeNotifier {
   String _token = "";
@@ -23,6 +25,9 @@ class Auth with ChangeNotifier {
     _dio = dio;
     _userClient = UserApiClient(_dio);
   }
+  Future<List<String>> roles() async {
+    return _userClient.whatRolesAmI();
+  }
 
   Future<UserDetails> signIn(String email, String password) async {
     try {
@@ -32,7 +37,13 @@ class Auth with ChangeNotifier {
     }
 
     _setAuthorization();
-
+    try {
+      var temp = await callApi(_userClient.whatRolesAmI());
+      print("myRole:");
+      print(temp.toString());
+    } catch (e) {
+      throw e;
+    }
     try {
       currentUser = await callApi(_userClient.getUserDetails());
     } catch (e) {
