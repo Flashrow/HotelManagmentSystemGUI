@@ -352,6 +352,7 @@ class _RegisterScreenComponentState extends State<RegisterScreenComponent> {
                             onChanged: (bool? value) {
                               setState(() {
                                 regulationsChecked = value!;
+                                bloc.changeRulesAccept(regulationsChecked);
                               });
                             },
                             activeColor: Theme.of(context).colorScheme.primary,
