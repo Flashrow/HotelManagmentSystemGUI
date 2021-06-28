@@ -1,50 +1,30 @@
-import 'package:built_collection/built_collection.dart';
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
-import 'package:hotel_management_system/models/Room/RoomTypes.dart';
-import 'package:equatable/equatable.dart';
-import 'package:built_value/built_value.dart';
+import 'package:hotel_management_system/models/EquipmentQuantity.dart';
+import 'package:hotel_management_system/models/Expense.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-import 'Bed.dart';
+part 'Room.g.dart';
 
-class Room extends Equatable {
-  int? id;
-  String? name;
-  int? size;
-  double? price;
-  List<Bed>? beds;
-  List<RoomType>? rooms;
-  List<DateTime>? blackoutDays;
-  Uri? imageURL;
+@JsonSerializable()
+class Room {
+  final int id;
+  final String description;
+  final int size;
+  final int floor;
+  final double price;
+  final int number;
+  final List<Expense>? expenses;
+  final List<EquipmentQuantity>? equipmentQuantities;
 
-  Room({this.id, this.name, this.size, this.beds, this.rooms, this.blackoutDays, this.imageURL, this.price});
+  Room(
+      {required this.id,
+      required this.description,
+      required this.size,
+      required this.price,
+      required this.floor,
+      required this.number,
+      this.expenses,
+      this.equipmentQuantities});
 
-  @override
-  List<Object?> get props => [id, name, size, price, beds, rooms, blackoutDays];
-
-  static Room fromJson(dynamic json) {
-    List<dynamic> bedsJson = json['beds'];
-    List<Bed> bedsList = [];
-
-    bedsJson.forEach((value) {
-      bedsList.add(Bed.fromJson(value));
-    });
-
-    List<dynamic> roomsJson = json['rooms'];
-    List<RoomType> roomsList = [];
-
-    roomsJson.forEach((value) {
-      roomsList.add(RoomType.fromJson(value));
-    });
-
-    return Room(
-      id: json['id'],
-      name: json['name'],
-      size: json['size'],
-      price: double.parse(json['price'].toString()),
-      imageURL: Uri.parse(json['imageURL']),
-      beds: bedsList,
-      rooms: roomsList,
-    );
-  }
+  factory Room.fromJson(Map<String, dynamic> json) => _$RoomFromJson(json);
+  Map<String, dynamic> toJson() => _$RoomToJson(this);
 }

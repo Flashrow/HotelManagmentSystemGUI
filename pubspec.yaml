@@ -39,8 +39,10 @@ dependencies:
   built_collection: ^5.0.0
   jwt_decode: ^0.3.1
   json_annotation: ^4.0.0
-  provider: ^5.0.0
   group_button: ^2.2.2
+  rxdart: ^0.27.1
+  crypto: ^3.0.1
+  fluttertoast: ^8.0,7
 
 dev_dependencies:
   test: ^1.17.5
