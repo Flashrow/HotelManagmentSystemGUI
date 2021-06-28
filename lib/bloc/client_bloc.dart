@@ -66,16 +66,20 @@ class ClientBloc {
 
   submitClient() async {
     if (formkey!.currentState!.validate()) {
-      print('validated good');
-
       if (!_rulesAccept.hasValue || _rulesAccept.value == false) {
-        print('rules are unchecked');
         showErrorToast('Zaakceptuj regulamin');
         return;
       }
 
-      print(
-          'New client data:\nName: ${_name.value}\nSurname: ${_surname.value}\nPassword: ${_password.value}\nRepeated password: ${_repeatedPassword.value}\nEmail: ${_email.value}\nRepeated Email: ${_repeatedEmail.value}\nAddress: ${_address.value}\nCity: ${_city.value}\nCountry: ${_country.value}\nNumber: ${_number.value}\nPostcode: ${_postCode.value}\n');
+      String? msg;
+      if ((msg = validateEmail()) != null) {
+        showErrorToast(msg!);
+        return;
+      }
+      if ((msg = validatePassword()) != null) {
+        showErrorToast(msg!);
+        return;
+      }
       try {
         await api.auth.signUp(
             email: _email.value,
@@ -89,7 +93,6 @@ class ClientBloc {
             repeatedEmail: _repeatedEmail.value,
             repeatedPassword: _repeatedPassword.value,
             surname: _surname.value);
-        print('user signed up');
         showSuccessToast('Zarejestrowano poprawnie');
         //TODO: navigation
       } catch (e) {
@@ -98,6 +101,20 @@ class ClientBloc {
     } else {
       print('validate error');
     }
+  }
+
+  bool compareStreams(BehaviorSubject s1, BehaviorSubject s2) {
+    return s1.hasValue && s2.hasValue && s1.value == s2.value;
+  }
+
+  String? validateEmail() {
+    if (compareStreams(_repeatedEmail, _email)) return null;
+    return "Email nie mogą się różnić";
+  }
+
+  String? validatePassword() {
+    if (compareStreams(_password, _repeatedPassword)) return null;
+    return "Hasła nie mogą się różnić";
   }
 
   showErrorToast(String message) {
