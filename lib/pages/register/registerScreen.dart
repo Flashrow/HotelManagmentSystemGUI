@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/bloc/client_bloc.dart';
 import 'package:hotel_management_system/pages/register/registerScreenComponent.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +11,7 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Provider(
-        create: (context) => ClientBloc(),
+        create: (context) => ClientBloc(context.read<ApiClient>()),
         child: RegisterScreenComponent(),
       ),
       backgroundColor: Colors.white,
