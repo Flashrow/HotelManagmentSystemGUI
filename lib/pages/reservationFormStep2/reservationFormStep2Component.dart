@@ -51,54 +51,66 @@ class _ReservationFormStep2ComponentState
                       padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
                       child: HeadingText(text: 'Rezerwacja'),
                     ),
-                    RoomComponent(
-                      titleText: 'Apartament karmazynowy',
-                      guestNumber: 0,
-                      startDate: 'test',
-                      endDate: 'test',
-                      days: 0,
-                      price: 0,
-                    ),
-                    // RoomComponent(
-                    //   titleText: 'Apartament złoty',
-                    //   guestNumber: 666,
-                    //   startDate: 'test1',
-                    //   endDate: 'test2',
-                    //   days: 2137,
-                    //   price: 1488,
-                    // ),
-                    Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: RichText(
-                            text: TextSpan(
-                              //text: 'Nie masz konta? ',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontFamily: 'RobotoMono',
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text:
-                                        'DODAJ OSOBĘ ODPOWIEDZIALNĄ ZA POKÓJ +',
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        print('Button clicked');
-                                      },
-                                    style: TextStyle(
-                                      color: myColors
-                                          .themeData.colorScheme.primary,
-                                    ))
-                              ],
-                            ),
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          RoomComponent(
+                            titleText: 'Apartament karmazynowy',
+                            guestNumber: 0,
+                            startDate: 'test',
+                            endDate: 'test',
+                            days: 0,
+                            price: 0,
                           ),
-                        ),
-                        Expanded(child: Container()),
-                      ],
+                          RoomComponent(
+                            titleText: 'Apartament złoty',
+                            guestNumber: 666,
+                            startDate: 'test1',
+                            endDate: 'test2',
+                            days: 2137,
+                            price: 1488,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                child: RichText(
+                                  text: TextSpan(
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontFamily: 'RobotoMono',
+                                    ),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                          text:
+                                              'DODAJ OSOBĘ ODPOWIEDZIALNĄ ZA POKÓJ +',
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () {
+                                              print('Button clicked');
+                                            },
+                                          style: TextStyle(
+                                            color: myColors
+                                                .themeData.colorScheme.primary,
+                                          ))
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Expanded(child: Container()),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                    Expanded(child: Container()),
+
+                    //Expanded(child: Container()),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Row(
                       children: [
                         Expanded(child: Container()),
