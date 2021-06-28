@@ -2,16 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
 
 class PasswordTextField extends StatelessWidget {
-  const PasswordTextField({
-    Key? key,
-    this.titleText = "Title",
-    this.hintText = "Hint",
-    this.onChange,
-  }) : super(key: key);
+  const PasswordTextField({Key? key, this.titleText = "Title", this.hintText = "Hint", this.onChange, this.validator})
+      : super(key: key);
 
   final String titleText;
   final String hintText;
   final void Function(String)? onChange;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -30,18 +27,18 @@ class PasswordTextField extends StatelessWidget {
                 fontFamily: 'RobotoMono',
               ),
             ),
-            TextField(
+            TextFormField(
               obscureText: true,
               style: TextStyle(color: Colors.black87),
               decoration: InputDecoration(
                 filled: false,
                 enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      BorderSide(color: myColors.themeData.colorScheme.primary),
+                  borderSide: BorderSide(color: myColors.themeData.colorScheme.primary),
                 ),
                 hintText: hintText,
                 contentPadding: EdgeInsets.all(8),
               ),
+              validator: validator,
               onChanged: onChange,
             )
           ],

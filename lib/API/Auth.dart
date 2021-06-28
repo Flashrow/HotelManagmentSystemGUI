@@ -1,13 +1,10 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/API/Apis.dart';
 import 'package:hotel_management_system/API/UserApiClient.dart';
 import 'package:hotel_management_system/models/User/UserDetails.dart';
-import 'package:hotel_management_system/utils/exceptions/ApiException.dart';
-
 import 'package:hotel_management_system/utils/utils.dart';
 import 'package:hotel_management_system/utils/whoAmI.dart';
 

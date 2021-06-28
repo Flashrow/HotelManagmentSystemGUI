@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
 
 class ClientBloc {
-  //late BuildContext context;
+  late ApiClient api;
 
-  //ClientBloc(this.context);
+  ClientBloc(this.api);
+  GlobalKey<FormState>? formkey;
 
   final _name = BehaviorSubject<String>();
   final _surname = BehaviorSubject<String>();
@@ -18,6 +21,7 @@ class ClientBloc {
   final _postCode = BehaviorSubject<String>();
   final _repeatedEmail = BehaviorSubject<String>();
   final _repeatedPassword = BehaviorSubject<String>();
+  final _rulesAccept = BehaviorSubject<bool>();
 
   Stream<String> get name => _name.stream;
   Stream<String> get surname => _surname.stream;
@@ -29,7 +33,8 @@ class ClientBloc {
   Stream<String> get number => _number.stream;
   Stream<String> get postCode => _postCode.stream;
   Stream<String> get repeatedEmail => _repeatedEmail.stream;
-  Stream<String> get repeatedPassword => _repeatedPassword.stream;      
+  Stream<String> get repeatedPassword => _repeatedPassword.stream;
+  Stream<bool> get rulesAccept => _rulesAccept.stream;
 
   Function(String) get changeName => _name.sink.add;
   Function(String) get changeSurname => _surname.sink.add;
@@ -42,6 +47,7 @@ class ClientBloc {
   Function(String) get changePostCode => _postCode.sink.add;
   Function(String) get changeRepeatedEmail => _repeatedEmail.sink.add;
   Function(String) get changeRepeatedPassword => _repeatedPassword.sink.add;
+  Function(bool) get changeRulesAccept => _rulesAccept.sink.add;
 
   dispose() {
     _name.close();
@@ -55,10 +61,81 @@ class ClientBloc {
     _postCode.close();
     _repeatedPassword.close();
     _repeatedEmail.close();
+    _rulesAccept.close();
   }
 
-  submitClient() {
-    print(
-        'New client data:\nName: ${_name.value}\nSurname: ${_surname.value}\nPassword: ${_password.value}\nRepeated password: ${_repeatedPassword.value}\nEmail: ${_email.value}\nRepeated Email: ${_repeatedEmail.value}\nAddress: ${_address.value}\nCity: ${_city.value}\nCountry: ${_country.value}\nNumber: ${_number.value}\nPostcode: ${_postCode.value}\n');
+  submitClient() async {
+    if (formkey!.currentState!.validate()) {
+      if (!_rulesAccept.hasValue || _rulesAccept.value == false) {
+        showErrorToast('Zaakceptuj regulamin');
+        return;
+      }
+
+      String? msg;
+      if ((msg = validateEmail()) != null) {
+        showErrorToast(msg!);
+        return;
+      }
+      if ((msg = validatePassword()) != null) {
+        showErrorToast(msg!);
+        return;
+      }
+      try {
+        await api.auth.signUp(
+            email: _email.value,
+            password: _password.value,
+            address: _address.value,
+            city: _city.value,
+            country: _country.value,
+            name: _name.value,
+            number: _number.value,
+            postCode: _postCode.value,
+            repeatedEmail: _repeatedEmail.value,
+            repeatedPassword: _repeatedPassword.value,
+            surname: _surname.value);
+        showSuccessToast('Zarejestrowano poprawnie');
+        //TODO: navigation
+      } catch (e) {
+        showErrorToast('Podano błędne dane');
+      }
+    } else {
+      print('validate error');
+    }
+  }
+
+  bool compareStreams(BehaviorSubject s1, BehaviorSubject s2) {
+    return s1.hasValue && s2.hasValue && s1.value == s2.value;
+  }
+
+  String? validateEmail() {
+    if (compareStreams(_repeatedEmail, _email)) return null;
+    return "Email nie mogą się różnić";
+  }
+
+  String? validatePassword() {
+    if (compareStreams(_password, _repeatedPassword)) return null;
+    return "Hasła nie mogą się różnić";
+  }
+
+  showErrorToast(String message) {
+    Fluttertoast.showToast(
+      webBgColor: "#ff1744",
+      webPosition: "center",
+      msg: message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 3,
+    );
+  }
+
+  showSuccessToast(String message) {
+    Fluttertoast.showToast(
+      webBgColor: "#00C851",
+      webPosition: "center",
+      msg: message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 3,
+    );
   }
 }

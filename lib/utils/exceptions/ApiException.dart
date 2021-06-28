@@ -7,7 +7,7 @@ class ApiException implements Exception {
 
   ApiException(this.error) {
     statusCode = error.response!.statusCode.toString();
-    msg = error.response!.data;
+    if (error.response!.data is String) msg = error.response!.data;
   }
 
   @override

@@ -9,6 +9,7 @@ import 'package:hotel_management_system/pages/login/loginScreen.dart';
 import 'package:hotel_management_system/pages/reception/receptionScreen.dart';
 import 'package:hotel_management_system/pages/register/registerScreen.dart';
 import 'package:hotel_management_system/pages/reservationFormStep2/reservationFormStep2.dart';
+import 'package:hotel_management_system/pages/register/registerScreen.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
 import 'package:provider/provider.dart';
 
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
         'Guest/Stay': (context) => GuestStayScreenWidget(),
       },
       home: MainContainer(
-        child: ReservationFormStep2(),
+        child: RegisterScreen(),
       ),
     );
   }

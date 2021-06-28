@@ -43,6 +43,7 @@ dependencies:
   rxdart: ^0.27.1
   crypto: ^3.0.1
   fluttertoast: ^8.0,7
+  form_validation: ^2.0.0
 
 dev_dependencies:
   test: ^1.17.5
