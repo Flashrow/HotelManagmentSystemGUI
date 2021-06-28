@@ -8,7 +8,7 @@ part of 'ReservationApiClient.dart';
 
 class _ReservationApiClient implements ReservationApiClient {
   _ReservationApiClient(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'http://127.0.0.1:8080/';
+    baseUrl ??= 'https://hotel-management-system-polsl.herokuapp.com/';
   }
 
   final Dio _dio;

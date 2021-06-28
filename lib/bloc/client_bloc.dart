@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
+import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
 
 class ClientBloc {
-  //late BuildContext context;
+  late ApiClient api;
 
-  //ClientBloc(this.context);
+  ClientBloc(this.api);
+  GlobalKey<FormState>? formkey;
 
   final _name = BehaviorSubject<String>();
   final _surname = BehaviorSubject<String>();
@@ -29,7 +31,7 @@ class ClientBloc {
   Stream<String> get number => _number.stream;
   Stream<String> get postCode => _postCode.stream;
   Stream<String> get repeatedEmail => _repeatedEmail.stream;
-  Stream<String> get repeatedPassword => _repeatedPassword.stream;      
+  Stream<String> get repeatedPassword => _repeatedPassword.stream;
 
   Function(String) get changeName => _name.sink.add;
   Function(String) get changeSurname => _surname.sink.add;
@@ -58,6 +60,7 @@ class ClientBloc {
   }
 
   submitClient() {
+    formkey!.currentState!.validate();
     print(
         'New client data:\nName: ${_name.value}\nSurname: ${_surname.value}\nPassword: ${_password.value}\nRepeated password: ${_repeatedPassword.value}\nEmail: ${_email.value}\nRepeated Email: ${_repeatedEmail.value}\nAddress: ${_address.value}\nCity: ${_city.value}\nCountry: ${_country.value}\nNumber: ${_number.value}\nPostcode: ${_postCode.value}\n');
   }
