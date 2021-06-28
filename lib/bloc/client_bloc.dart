@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
@@ -59,9 +60,42 @@ class ClientBloc {
     _repeatedEmail.close();
   }
 
-  submitClient() {
-    formkey!.currentState!.validate();
-    print(
-        'New client data:\nName: ${_name.value}\nSurname: ${_surname.value}\nPassword: ${_password.value}\nRepeated password: ${_repeatedPassword.value}\nEmail: ${_email.value}\nRepeated Email: ${_repeatedEmail.value}\nAddress: ${_address.value}\nCity: ${_city.value}\nCountry: ${_country.value}\nNumber: ${_number.value}\nPostcode: ${_postCode.value}\n');
+  submitClient() async {
+    if (formkey!.currentState!.validate()) {
+      print('validated good');
+      print(
+          'New client data:\nName: ${_name.value}\nSurname: ${_surname.value}\nPassword: ${_password.value}\nRepeated password: ${_repeatedPassword.value}\nEmail: ${_email.value}\nRepeated Email: ${_repeatedEmail.value}\nAddress: ${_address.value}\nCity: ${_city.value}\nCountry: ${_country.value}\nNumber: ${_number.value}\nPostcode: ${_postCode.value}\n');
+      try {
+        await api.auth.signUp(
+            email: _email.value,
+            password: _password.value,
+            address: _address.value,
+            city: _city.value,
+            country: _country.value,
+            name: _name.value,
+            number: _number.value,
+            postCode: _postCode.value,
+            repeatedEmail: _repeatedEmail.value,
+            repeatedPassword: _repeatedPassword.value,
+            surname: _surname.value);
+        print('user signed up');
+        Fluttertoast.showToast(
+          msg: 'Zarejestrowano poprawnie',
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 3,
+        );
+        //TODO: navigation
+      } catch (e) {
+        Fluttertoast.showToast(
+          msg: 'Podano błędne dane',
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 3,
+        );
+      }
+    } else {
+      print('validate error');
+    }
   }
 }
