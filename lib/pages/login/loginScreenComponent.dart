@@ -98,7 +98,6 @@ class LoginScreenComponent extends StatelessWidget {
                                 contentPadding: EdgeInsets.all(4),
                               ),
                               onChanged: (text) {
-                                print('email: $text');
                                 currentUsername = text;
                               },
                             ),
@@ -136,7 +135,6 @@ class LoginScreenComponent extends StatelessWidget {
                               ),
                               onChanged: (passwordText) {
                                 currentPassword = passwordText;
-                                print('password: $passwordText');
                               },
                             ),
                           )
@@ -146,13 +144,22 @@ class LoginScreenComponent extends StatelessWidget {
                     //TODO: check authentication
                     FilledRoundedButton(
                       buttonText: 'zaloguj się',
-                      onPresesd: () => {
-                        print(apiClient.auth.signIn(currentUsername, currentPassword).catchError((error) => {
+                      onPresesd: () async => {
+                        print(apiClient.auth.signInStaff(currentUsername, currentPassword).catchError((error) => {
                               _passwordController.clear(),
                               _loginController.clear(),
                               showErrorToast(error.toString()),
                             })),
-                        Navigator.pushNamed(context, WhatRoleAmI.getPath())
+                        if (apiClient.auth.isAuthorized)
+                          {
+                            Navigator.pushNamed(
+                              context,
+                              NavigationController.getPath(apiClient.auth.getSingleRole(apiClient.auth.userRoles)),
+                              arguments: <String, String>{
+                                'role': apiClient.auth.getSingleRole(apiClient.auth.userRoles),
+                              },
+                            )
+                          }
                       },
                     ),
                     Container(

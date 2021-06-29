@@ -9,7 +9,7 @@ main() {
     ApiClient api = new ApiClient();
     Auth auth = api.auth;
     try {
-      await auth.signIn("string", "string");
+      await auth.signInStaff("string", "string");
     } catch (e) {
       print(e);
     }

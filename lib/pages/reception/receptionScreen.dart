@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/components/filledRoundedButton.dart';
 import 'package:hotel_management_system/components/navigationComponent.dart';
@@ -60,6 +62,7 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
   String clientName = "tempclient";
   @override
   Widget build(BuildContext context) {
+    Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
     var swapWidget;
     if (myWidget == true) {
       swapWidget = new EditClientWidget(key: UniqueKey(), clientName: clientName);
@@ -78,7 +81,7 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
           children: <Widget>[
             Container(
               width: 300,
-              child: NavigationComponent(),
+              child: NavigationComponent(navigationRole: arguments['role']),
             ),
             Expanded(
               child: Column(

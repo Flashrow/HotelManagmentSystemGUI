@@ -2,8 +2,9 @@ class Apis {
   static const String users = "/users";
   static const String login = '$users/login';
   static const String clients = '/clients';
-  static const String whatRolesAmI = '$clients/whatRolesAmI';
+  static const String whatRolesAmI = '$users/whatRolesAmI';
   static const String userDetails = '$clients/getMyDetails';
+  static const String staffAllClients = '/staff/reception/getAllClients';
   static const String addRoomIssue = '$clients/addRoomIssue';
   static const String modifyMyReservation = '$clients/modifyMyReservation/{id}';
   static const String getMyRoomIssues = '$clients/getMyRoomIssues';

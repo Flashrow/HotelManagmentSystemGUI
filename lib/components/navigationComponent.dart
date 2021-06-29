@@ -10,16 +10,17 @@ class NavigationName {
 }
 
 class NavigationComponent extends StatefulWidget {
-  NavigationComponent({Key? key}) : super(key: key);
+  String navigationRole = "";
+  NavigationComponent({Key? key, required this.navigationRole}) : super(key: key);
 
   @override
   _NavigationComponentState createState() => _NavigationComponentState();
 }
 
 class _NavigationComponentState extends State<NavigationComponent> {
-  List<NavigationName> navigationList = WhatRoleAmI.getNavigation();
   @override
   Widget build(BuildContext context) {
+    List<NavigationName> navigationList = NavigationController.getNavigation(widget.navigationRole);
     return Material(
       color: Theme.of(context).primaryColor,
       child: Container(

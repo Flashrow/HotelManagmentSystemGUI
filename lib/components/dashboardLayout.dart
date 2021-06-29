@@ -15,7 +15,7 @@ class DashboardLayout extends StatelessWidget {
         children: <Widget>[
           Container(
             width: 300,
-            child: NavigationComponent(),
+            child: NavigationComponent(navigationRole: "ROLE_RECEPTION"),
           ),
           Expanded(
             child: Column(

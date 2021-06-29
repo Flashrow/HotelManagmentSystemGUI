@@ -12,11 +12,14 @@ class UserVerification extends StatelessWidget {
 
   bool checkRole(List<MyRole> routeRoles, List<String> myRoles) {
     bool foundRole = false;
+    print(routeRoles);
+    print("myROles: ");
+    print(myRoles);
     routeRoles.forEach(
       (routeElement) {
         myRoles.forEach(
           (myElement) {
-            if (routeElement.toString() == myElement) foundRole = true;
+            if (routeElement.toString() == ("MyRole." + myElement)) foundRole = true;
           },
         );
       },
@@ -27,17 +30,17 @@ class UserVerification extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<String>>(
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasError)
-            return Text("nastąpił bład");
-          else if (snapshot.hasData) {
-            if (checkRole(routeRoles, snapshot.data ?? [])) return child;
-          }
-        }
-        return Container();
-      },
       future: context.read<ApiClient>().auth.roles(),
+      builder: (context, snapshot) {
+        print(snapshot.data);
+        if (snapshot.data!.isNotEmpty) {
+          if (checkRole(routeRoles, snapshot.data ?? []))
+            return child;
+          else
+            return Container();
+        } else
+          return Container();
+      },
     );
   }
 }
