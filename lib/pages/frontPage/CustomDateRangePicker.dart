@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/models/DatePicker/DateRangePickerModel.dart';
-import 'package:intl/intl.dart';
+import 'package:hotel_management_system/models/Room/Room.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 /// My app class to display the date range picker
 class CustomDateRangePicker extends StatefulWidget {
+  Room? room;
+
   @override
   CustomDateRangePickerState createState() => CustomDateRangePickerState();
 }
@@ -89,36 +93,55 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Card(
-            color: Colors.white,
-            elevation: 2.0,
-            child: Container(
-              padding: const EdgeInsets.all(20),
-              width: 350,
-              height: 600,
-              child: buildLeftBar(context),
+
+    Future<List<DateTime>?> getBlackoutDates() async {
+      return await context.read<ApiClient>().database.getBlackoutDates(this.widget.room!.id);
+    }
+    
+    return FutureBuilder(
+        future: getBlackoutDates(),
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+
+       if (snapshot.connectionState == ConnectionState.waiting)
+              return Center(child: CircularProgressIndicator());
+            else if (snapshot.hasData) {
+              dates.blackoutDays = snapshot.data;
+            } else if (snapshot.hasError)
+              return Text("ERROR: ${snapshot.error}");
+            else
+              return Text('None');
+
+      return Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Card(
+              color: Colors.white,
+              elevation: 2.0,
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                width: 350,
+                height: 600,
+                child: buildLeftBar(context),
+              ),
             ),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          Card(
-            color: Colors.white,
-            elevation: 2.0,
-            child: Container(
-              padding: const EdgeInsets.all(20),
-              height: 600,
-              width: 800,
-              child: buildDataPicker(context),
+            SizedBox(
+              width: 20,
             ),
-          ),
-        ],
-      ),
-    );
+            Card(
+              color: Colors.white,
+              elevation: 2.0,
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                height: 600,
+                width: 800,
+                child: buildDataPicker(context),
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 
   Widget buildDataPicker(BuildContext context) {
@@ -132,8 +155,10 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker> {
       minDate: DateTime.now(),
       selectionColor: Theme.of(context).primaryColor.withOpacity(.3),
       monthCellStyle: DateRangePickerMonthCellStyle(
-          blackoutDateTextStyle: const TextStyle(color: Colors.red, decoration: TextDecoration.lineThrough)),
-      monthViewSettings: DateRangePickerMonthViewSettings(firstDayOfWeek: 1, blackoutDates: dates.blackoutDays),
+          blackoutDateTextStyle: const TextStyle(
+              color: Colors.red, decoration: TextDecoration.lineThrough)),
+      monthViewSettings: DateRangePickerMonthViewSettings(
+          firstDayOfWeek: 1, blackoutDates: dates.blackoutDays),
       selectionMode: DateRangePickerSelectionMode.range,
     );
   }

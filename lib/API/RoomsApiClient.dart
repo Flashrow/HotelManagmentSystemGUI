@@ -19,7 +19,7 @@ abstract class RoomsApiClient {
   Future<HttpResponse> addRoom(@Body() NewRoomDTO newRoom);
 
   @GET(Apis.rooms + "/{id}/blackoutDays")
-  Future<BlackoutTimeDTO> getRoomBlackoutDays(@Path('id') int roomId);
+  Future<List<BlackoutTimeDTO>> getRoomBlackoutDays(@Path('id') int roomId);
 
   @POST(Apis.rooms + "/{id}/addReview")
   Future<HttpResponse> addReview(@Path('id') int roomId, @Query('date') String date, @Query('content') String content);
