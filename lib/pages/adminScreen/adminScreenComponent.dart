@@ -77,8 +77,7 @@ class _AdminScreenComponentState extends State<AdminScreenComponent> {
                                         color: Colors.black12,
                                         blurRadius: 11.0,
                                         spreadRadius: 0.0,
-                                        offset: Offset(0.0,
-                                            4.0), // shadow direction: bottom right
+                                        offset: Offset(0.0, 4.0),
                                       ),
                                     ],
                                     borderRadius: BorderRadius.only(
@@ -121,8 +120,7 @@ class _AdminScreenComponentState extends State<AdminScreenComponent> {
                                         color: Colors.black12,
                                         blurRadius: 11.0,
                                         spreadRadius: 0.0,
-                                        offset: Offset(0.0,
-                                            4.0), // shadow direction: bottom right
+                                        offset: Offset(0.0, 4.0),
                                       ),
                                     ],
                                   ),

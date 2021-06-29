@@ -25,6 +25,15 @@ class StaffComponent extends StatefulWidget {
 
 class _StaffComponentState extends State<StaffComponent> {
   String dropdownValue = 'Kitchen';
+  List<String> roles = [
+    'Admin',
+    'Client',
+    'Staff',
+    'Manager',
+    'Kitchen',
+    'Room Service',
+    'Reception'
+  ];
   @override
   Widget build(BuildContext context) {
     ColorTheme myColors = ColorTheme();
@@ -34,17 +43,13 @@ class _StaffComponentState extends State<StaffComponent> {
         width: 480,
         decoration: BoxDecoration(
           color: Theme.of(context).primaryColor,
-          //color: Colors.white,
-          // border: Border.all(
-          //   color: Colors.black,
-          // ),
           borderRadius: BorderRadius.all(Radius.circular(15)),
           boxShadow: [
             BoxShadow(
               color: Colors.black12,
               blurRadius: 11.0,
               spreadRadius: 0.0,
-              offset: Offset(0.0, 4.0), // shadow direction: bottom right
+              offset: Offset(0.0, 4.0),
             ),
           ],
         ),
@@ -56,10 +61,8 @@ class _StaffComponentState extends State<StaffComponent> {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
                 child: Row(
-                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(widget.nameText + ' ' + widget.surnameText),
-                    //Container(width: 110),
                   ],
                 ),
               ),
@@ -116,8 +119,6 @@ class _StaffComponentState extends State<StaffComponent> {
                       ),
                       DropdownButton(
                         value: dropdownValue,
-                        // icon: const Icon(Icons.arrow_downward),
-                        // iconSize: 24,
                         elevation: 16,
                         isExpanded: true,
                         underline: Container(
@@ -127,16 +128,7 @@ class _StaffComponentState extends State<StaffComponent> {
                             dropdownValue = newValue!;
                           });
                         },
-
-                        items: <String>[
-                          'Admin',
-                          'Client',
-                          'Staff',
-                          'Manager',
-                          'Kitchen',
-                          'Room Service',
-                          'Reception'
-                        ].map<DropdownMenuItem<String>>(
+                        items: roles.map<DropdownMenuItem<String>>(
                           (String value) {
                             return DropdownMenuItem(
                               value: value,
