@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/components/HeadingText.dart';
+import 'package:hotel_management_system/components/dashboardLayout.dart';
 import 'package:hotel_management_system/components/filledRoundedButton.dart';
 import 'package:hotel_management_system/components/navigationComponent.dart';
 import 'package:hotel_management_system/components/outlinedRoundedButton.dart';
@@ -22,14 +23,9 @@ class _AdminScreenComponentState extends State<AdminScreenComponent> {
     ColorTheme myColors = ColorTheme();
     return Row(
       children: [
-        Container(
-          width: 300,
-          child: NavigationComponent(),
-        ),
         Expanded(
           child: Column(
             children: [
-              TopBar(),
               Expanded(
                 child: Row(
                   children: [
