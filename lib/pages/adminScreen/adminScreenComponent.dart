@@ -72,6 +72,15 @@ class _AdminScreenComponentState extends State<AdminScreenComponent> {
                                 padding: const EdgeInsets.only(top: 16),
                                 child: Container(
                                   decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        blurRadius: 11.0,
+                                        spreadRadius: 0.0,
+                                        offset: Offset(0.0,
+                                            4.0), // shadow direction: bottom right
+                                      ),
+                                    ],
                                     borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(20),
                                         topRight: Radius.circular(20)),
@@ -101,6 +110,22 @@ class _AdminScreenComponentState extends State<AdminScreenComponent> {
                               Expanded(
                                 flex: 2,
                                 child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(15),
+                                      bottomRight: Radius.circular(15),
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        blurRadius: 11.0,
+                                        spreadRadius: 0.0,
+                                        offset: Offset(0.0,
+                                            4.0), // shadow direction: bottom right
+                                      ),
+                                    ],
+                                  ),
                                   child: ListView.builder(
                                     itemCount: 15,
                                     itemBuilder: (context, index) {
@@ -175,6 +200,13 @@ class _AdminScreenComponentState extends State<AdminScreenComponent> {
                   ],
                 ),
               ),
+              OutlinedRoundedButton(
+                buttonText: 'Nowy user',
+                onPresesd: () => {},
+              ),
+              SizedBox(
+                height: 32,
+              )
             ],
           ),
         )
