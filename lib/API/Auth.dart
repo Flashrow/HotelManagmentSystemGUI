@@ -107,12 +107,17 @@ class Auth with ChangeNotifier {
     notifyListeners();
   }
 
-  logout() {
+  Future<bool> logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('token');
+    prefs.remove('tokenDate');
     isAuthorized = true;
     _dio.options.headers["Authorization"] = null;
     userRoles = [];
     currentUser = null;
+
     notifyListeners();
+    return true;
   }
 
   _saveToken() async {

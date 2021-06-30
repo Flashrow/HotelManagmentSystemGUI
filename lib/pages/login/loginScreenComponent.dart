@@ -35,8 +35,8 @@ class LoginScreenComponent extends StatelessWidget {
     ColorTheme myColors = ColorTheme();
     ApiClient apiClient = context.read<ApiClient>();
 
-    apiClient.auth.tryLoginWithSavedToken().then((value) {
-      navigate(apiClient, context);
+    apiClient.auth.tryLoginWithSavedToken().then((isUser) {
+      if (isUser) navigate(apiClient, context);
     });
     return Center(
       child: Container(
@@ -165,8 +165,7 @@ class LoginScreenComponent extends StatelessWidget {
                           _passwordController.clear();
                           _loginController.clear();
                           showErrorToast(error.toString());
-                        });
-                        navigate(apiClient, context);
+                        }).then((value) => navigate(apiClient, context));
                       },
                     ),
                     Container(

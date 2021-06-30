@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/API/ApiClient.dart';
-import 'package:hotel_management_system/components/topBar.dart';
-import 'package:hotel_management_system/utils/whoAmI.dart';
 import 'package:provider/provider.dart';
-import 'navigationComponent.dart';
 
 class UserVerification extends StatelessWidget {
   const UserVerification({Key? key, required this.child, required this.routeRoles}) : super(key: key);
@@ -29,7 +26,7 @@ class UserVerification extends StatelessWidget {
     return FutureBuilder<List<String>>(
       future: context.read<ApiClient>().auth.roles(),
       builder: (context, snapshot) {
-        if (snapshot.data!.isNotEmpty) {
+        if (snapshot.data?.isNotEmpty == true) {
           print(routeRoles);
           print(snapshot.data);
           if (checkRole(routeRoles, snapshot.data ?? []))
@@ -37,7 +34,7 @@ class UserVerification extends StatelessWidget {
           else
             return Text("error404");
         } else
-          return Text("error404");
+          return Text("loading");
       },
     );
   }
