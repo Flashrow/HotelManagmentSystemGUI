@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_management_system/models/Room/Room.dart';
 import 'package:hotel_management_system/pages/frontPage/CustomDateRangePicker.dart';
 
 class FullPageDataRangePickerDialog extends StatelessWidget {
-  const FullPageDataRangePickerDialog({Key? key}) : super(key: key);
+  final Room? room;
+  const FullPageDataRangePickerDialog({Key? key, required this.room}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class FullPageDataRangePickerDialog extends StatelessWidget {
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: Container(
-        child: CustomDateRangePicker(),
+        child: CustomDateRangePicker(room: this.room),
       ),
     );
   }

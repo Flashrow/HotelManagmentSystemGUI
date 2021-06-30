@@ -56,10 +56,7 @@ class FrontPage extends StatelessWidget {
                       return Align(
                         alignment: Alignment.topCenter,
                         child: RoomCard(
-                          price: rooms[index].price,
-                          roomName: "Pokój " + rooms[index].description.toString(),
-                          roomSize: rooms[index].size,
-                          equipmentQuantity: rooms[index].equipmentQuantities,
+                          room: rooms[index],
                         ),
                       );
                     },

@@ -5,41 +5,28 @@ import 'package:hotel_management_system/models/models.dart';
 import 'FullPageDateRangePickerDialog.dart';
 
 class RoomCard extends StatelessWidget {
-  const RoomCard(
-      {Key? key,
-      this.roomSize,
-      this.roomName,
-      this.price,
-      this.equipmentQuantity})
-      : super(key: key);
+  const RoomCard({
+    Key? key,
+    this.room,
+  }) : super(key: key);
 
-  final int? roomSize;
-  final double? price;
-  final String? roomName;
-  final List<EquipmentQuantity>? equipmentQuantity;
+  final Room? room;
 
   expandMore() {
     print("Expand pressed");
   }
 
-  book(BuildContext context) {
+  void book(BuildContext context) {
     print("Booked pressed");
-    _openDateRangePickerDialog(context);
-  }
-
-  void _openDateRangePickerDialog(BuildContext context) {
     Navigator.of(context).push(new MaterialPageRoute<Null>(
         builder: (BuildContext context) {
-          return FullPageDataRangePickerDialog();
+          return FullPageDataRangePickerDialog(room: room);
         },
         fullscreenDialog: true));
   }
 
   @override
   Widget build(BuildContext context) {
-    print("Equipment quantity: " + equipmentQuantity!.length.toString());
-    print("Equipment quantity lenght: " +
-        (equipmentQuantity!.length / 3).ceil().toString());
     var roomSizeWidget = Row(
       children: [
         Icon(Icons.people_outline,
@@ -48,7 +35,7 @@ class RoomCard extends StatelessWidget {
           padding: const EdgeInsets.only(
             left: 7.0,
           ),
-          child: Text(roomSize.toString()),
+          child: Text(room!.size.toString()),
         )
       ],
     );
@@ -57,7 +44,7 @@ class RoomCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          roomName!,
+          "Pokój " + room!.description,
           style: TextStyle(
             fontSize: 20,
             color: Theme.of(context).colorScheme.secondary,
@@ -80,33 +67,33 @@ class RoomCard extends StatelessWidget {
     var listsWidget = Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        if(equipmentQuantity!.length > 0)
-        SizedBox(
-          width: double.infinity,
-          child: Text(
-            "Wyposażenie:",
-            textAlign: TextAlign.start,
+        if (room!.equipmentQuantities!.length > 0)
+          SizedBox(
+            width: double.infinity,
+            child: Text(
+              "Wyposażenie:",
+              textAlign: TextAlign.start,
+            ),
           ),
-        ),
         SizedBox(
           height: 16,
         ),
-        for (var index = 0; index < equipmentQuantity!.length; index += 3)
+        for (var index = 0; index < room!.equipmentQuantities!.length; index += 3)
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                if (index < equipmentQuantity!.length)
-                  Text("- " + equipmentQuantity![index].equipment.name)
+                if (index < room!.equipmentQuantities!.length)
+                  Text("- " + room!.equipmentQuantities![index].equipment.name)
                 else
                   Container(),
-                if (index + 1 < equipmentQuantity!.length)
-                  Text("- " + equipmentQuantity![index + 1].equipment.name)
+                if (index + 1 < room!.equipmentQuantities!.length)
+                  Text("- " + room!.equipmentQuantities![index + 1].equipment.name)
                 else
                   Container(),
-                if (index + 2 < equipmentQuantity!.length)
-                  Text("- " + equipmentQuantity![index + 2].equipment.name)
+                if (index + 2 < room!.equipmentQuantities!.length)
+                  Text("- " + room!.equipmentQuantities![index + 2].equipment.name)
                 else
                   Container(),
               ],
@@ -163,13 +150,13 @@ class RoomCard extends StatelessWidget {
                           padding: const EdgeInsets.all(16.0),
                           child: listsWidget,
                         ),
-                        Expanded(child:Container()),
+                        Expanded(child: Container()),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Expanded(
                               child: Text(
-                                "Cena: ${price}zł / doba",
+                                "Cena: ${room!.price.toString()}zł / doba",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     color: Theme.of(context)
@@ -182,7 +169,11 @@ class RoomCard extends StatelessWidget {
                             ),
                             FilledRoundedButton(
                               buttonText: "rezerwuj",
-                              onPresesd: () => book(context),
+                              onPresesd: () => {
+                                book(
+                                  context,
+                                ),
+                              },
                             )
                           ],
                         )

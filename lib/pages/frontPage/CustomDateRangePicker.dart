@@ -9,6 +9,8 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 class CustomDateRangePicker extends StatefulWidget {
   Room? room;
 
+  CustomDateRangePicker({required this.room});
+
   @override
   CustomDateRangePickerState createState() => CustomDateRangePickerState();
 }
@@ -93,55 +95,68 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker> {
 
   @override
   Widget build(BuildContext context) {
+    bool calendarVisibility = false;
+    bool progressBarVisibility = true;
 
     Future<List<DateTime>?> getBlackoutDates() async {
-      return await context.read<ApiClient>().database.getBlackoutDates(this.widget.room!.id);
+      return await context
+          .read<ApiClient>()
+          .database
+          .getBlackoutDates(this.widget.room!.id);
     }
-    
+
     return FutureBuilder(
         future: getBlackoutDates(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          if (snapshot.hasData) {
+            print("room id: " + this.widget.room!.id.toString());
+            progressBarVisibility = false;
+            calendarVisibility = true;
+            dates.blackoutDays = snapshot.data;
+          } else if (snapshot.hasError) return Text("ERROR: ${snapshot.error}");
 
-       if (snapshot.connectionState == ConnectionState.waiting)
-              return Center(child: CircularProgressIndicator());
-            else if (snapshot.hasData) {
-              dates.blackoutDays = snapshot.data;
-            } else if (snapshot.hasError)
-              return Text("ERROR: ${snapshot.error}");
-            else
-              return Text('None');
-
-      return Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Card(
-              color: Colors.white,
-              elevation: 2.0,
-              child: Container(
-                padding: const EdgeInsets.all(20),
-                width: 350,
-                height: 600,
-                child: buildLeftBar(context),
+          return Stack(
+            children: [
+              Visibility(
+                visible: progressBarVisibility,
+                child: CircularProgressIndicator(),
               ),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Card(
-              color: Colors.white,
-              elevation: 2.0,
-              child: Container(
-                padding: const EdgeInsets.all(20),
-                height: 600,
-                width: 800,
-                child: buildDataPicker(context),
+              Visibility(
+                visible: calendarVisibility,
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Card(
+                        color: Colors.white,
+                        elevation: 2.0,
+                        child: Container(
+                          padding: const EdgeInsets.all(20),
+                          width: 350,
+                          height: 600,
+                          child: buildLeftBar(context),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Card(
+                        color: Colors.white,
+                        elevation: 2.0,
+                        child: Container(
+                          padding: const EdgeInsets.all(20),
+                          height: 600,
+                          width: 800,
+                          child: buildDataPicker(context),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ],
-        ),
-      );
-    });
+            ],
+          );
+        });
   }
 
   Widget buildDataPicker(BuildContext context) {
