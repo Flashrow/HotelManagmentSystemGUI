@@ -1,11 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:hotel_management_system/API/Apis.dart';
 import 'package:hotel_management_system/AppConfig.dart';
-import 'package:hotel_management_system/models/StaffUser/StaffUser.dart';
+import 'package:hotel_management_system/models/DTO/AddReservationDTO.dart';
+import 'package:hotel_management_system/models/DTO/AddRoomIssueDTO.dart';
 import 'package:hotel_management_system/models/User/UserDetails.dart';
 import 'package:retrofit/retrofit.dart';
-
-import 'ApiClient.dart';
 
 part 'UserApiClient.g.dart';
 
@@ -18,6 +17,18 @@ abstract class UserApiClient {
 
   @POST(Apis.userDetails)
   Future<UserDetails> getUserDetails();
+
+  @POST(Apis.whatRolesAmI)
+  Future<List<String>> whatRolesAmI();
+
+  @POST(Apis.modifyMyReservation)
+  Future<HttpResponse> modifyMyReservation(@Path('id') int reservationId, @Body() AddReservationDTO addReservationDTO);
+
+  @POST(Apis.addRoomIssue)
+  Future<HttpResponse> addMyRoomIssue(@Body() AddRoomIssueDTO addRoomIssueDTO);
+
+  @GET(Apis.getMyRoomIssues)
+  Future<HttpResponse> getMyRoomIssues();
 
   @POST(Apis.signUp)
   Future<dynamic> signUp({
