@@ -1,17 +1,39 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
+import 'package:hotel_management_system/utils/whoAmI.dart';
+
+class NavigationName {
+  String buttonName;
+  String buttonRoute;
+  NavigationName({required this.buttonName, required this.buttonRoute});
+}
 
 class NavigationComponent extends StatefulWidget {
-  NavigationComponent({Key? key}) : super(key: key);
+  late List<String> navigationRole;
+  NavigationComponent({Key? key, required this.navigationRole}) : super(key: key);
 
   @override
   _NavigationComponentState createState() => _NavigationComponentState();
 }
 
+List<NavigationName> createNavigationList(List<String> navigationRole) {
+  List<List<NavigationName>> tempNavigationList = [];
+  navigationRole.forEach((element) {
+    tempNavigationList.add(NavigationController.getNavigation(element));
+  });
+  List<NavigationName> navigationList = [];
+  tempNavigationList.forEach((element) {
+    print(element);
+    navigationList += element;
+  });
+  return navigationList;
+}
+
 class _NavigationComponentState extends State<NavigationComponent> {
   @override
   Widget build(BuildContext context) {
+    List<NavigationName> navigationList = createNavigationList(widget.navigationRole);
     return Material(
       color: Theme.of(context).primaryColor,
       child: Container(
@@ -34,15 +56,20 @@ class _NavigationComponentState extends State<NavigationComponent> {
               flex: 4,
               child: Container(
                 child: ListView.builder(
-                  itemCount: 5,
+                  itemCount: navigationList.length,
                   itemBuilder: (context, index) {
                     return ListTile(
                       title: Text(
-                        'Basic text: ' + index.toString(),
+                        navigationList[index].buttonName,
                         style: TextStyle(color: Colors.white),
                       ),
                       leading: Icon(Icons.home, color: Colors.white),
-                      onTap: () => {},
+                      onTap: () => {
+                        print("navigationList[index].buttonRoute"),
+                        print(navigationList[index].buttonRoute),
+                        Navigator.pushNamed(context, navigationList[index].buttonRoute,
+                            arguments: {'role': widget.navigationRole})
+                      },
                     );
                   },
                 ),

@@ -52,7 +52,7 @@ class _UserApiClient implements UserApiClient {
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<String>>(
             Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/clients/whatRolesAmI',
+                .compose(_dio.options, '/users/whatRolesAmI',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data!.cast<String>();
