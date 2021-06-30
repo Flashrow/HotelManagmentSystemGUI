@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:hotel_management_system/components/HeadingText.dart';
 import 'package:hotel_management_system/components/filledRoundedButton.dart';
 import 'package:hotel_management_system/components/outlinedRoundedButton.dart';
-import 'package:hotel_management_system/components/textFieldComponent.dart';
-import 'package:hotel_management_system/components/passwordFieldComponent.dart';
-import 'package:hotel_management_system/pages/reservationForm/customerData.dart';
 import 'package:hotel_management_system/pages/reservationFormStep2/roomComponent.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
 

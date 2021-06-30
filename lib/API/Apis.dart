@@ -18,4 +18,15 @@ class Apis {
   static const String getReservation = '$reservations/{id}/getReservation';
   static const String addFoodPreference = '$reservations/addFoodPreference';
   static const String addPayment = '$reservations/addPayment';
+  static const String staff = '/staff';
+  static const String getMyDetails = '$staff/getMyDetails';
+  static const String getFoodPreferences = '$staff/getFoodPreferences';
+  static const String getRoomIssues = '$staff/roomService/{room-id}/getRoomIssues';
+  static const String startRoomIssue = '$staff/roomService/startIssue/{issue-id}';
+  static const String resolveRoomIssues = '$staff/roomService/resolveIssue/{issue-id}';
+  static const String getAllClients = '$staff/reception/getAllClients';
+  static const String acceptPayment = '$staff/reception/acceptPayment';
+  static const String checkIn = '$staff/reception/checkIn';
+  static const String checkOut = '$staff/reception/checkOut';
+  static const String modifyClientReservation = '$staff/reception/modifyClientReservation/{reservation-id}';
 }
