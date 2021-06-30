@@ -10,17 +10,30 @@ class NavigationName {
 }
 
 class NavigationComponent extends StatefulWidget {
-  String navigationRole = "";
+  late List<String> navigationRole;
   NavigationComponent({Key? key, required this.navigationRole}) : super(key: key);
 
   @override
   _NavigationComponentState createState() => _NavigationComponentState();
 }
 
+List<NavigationName> createNavigationList(List<String> navigationRole) {
+  List<List<NavigationName>> tempNavigationList = [];
+  navigationRole.forEach((element) {
+    tempNavigationList.add(NavigationController.getNavigation(element));
+  });
+  List<NavigationName> navigationList = [];
+  tempNavigationList.forEach((element) {
+    print(element);
+    navigationList += element;
+  });
+  return navigationList;
+}
+
 class _NavigationComponentState extends State<NavigationComponent> {
   @override
   Widget build(BuildContext context) {
-    List<NavigationName> navigationList = NavigationController.getNavigation(widget.navigationRole);
+    List<NavigationName> navigationList = createNavigationList(widget.navigationRole);
     return Material(
       color: Theme.of(context).primaryColor,
       child: Container(
@@ -51,7 +64,12 @@ class _NavigationComponentState extends State<NavigationComponent> {
                         style: TextStyle(color: Colors.white),
                       ),
                       leading: Icon(Icons.home, color: Colors.white),
-                      onTap: () => {Navigator.pushNamed(context, navigationList[index].buttonRoute)},
+                      onTap: () => {
+                        print("navigationList[index].buttonRoute"),
+                        print(navigationList[index].buttonRoute),
+                        Navigator.pushNamed(context, navigationList[index].buttonRoute,
+                            arguments: {'role': widget.navigationRole})
+                      },
                     );
                   },
                 ),

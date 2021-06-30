@@ -74,7 +74,7 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
       title: swapWidget,
     );
     return UserVerification(
-      routeRoles: [MyRole.ROLE_RECEPTION, MyRole.ROLE_ADMIN],
+      routeRoles: ["ROLE_RECEPTION", "ROLE_ADMIN"],
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Row(

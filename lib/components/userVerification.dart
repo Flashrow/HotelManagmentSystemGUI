@@ -8,18 +8,15 @@ import 'navigationComponent.dart';
 class UserVerification extends StatelessWidget {
   const UserVerification({Key? key, required this.child, required this.routeRoles}) : super(key: key);
   final Widget child;
-  final List<MyRole> routeRoles;
+  final List<String> routeRoles;
 
-  bool checkRole(List<MyRole> routeRoles, List<String> myRoles) {
+  bool checkRole(List<String> routeRoles, List<String> myRoles) {
     bool foundRole = false;
-    print(routeRoles);
-    print("myROles: ");
-    print(myRoles);
     routeRoles.forEach(
       (routeElement) {
         myRoles.forEach(
           (myElement) {
-            if (routeElement.toString() == ("MyRole." + myElement)) foundRole = true;
+            if (routeElement.toString() == (myElement)) foundRole = true;
           },
         );
       },
@@ -32,14 +29,15 @@ class UserVerification extends StatelessWidget {
     return FutureBuilder<List<String>>(
       future: context.read<ApiClient>().auth.roles(),
       builder: (context, snapshot) {
-        print(snapshot.data);
         if (snapshot.data!.isNotEmpty) {
+          print(routeRoles);
+          print(snapshot.data);
           if (checkRole(routeRoles, snapshot.data ?? []))
             return child;
           else
-            return Container();
+            return Text("dupa1");
         } else
-          return Container();
+          return Text("dupa2");
       },
     );
   }

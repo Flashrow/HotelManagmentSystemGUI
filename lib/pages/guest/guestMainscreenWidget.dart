@@ -7,11 +7,15 @@ import 'actualReservations.dart';
 import 'informationsTile.dart';
 
 class GuestMainScreenWidget extends StatelessWidget {
-  const GuestMainScreenWidget({Key? key}) : super(key: key);
+  const GuestMainScreenWidget({Key? key, required this.navigationRole}) : super(key: key);
+  final List<String> navigationRole;
 
   @override
   Widget build(BuildContext context) {
+    print("GuestMainScreenWidget");
+    print(this.navigationRole);
     return DashboardLayout(
+      navigationRole: this.navigationRole,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(24, 24, 24, 36),
         child: Row(

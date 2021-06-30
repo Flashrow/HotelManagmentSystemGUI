@@ -44,8 +44,12 @@ class MyApp extends StatelessWidget {
         'Guest': (context) => GuestScreen(),
         'FrontPage': (context) => FrontPage(),
         'Register': (context) => RegisterScreen(),
-        'Guest/Home': (context) => GuestMainScreenWidget(),
-        'Guest/Stay': (context) => GuestStayScreenWidget(),
+        'Guest/Home': (context) => GuestMainScreenWidget(
+              navigationRole: ["ROLE_CLIENT"],
+            ),
+        'Guest/Stay': (context) => GuestStayScreenWidget(
+              navigationRole: ["ROLE_CLIENT"],
+            ),
       },
       home: MainContainer(
         child: RegisterScreen(),

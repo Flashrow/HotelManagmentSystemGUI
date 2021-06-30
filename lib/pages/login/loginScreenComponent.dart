@@ -155,8 +155,8 @@ class LoginScreenComponent extends StatelessWidget {
                             Navigator.pushNamed(
                               context,
                               NavigationController.getPath(apiClient.auth.getSingleRole(apiClient.auth.userRoles)),
-                              arguments: <String, String>{
-                                'role': apiClient.auth.getSingleRole(apiClient.auth.userRoles),
+                              arguments: {
+                                'role': apiClient.auth.userRoles,
                               },
                             )
                           }
