@@ -35,9 +35,9 @@ class UserVerification extends StatelessWidget {
           if (checkRole(routeRoles, snapshot.data ?? []))
             return child;
           else
-            return Text("dupa1");
+            return Text("error404");
         } else
-          return Text("dupa2");
+          return Text("error404");
       },
     );
   }
