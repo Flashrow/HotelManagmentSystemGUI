@@ -12,6 +12,18 @@ import 'package:provider/provider.dart';
 class LoginScreenComponent extends StatelessWidget {
   const LoginScreenComponent({Key? key}) : super(key: key);
 
+  navigate(ApiClient apiClient, BuildContext context) {
+    if (apiClient.auth.isAuthorized) {
+      Navigator.pushNamed(
+        context,
+        NavigationController.getPath(apiClient.auth.getSingleRole(apiClient.auth.userRoles)),
+        arguments: {
+          'role': apiClient.auth.userRoles,
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final TextEditingController _passwordController = new TextEditingController();
@@ -22,6 +34,10 @@ class LoginScreenComponent extends StatelessWidget {
 
     ColorTheme myColors = ColorTheme();
     ApiClient apiClient = context.read<ApiClient>();
+
+    apiClient.auth.tryLoginWithSavedToken().then((isUser) {
+      if (isUser) navigate(apiClient, context);
+    });
     return Center(
       child: Container(
         //margin: EdgeInsets.fromLTRB(300, 200, 300, 200),
@@ -144,22 +160,12 @@ class LoginScreenComponent extends StatelessWidget {
                     //TODO: check authentication
                     FilledRoundedButton(
                       buttonText: 'zaloguj się',
-                      onPresesd: () async => {
-                        print(apiClient.auth.signInStaff(currentUsername, currentPassword).catchError((error) => {
-                              _passwordController.clear(),
-                              _loginController.clear(),
-                              showErrorToast(error.toString()),
-                            })),
-                        if (apiClient.auth.isAuthorized)
-                          {
-                            Navigator.pushNamed(
-                              context,
-                              NavigationController.getPath(apiClient.auth.getSingleRole(apiClient.auth.userRoles)),
-                              arguments: {
-                                'role': apiClient.auth.userRoles,
-                              },
-                            )
-                          }
+                      onPresesd: () async {
+                        apiClient.auth.signInStaff(currentUsername, currentPassword).catchError((error) {
+                          _passwordController.clear();
+                          _loginController.clear();
+                          showErrorToast(error.toString());
+                        }).then((value) => navigate(apiClient, context));
                       },
                     ),
                     Container(

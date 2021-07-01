@@ -1,7 +1,7 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/utils/colorTheme.dart';
+import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/utils/whoAmI.dart';
+import 'package:provider/provider.dart';
 
 class NavigationName {
   String buttonName;
@@ -28,6 +28,12 @@ List<NavigationName> createNavigationList(List<String> navigationRole) {
     navigationList += element;
   });
   return navigationList;
+}
+
+logout(BuildContext context) {
+  context.read<ApiClient>().auth.logout().then((value) {
+    Navigator.pushNamed(context, 'Login');
+  });
 }
 
 class _NavigationComponentState extends State<NavigationComponent> {
@@ -76,7 +82,7 @@ class _NavigationComponentState extends State<NavigationComponent> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () => logout(context),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(16, 8, 0, 8),
                 child: Container(
