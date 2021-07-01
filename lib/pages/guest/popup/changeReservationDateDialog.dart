@@ -18,7 +18,7 @@ class ChangeReservationDateDialog extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(width: 700),
-            CustomDateRangePicker(room: this.room,),
+            CustomDateRangePicker(room: this.room, context: context,),
           ],
         ),
       ),

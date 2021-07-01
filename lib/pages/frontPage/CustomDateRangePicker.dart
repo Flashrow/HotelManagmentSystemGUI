@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/models/DatePicker/DateRangePickerModel.dart';
 import 'package:hotel_management_system/models/Room/Room.dart';
+import 'package:hotel_management_system/pages/login/loginScreen.dart';
+import 'package:hotel_management_system/pages/reservationForm/reservationForm.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 /// My app class to display the date range picker
 class CustomDateRangePicker extends StatefulWidget {
   Room? room;
+  BuildContext? context;
 
-  CustomDateRangePicker({required this.room});
+  CustomDateRangePicker({required this.room, required this.context});
 
   @override
   CustomDateRangePickerState createState() => CustomDateRangePickerState();
@@ -17,6 +20,7 @@ class CustomDateRangePicker extends StatefulWidget {
 
 /// State for MyApp
 class CustomDateRangePickerState extends State<CustomDateRangePicker> {
+  bool isDateRangeSelected = false;
   DateRangePickerModel dates = new DateRangePickerModel();
   double _costPerDay = 250.0;
   double _wholeCost = 7 * 250.0;
@@ -24,10 +28,12 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker> {
 
   @override
   void initState() {
-    dates.blackoutDays = [
-      DateTime.now().add(const Duration(days: 1)),
-      DateTime.now().add(const Duration(days: 3)),
-    ];
+    if(isDateRangeSelected && this.widget.context!.read<ApiClient>().auth.isAuthorized){
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ReservationForm()),
+      );
+    }
 
     super.initState();
   }
@@ -58,6 +64,11 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker> {
   }
 
   confirm() {
+    if(!this.widget.context!.read<ApiClient>().auth.isAuthorized)
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+      );
     print("Confirm pressed");
   }
 

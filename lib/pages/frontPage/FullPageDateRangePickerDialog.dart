@@ -14,7 +14,7 @@ class FullPageDataRangePickerDialog extends StatelessWidget {
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: Container(
-        child: CustomDateRangePicker(room: this.room),
+        child: CustomDateRangePicker(room: this.room, context: context,),
       ),
     );
   }
