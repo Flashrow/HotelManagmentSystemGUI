@@ -6,15 +6,27 @@ import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/components/HeadingText.dart';
 import 'package:hotel_management_system/components/filledRoundedButton.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
+import 'package:hotel_management_system/utils/whoAmI.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreenComponent extends StatelessWidget {
   const LoginScreenComponent({Key? key}) : super(key: key);
 
+  navigate(ApiClient apiClient, BuildContext context) {
+    if (apiClient.auth.isAuthorized) {
+      Navigator.pushNamed(
+        context,
+        NavigationController.getPath(apiClient.auth.getSingleRole(apiClient.auth.userRoles)),
+        arguments: {
+          'role': apiClient.auth.userRoles,
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _passwordController =
-        new TextEditingController();
+    final TextEditingController _passwordController = new TextEditingController();
     final TextEditingController _loginController = new TextEditingController();
 
     String currentPassword = "";
@@ -22,6 +34,10 @@ class LoginScreenComponent extends StatelessWidget {
 
     ColorTheme myColors = ColorTheme();
     ApiClient apiClient = context.read<ApiClient>();
+
+    apiClient.auth.tryLoginWithSavedToken().then((isUser) {
+      if (isUser) navigate(apiClient, context);
+    });
     return Center(
       child: Container(
         //margin: EdgeInsets.fromLTRB(300, 200, 300, 200),
@@ -61,9 +77,7 @@ class LoginScreenComponent extends StatelessWidget {
               //flex: 3,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(20),
-                      bottomRight: Radius.circular(20)),
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(20), bottomRight: Radius.circular(20)),
                   color: Colors.white,
                 ),
                 child: Column(
@@ -94,15 +108,12 @@ class LoginScreenComponent extends StatelessWidget {
                                 fillColor: Colors.white,
                                 filled: true,
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: myColors
-                                          .themeData.colorScheme.primary),
+                                  borderSide: BorderSide(color: myColors.themeData.colorScheme.primary),
                                 ),
                                 hintText: 'Podaj adres email',
                                 contentPadding: EdgeInsets.all(4),
                               ),
                               onChanged: (text) {
-                                print('email: $text');
                                 currentUsername = text;
                               },
                             ),
@@ -133,32 +144,28 @@ class LoginScreenComponent extends StatelessWidget {
                                 fillColor: Colors.white,
                                 filled: true,
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: myColors
-                                          .themeData.colorScheme.primary),
+                                  borderSide: BorderSide(color: myColors.themeData.colorScheme.primary),
                                 ),
                                 hintText: 'Podaj hasło',
                                 contentPadding: EdgeInsets.all(4),
                               ),
                               onChanged: (passwordText) {
                                 currentPassword = passwordText;
-                                print('password: $passwordText');
                               },
                             ),
                           )
                         ],
                       ),
                     ),
+                    //TODO: check authentication
                     FilledRoundedButton(
                       buttonText: 'zaloguj się',
-                      onPresesd: () => {
-                        print(apiClient.auth
-                            .signIn(currentUsername, currentPassword)
-                            .catchError((error) => {
-                                  _passwordController.clear(),
-                                  _loginController.clear(),
-                                  showErrorToast(error.toString()),
-                                }))
+                      onPresesd: () async {
+                        apiClient.auth.signInStaff(currentUsername, currentPassword).catchError((error) {
+                          _passwordController.clear();
+                          _loginController.clear();
+                          showErrorToast(error.toString());
+                        }).then((value) => navigate(apiClient, context));
                       },
                     ),
                     Container(
@@ -176,7 +183,7 @@ class LoginScreenComponent extends StatelessWidget {
                                 text: 'Zarejestruj się',
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    print('Button clicked');
+                                    Navigator.pushNamed(context, "Register");
                                   },
                                 style: TextStyle(
                                   color: myColors.themeData.colorScheme.primary,
