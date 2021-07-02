@@ -4,12 +4,13 @@ import 'package:hotel_management_system/components/HeadingText.dart';
 import 'package:hotel_management_system/components/filledRoundedButton.dart';
 import 'package:hotel_management_system/components/outlinedRoundedButton.dart';
 import 'package:hotel_management_system/components/textFieldComponent.dart';
-import 'package:hotel_management_system/components/passwordFieldComponent.dart';
+import 'package:hotel_management_system/models/Room/Room.dart';
 import 'package:hotel_management_system/pages/reservationForm/customerData.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
 
 class ReservationFormComponent extends StatefulWidget {
-  const ReservationFormComponent({Key? key}) : super(key: key);
+  final Room? room;
+  const ReservationFormComponent({Key? key, required this.room}) : super(key: key);
 
   @override
   _ReservationFormComponentState createState() =>
@@ -54,7 +55,7 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                       children: [
                         Expanded(child: Container()),
                         Text(
-                          "Apartament karmazynowy",
+                         "Pokój " + this.widget.room!.description.toString(),
                           style: TextStyle(
                             fontSize: 20,
                           ),

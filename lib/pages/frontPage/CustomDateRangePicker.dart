@@ -22,19 +22,13 @@ class CustomDateRangePicker extends StatefulWidget {
 class CustomDateRangePickerState extends State<CustomDateRangePicker> {
   bool isDateRangeSelected = false;
   DateRangePickerModel dates = new DateRangePickerModel();
-  double _costPerDay = 250.0;
-  double _wholeCost = 7 * 250.0;
+  double _costPerDay = 0;
+  double _wholeCost = 0;
   Function? confirmButton;
 
   @override
   void initState() {
-    if(isDateRangeSelected && this.widget.context!.read<ApiClient>().auth.isAuthorized){
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ReservationForm()),
-      );
-    }
-
+    _costPerDay = this.widget.room!.price;
     super.initState();
   }
 
@@ -44,7 +38,7 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker> {
         dates.startDate = args.value.startDate;
         dates.endDate = args.value.endDate ?? args.value.startDate;
         _wholeCost = dates.days * _costPerDay;
-
+        
         validateDateRange();
       }
     });
@@ -55,6 +49,7 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker> {
       _showAlertDateDialog();
       confirmButton = null;
     } else {
+      isDateRangeSelected = true;
       confirmButton = confirm;
     }
 
@@ -64,11 +59,24 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker> {
   }
 
   confirm() {
-    if(!this.widget.context!.read<ApiClient>().auth.isAuthorized)
+    if (!this.widget.context!.read<ApiClient>().auth.isAuthorized)
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => LoginScreen()),
-      );
+      ).then((value) => {
+            if (isDateRangeSelected &&
+                this.widget.context!.read<ApiClient>().auth.isAuthorized)
+              {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ReservationForm(room: this.widget.room)),
+                )
+              }
+          });
+    else
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => ReservationForm(room: this.widget.room)));
+
     print("Confirm pressed");
   }
 
