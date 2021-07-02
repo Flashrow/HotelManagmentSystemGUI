@@ -8,6 +8,7 @@ import 'package:hotel_management_system/components/outlinedRoundedButton.dart';
 import 'package:hotel_management_system/components/topBar.dart';
 import 'package:hotel_management_system/pages/adminScreen/staffComponent.dart';
 import 'package:hotel_management_system/pages/reservationFormStep2/roomComponent.dart';
+import 'package:hotel_management_system/pages/roomService/roomServiceElement.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
 
 class RoomServiceScreenComponent extends StatefulWidget {
@@ -32,7 +33,7 @@ class _RoomServiceScreenComponentState
                 child: Row(
                   children: [
                     Expanded(
-                      flex: 5,
+                      flex: 2,
                       child: Padding(
                         padding: const EdgeInsets.all(32.0),
                         child: Container(
@@ -68,7 +69,7 @@ class _RoomServiceScreenComponentState
                                           Text('Nr pokoju'),
                                           Text('Stan'),
                                           Text('Opis'),
-                                          Container(width: 610),
+                                          Container(width: 410),
                                         ],
                                       ),
                                     ),
@@ -76,7 +77,7 @@ class _RoomServiceScreenComponentState
                                 ),
                               ),
                               Expanded(
-                                flex: 2,
+                                flex: 4,
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Colors.white,
@@ -98,47 +99,12 @@ class _RoomServiceScreenComponentState
                                     itemBuilder: (context, index) {
                                       return ListTile(
                                         title: InkWell(
-                                          onTap: () => {},
-                                          child: Row(
-                                            children: [
-                                              Expanded(
-                                                flex: 5,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text('1.'),
-                                                    Text('Obsługiwane'),
-                                                    Text(
-                                                        'Brak papieru toaletowego'),
-                                                  ],
-                                                ),
-                                              ),
-                                              Expanded(
-                                                flex: 2,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    IconButton(
-                                                      icon: Icon(
-                                                          Icons.person_remove),
-                                                      onPressed: () => {},
-                                                      splashRadius: 25,
-                                                    ),
-                                                    IconButton(
-                                                      icon: Icon(
-                                                          Icons.edit_outlined),
-                                                      onPressed: () => {},
-                                                      splashRadius: 25,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                                            onTap: () => {},
+                                            child: RoomServiceElement(
+                                              descText: 'Brudno',
+                                              numberText: '1',
+                                              stateText: 'Obsługiwane',
+                                            )),
                                       );
                                     },
                                   ),
