@@ -9,6 +9,8 @@ import 'package:hotel_management_system/pages/login/loginScreen.dart';
 import 'package:hotel_management_system/pages/reception/receptionScreen.dart';
 import 'package:hotel_management_system/pages/register/registerScreen.dart';
 import 'package:hotel_management_system/pages/adminScreen/adminScreen.dart';
+import 'package:hotel_management_system/pages/reservationFormStep2/reservationFormStep2.dart';
+import 'package:hotel_management_system/pages/roomService/roomServiceScreen.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
 import 'package:provider/provider.dart';
 
