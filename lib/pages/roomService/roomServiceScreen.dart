@@ -11,7 +11,7 @@ class RoomServiceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: DashboardLayout(
-        navigationRole: ['ROLE_ROLE_ROOM_SERVICE'],
+        navigationRole: ['ROLE_ROOM_SERVICE'],
         child: RoomServiceScreenComponent(),
       ),
       backgroundColor: Colors.white,
