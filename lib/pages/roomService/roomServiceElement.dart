@@ -1,31 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/components/filledRoundedButton.dart';
+import 'package:hotel_management_system/API/ApiClient.dart';
+import 'package:hotel_management_system/models/RoomIssue.dart';
 import 'package:hotel_management_system/pages/roomService/checkButton.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
+import 'package:provider/provider.dart';
 
-class RoomServiceElement extends StatefulWidget {
+class RoomServiceElement extends StatelessWidget {
   const RoomServiceElement({
     Key? key,
-    this.nameText,
-    this.surnameText,
-    this.descText,
-    this.stateText = "Obsługiwane",
-    this.numberText = "0",
+    required this.issue,
+    required this.refresh,
   }) : super(key: key);
 
-  final String? nameText;
-  final String? surnameText;
-  final String stateText;
-  final String? descText;
-  final String numberText;
+  final Function() refresh;
+  final RoomIssue issue;
 
-  @override
-  _RoomServiceElementState createState() => _RoomServiceElementState();
-}
+  activate(ApiClient api) {
+    api.database.staff.startRoomIssue(issue.id);
+    refresh();
+  }
 
-class _RoomServiceElementState extends State<RoomServiceElement> {
+  resolve(ApiClient api) {
+    api.database.staff.resolveRoomIssues(issue.id);
+    refresh();
+  }
+
   @override
   Widget build(BuildContext context) {
+    ApiClient apiClient = Provider.of<ApiClient>(context);
     ColorTheme myColors = ColorTheme();
     return Row(
       children: [
@@ -34,9 +36,9 @@ class _RoomServiceElementState extends State<RoomServiceElement> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(widget.numberText + '.'),
-              Text(widget.stateText),
-              Text(widget.descText!),
+              Text(issue.roomId.toString() + '.'),
+              Text(issue.roomIssueStatus),
+              Text(issue.description),
             ],
           ),
         ),
@@ -46,18 +48,21 @@ class _RoomServiceElementState extends State<RoomServiceElement> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              if (widget.stateText == 'Obsługiwane')
-                FilledRoundedButton(
-                  buttonText: 'zgłoś szkodę',
-                  onPresesd: () => {},
+              if (issue.roomIssueStatus == 'REPORTED')
+                CheckButton(
+                  text: 'Aktywuj',
+                  color: Colors.green,
+                  onPresesd: () => activate(apiClient),
                 ),
               SizedBox(
                 width: 10,
               ),
-              CheckButton(
-                stateText: widget.stateText,
-                onPresesd: () => {},
-              ),
+              if (issue.roomIssueStatus == 'IN_PROGRESS')
+                CheckButton(
+                  text: 'Zakończ',
+                  color: Colors.pink,
+                  onPresesd: () => resolve(apiClient),
+                )
             ],
           ),
         ),

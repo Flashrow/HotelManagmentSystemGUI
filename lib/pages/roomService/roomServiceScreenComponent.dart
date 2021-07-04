@@ -1,29 +1,27 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/components/HeadingText.dart';
-import 'package:hotel_management_system/components/dashboardLayout.dart';
-import 'package:hotel_management_system/components/filledRoundedButton.dart';
-import 'package:hotel_management_system/components/navigationComponent.dart';
-import 'package:hotel_management_system/components/outlinedRoundedButton.dart';
-import 'package:hotel_management_system/components/topBar.dart';
-import 'package:hotel_management_system/pages/adminScreen/staffComponent.dart';
-import 'package:hotel_management_system/pages/reservationFormStep2/roomComponent.dart';
+import 'package:hotel_management_system/API/ApiClient.dart';
+import 'package:hotel_management_system/models/RoomIssue.dart';
 import 'package:hotel_management_system/pages/roomService/roomServiceElement.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
+import 'package:provider/provider.dart';
 
 class RoomServiceScreenComponent extends StatefulWidget {
   const RoomServiceScreenComponent({Key? key}) : super(key: key);
 
   @override
-  _RoomServiceScreenComponentState createState() =>
-      _RoomServiceScreenComponentState();
+  _RoomServiceScreenComponentState createState() => _RoomServiceScreenComponentState();
 }
 
-class _RoomServiceScreenComponentState
-    extends State<RoomServiceScreenComponent> {
+class _RoomServiceScreenComponentState extends State<RoomServiceScreenComponent> {
+  refresh() {
+    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+  }
+
   @override
   Widget build(BuildContext context) {
     ColorTheme myColors = ColorTheme();
+    ApiClient apiClient = Provider.of<ApiClient>(context);
     return Row(
       children: [
         Expanded(
@@ -51,20 +49,17 @@ class _RoomServiceScreenComponentState
                                         offset: Offset(0.0, 4.0),
                                       ),
                                     ],
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(20),
-                                        topRight: Radius.circular(20)),
+                                    borderRadius:
+                                        BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
                                     color: Theme.of(context).primaryColor,
                                   ),
                                   child: Material(
                                     color: Colors.transparent,
                                     textStyle: TextStyle(color: Colors.white),
                                     child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          8, 16, 8, 16),
+                                      padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text('Nr pokoju'),
                                           Text('Stan'),
@@ -94,18 +89,19 @@ class _RoomServiceScreenComponentState
                                       ),
                                     ],
                                   ),
-                                  child: ListView.builder(
-                                    itemCount: 15,
-                                    itemBuilder: (context, index) {
-                                      return ListTile(
-                                        title: InkWell(
-                                            onTap: () => {},
-                                            child: RoomServiceElement(
-                                              descText: 'Brudno',
-                                              numberText: '1',
-                                              stateText: 'Obsługiwane',
-                                            )),
-                                      );
+                                  child: FutureBuilder(
+                                    future: apiClient.database.getRoomsIssue(),
+                                    builder: (context, AsyncSnapshot<List<RoomIssue>> snapshot) {
+                                      if (snapshot.hasData && snapshot.data != null) {
+                                        return ListView.builder(
+                                          itemCount: snapshot.data?.length ?? 0,
+                                          itemBuilder: (context, index) {
+                                            return buildListItem(snapshot.data!.elementAt(index));
+                                          },
+                                        );
+                                      } else {
+                                        return Text("Loading");
+                                      }
                                     },
                                   ),
                                 ),
@@ -122,6 +118,17 @@ class _RoomServiceScreenComponentState
           ),
         )
       ],
+    );
+  }
+
+  ListTile buildListItem(RoomIssue issue) {
+    return ListTile(
+      title: InkWell(
+          onTap: () => {},
+          child: RoomServiceElement(
+            issue: issue,
+            refresh: refresh,
+          )),
     );
   }
 }
