@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: colorTheme.themeData,
-      initialRoute: 'Admin/Rooms',
+      initialRoute: 'Login',
       routes: {
         'Reception': (context) => ReceptionScreen(),
         'Kitchen': (context) => KitchenScreen(),
@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
               navigationRole: ["ROLE_CLIENT"],
             ),
         'Guest/Stay': (context) => GuestStayScreenWidget(
-              navigationRole: ["ROLE_CLIENT"],
+              navigationRole: ["ROLE_CLIENT", "ROLE_ADMIN"],
             ),
         'Admin/Staff': (context) => AdminScreen(),
         'Admin/Rooms': (context) => RoomEditScreen(),

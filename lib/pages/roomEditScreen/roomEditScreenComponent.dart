@@ -8,6 +8,7 @@ import 'package:hotel_management_system/components/outlinedRoundedButton.dart';
 import 'package:hotel_management_system/components/topBar.dart';
 import 'package:hotel_management_system/pages/adminScreen/staffComponent.dart';
 import 'package:hotel_management_system/pages/reservationFormStep2/roomComponent.dart';
+import 'package:hotel_management_system/pages/roomEditScreen/roomDetailsComponent.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
 
 class RoomEditScreenComponent extends StatefulWidget {
@@ -57,7 +58,7 @@ class _RoomEditScreenComponentState extends State<RoomEditScreenComponent> {
                                           ),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(30))),
-                                      hintText: "Staff",
+                                      hintText: "Room",
                                       hintStyle: TextStyle(
                                           color:
                                               Theme.of(context).primaryColor)),
@@ -92,10 +93,9 @@ class _RoomEditScreenComponentState extends State<RoomEditScreenComponent> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text('Imię'),
-                                          Text('Nazwisko'),
-                                          Text('Email'),
-                                          Text('Rola'),
+                                          Text('Nr pokoju'),
+                                          Text('Nazwa pokoju'),
+                                          Text('Cena'),
                                           Container(width: 110),
                                         ],
                                       ),
@@ -136,11 +136,9 @@ class _RoomEditScreenComponentState extends State<RoomEditScreenComponent> {
                                                       MainAxisAlignment
                                                           .spaceBetween,
                                                   children: [
-                                                    Text('Jan'),
-                                                    Text('Kowalski'),
-                                                    Text(
-                                                        'jan.kowalski@mail.com'),
-                                                    Text('Recepcja'),
+                                                    Text('102'),
+                                                    Text('Pokój 2'),
+                                                    Text('200zł'),
                                                   ],
                                                 ),
                                               ),
@@ -152,13 +150,12 @@ class _RoomEditScreenComponentState extends State<RoomEditScreenComponent> {
                                                   children: [
                                                     IconButton(
                                                       icon: Icon(
-                                                          Icons.person_remove),
+                                                          Icons.edit_outlined),
                                                       onPressed: () => {},
                                                       splashRadius: 25,
                                                     ),
                                                     IconButton(
-                                                      icon: Icon(
-                                                          Icons.edit_outlined),
+                                                      icon: Icon(Icons.delete),
                                                       onPressed: () => {},
                                                       splashRadius: 25,
                                                     ),
@@ -184,19 +181,19 @@ class _RoomEditScreenComponentState extends State<RoomEditScreenComponent> {
                     ),
                     Expanded(
                       flex: 5,
-                      child: StaffComponent(
-                        nameText: 'Adam',
-                        surnameText: 'Nowak',
-                        emailText: 'adamnowak@mail.com',
-                        passwordText: 'gwiazdki',
-                        roleText: 'Kuchnia',
+                      child: RoomDetailsComponent(
+                        roomNameText: 'Pokój 2137',
+                        roomDescText: 'mały ale szybkie wifi',
+                        roomNumberText: '3',
+                        roomPriceText: '420',
+                        roomSizeText: '3',
                       ),
                     ),
                   ],
                 ),
               ),
               OutlinedRoundedButton(
-                buttonText: 'Nowy user',
+                buttonText: 'Nowy pokój',
                 onPresesd: () => {},
               ),
               SizedBox(
