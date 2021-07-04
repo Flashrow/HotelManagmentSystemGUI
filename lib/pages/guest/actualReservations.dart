@@ -84,6 +84,11 @@ class _ActualReservationsState extends State<ActualReservations> {
                     text: "Zmień datę",
                   ),
                   IconText(
+                    icon: Icons.report,
+                    fontSize: 14,
+                    text: "Zgłoś problem",
+                  ),
+                  IconText(
                     icon: Icons.cancel,
                     fontSize: 14,
                     text: "Anuluj",
