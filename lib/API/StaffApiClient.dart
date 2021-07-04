@@ -5,6 +5,7 @@ import 'package:hotel_management_system/constants/KitchenTimeOfDayEnum.dart';
 import 'package:hotel_management_system/models/Client.dart';
 import 'package:hotel_management_system/models/DTO/AddReservationDTO.dart';
 import 'package:hotel_management_system/models/DTO/KitchenDishesDTO.dart';
+import 'package:hotel_management_system/models/DTO/SingleActiveRoomDTO.dart';
 import 'package:hotel_management_system/models/RoomIssue.dart';
 import 'package:hotel_management_system/models/Staff.dart';
 import 'package:retrofit/retrofit.dart';
@@ -41,6 +42,9 @@ abstract class StaffApiClient {
 
   @POST(Apis.checkOut)
   Future<HttpResponse> checkOut(@Query('checkedInId') int checkedInId);
+
+  @GET(Apis.getActiveRooms)
+  Future<List<SingleActiveRoomDTO>> getActiveRooms();
 
   @POST(Apis.modifyClientReservation)
   Future<HttpResponse> modifyClientReservation(

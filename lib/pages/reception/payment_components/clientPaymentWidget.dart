@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/components/filledRoundedButton.dart';
+import 'package:hotel_management_system/models/DTO/SingleActiveRoomDTO.dart';
 
 import 'clientDataWidget.dart';
 import 'clientFoodWidget.dart';
@@ -7,10 +8,10 @@ import 'clientStayWidget.dart';
 import 'clientTopBarWidget.dart';
 
 class ClientPaymentWidget extends StatefulWidget {
-  final String clientName;
+  final SingleActiveRoomDTO roomData;
   const ClientPaymentWidget({
     Key? key,
-    required this.clientName,
+    required this.roomData,
   }) : super(key: key);
 
   @override
@@ -24,7 +25,13 @@ class _ClientPaymentWidgetState extends State<ClientPaymentWidget> {
       padding: const EdgeInsets.only(top: 64, left: 16, right: 32),
       child: Column(
         children: [
-          ClientTopBar(),
+          ClientTopBar(
+            clientName: widget.roomData.client.firstName,
+            clientSurName: widget.roomData.client.lastName,
+            roomNumber: widget.roomData.room.number.toString(),
+            stayEnd: '',
+            stayStart: '',
+          ),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -38,15 +45,21 @@ class _ClientPaymentWidgetState extends State<ClientPaymentWidget> {
                 Row(
                   children: [
                     ClientDataWidget(
-                      city: 'city',
-                      country: 'country',
-                      name: widget.clientName,
-                      phoneNumber: 'phoneNumber',
-                      postCode: 'postCode',
-                      streetName: 'streetName',
-                      surname: 'surname',
+                      city: widget.roomData.client.city,
+                      country: widget.roomData.client.country,
+                      name: widget.roomData.client.firstName,
+                      phoneNumber: widget.roomData.client.phoneNumber,
+                      postCode: widget.roomData.client.postCode,
+                      streetName: widget.roomData.client.address,
+                      surname: widget.roomData.client.lastName,
                     ),
-                    ClientStayWidget(),
+                    ClientStayWidget(
+                      bedsNumber: widget.roomData.room.size.toString(),
+                      roomNumber: widget.roomData.room.number.toString(),
+                      roomType: "standard",
+                      stayEnd: widget.roomData.endDate.split("T")[0],
+                      stayStart: widget.roomData.startDate.split("T")[0],
+                    ),
                   ],
                 ),
                 Row(

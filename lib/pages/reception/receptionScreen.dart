@@ -1,11 +1,15 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/components/filledRoundedButton.dart';
 import 'package:hotel_management_system/components/navigationComponent.dart';
 import 'package:hotel_management_system/components/outlinedRoundedButton.dart';
 import 'package:hotel_management_system/components/topBar.dart';
 import 'package:hotel_management_system/components/userVerification.dart';
+import 'package:hotel_management_system/models/Client.dart';
+import 'package:hotel_management_system/models/DTO/SingleActiveRoomDTO.dart';
+import 'package:hotel_management_system/models/Room/Room.dart';
 import 'package:hotel_management_system/pages/reception/payment_components/clientDataWidget.dart';
 import 'package:hotel_management_system/pages/reception/payment_components/clientFoodWidget.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
@@ -15,59 +19,78 @@ import 'edit_components/editClientWidget.dart';
 import 'payment_components/clientPaymentWidget.dart';
 import 'payment_components/clientStayWidget.dart';
 import 'payment_components/clientTopBarWidget.dart';
+import 'package:provider/provider.dart';
 
 class ReceptionScreen extends StatefulWidget {
-  late String name = "Name";
-  late String surname = "Surname";
-  late String phoneNumber;
-  late String country;
-  late String city;
-  late String postCode;
-  late String streetName;
-  ReceptionScreen(
-      {Key? key,
-      String? name,
-      String? surname,
-      String? phoneNumber,
-      String? country,
-      String? city,
-      String? postCode,
-      String? streetName})
-      : super(key: key);
+  ReceptionScreen({Key? key}) : super(key: key);
 
   @override
   _ReceptionScreenState createState() => _ReceptionScreenState();
 }
 
 class _ReceptionScreenState extends State<ReceptionScreen> {
-  List<String> names = <String>[
-    "name1",
-    "name2",
-    "name3",
-    "name4",
-    "name5",
-    "name6",
-    "name7",
-    "name8",
-    "name9",
-    "name10",
-    "name11",
-    "name12",
-    "name13",
-    "name14",
-    "name15",
-    "name16"
-  ];
   bool myWidget = false;
   String clientName = "tempclient";
+  SingleActiveRoomDTO temp = SingleActiveRoomDTO(
+      endDate: "koniec",
+      startDate: "początek",
+      room: Room(
+        description: 'opis',
+        floor: 1,
+        id: 0,
+        number: 5,
+        price: 500,
+        size: 5,
+      ),
+      client: Client(
+          country: 'kraj',
+          address: 'adres',
+          city: 'miasto',
+          email: 'email',
+          firstName: 'imie',
+          id: 0,
+          lastName: 'nazwisko',
+          password: 'haslo',
+          phoneNumber: 'nr telefonu',
+          postCode: 'kod pocztowy',
+          roles: []));
+  List<SingleActiveRoomDTO> filteredRoom = [];
+  List<SingleActiveRoomDTO> raw = [];
+
+  filterListBySurname(String surname) {
+    List<SingleActiveRoomDTO> empty = [];
+    raw.forEach((element) {
+      if (element.client.lastName.contains(surname)) empty.add(element);
+    });
+    setState(() {
+      filteredRoom = empty;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<ApiClient>().database.getActiveRooms().then(
+          (value) => setState(() {
+            raw = value;
+            filteredRoom = value;
+          }),
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
+    ApiClient apiClient = context.read<ApiClient>();
+
+    Future<List<SingleActiveRoomDTO>> activeRooms = apiClient.database.getActiveRooms();
+
     Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
     var swapWidget;
     if (myWidget == true) {
-      swapWidget = new EditClientWidget(key: UniqueKey(), clientName: clientName);
+      swapWidget = new EditClientWidget(key: UniqueKey(), roomData: temp);
     } else {
-      swapWidget = new ClientPaymentWidget(key: UniqueKey(), clientName: clientName);
+      swapWidget = new ClientPaymentWidget(key: UniqueKey(), roomData: temp);
     }
 
     var myTile = ListTile(
@@ -99,6 +122,7 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
                                 children: [
                                   Container(
                                     child: TextField(
+                                      onChanged: filterListBySurname,
                                       decoration: new InputDecoration(
                                           border: new OutlineInputBorder(
                                             borderSide: new BorderSide(color: Theme.of(context).primaryColor),
@@ -146,8 +170,9 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
                                     flex: 2,
                                     child: Container(
                                       child: ListView.builder(
-                                        itemCount: 15,
+                                        itemCount: filteredRoom.length,
                                         itemBuilder: (context, index) {
+                                          SingleActiveRoomDTO singleActiveRoom = filteredRoom[index];
                                           return ListTile(
                                             title: InkWell(
                                               onTap: () => {},
@@ -158,10 +183,12 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
                                                     child: Row(
                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                       children: [
-                                                        Text('101'),
-                                                        Text(names[index]),
-                                                        Text('+48 111 222 333'),
-                                                        Text('05.05.2021'),
+                                                        Text(singleActiveRoom.room.id.toString()),
+                                                        Text(singleActiveRoom.client.firstName +
+                                                            " " +
+                                                            singleActiveRoom.client.lastName),
+                                                        Text(singleActiveRoom.client.phoneNumber),
+                                                        Text(singleActiveRoom.client.city),
                                                       ],
                                                     ),
                                                   ),
@@ -185,13 +212,15 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
                                                           onPressed: () => {
                                                             if (myWidget == true)
                                                               setState(() {
-                                                                clientName = names[index];
+                                                                clientName = singleActiveRoom.client.firstName;
+                                                                temp = singleActiveRoom;
                                                                 myWidget = false;
                                                               })
                                                             else
                                                               {
                                                                 setState(() {
-                                                                  clientName = names[index];
+                                                                  clientName = singleActiveRoom.client.firstName;
+                                                                  temp = singleActiveRoom;
                                                                 })
                                                               }
                                                           },
@@ -202,13 +231,15 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
                                                           onPressed: () => {
                                                             if (myWidget == false)
                                                               setState(() {
-                                                                clientName = names[index];
+                                                                clientName = singleActiveRoom.client.firstName;
+                                                                temp = singleActiveRoom;
                                                                 myWidget = true;
                                                               })
                                                             else
                                                               {
                                                                 setState(() {
-                                                                  clientName = names[index];
+                                                                  clientName = singleActiveRoom.client.firstName;
+                                                                  temp = singleActiveRoom;
                                                                 })
                                                               }
                                                           },
