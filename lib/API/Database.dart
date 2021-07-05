@@ -8,6 +8,7 @@ import 'package:hotel_management_system/models/Interim/GuestInfo.dart';
 import 'package:hotel_management_system/models/Interim/ReservationBlueprint.dart';
 import 'package:hotel_management_system/models/Room/Room.dart';
 import 'package:intl/intl.dart';
+import 'package:retrofit/dio.dart';
 
 class Database {
   late Dio _dio;
@@ -40,7 +41,7 @@ class Database {
     return blackoutDates;
   }
 
-  addNewReservation(ReservationBlueprint? newReservation) {
+  Future<HttpResponse> addNewReservation(ReservationBlueprint? newReservation) {
     print("Reservation button pressed");
     print("room id: " + newReservation!.room!.id.toString());
     print("start date: " + newReservation.startDate.toString());
@@ -63,7 +64,7 @@ class Database {
 
     var dateFormatter = new DateFormat('yyyy-MM-dd');
 
-    this._reservationApiClient.addReservation(AddReservationDTO(
+    return this._reservationApiClient.addReservation(AddReservationDTO(
           comment: "",
           roomId: newReservation.room!.id,
           startDate: dateFormatter.format(newReservation.startDate!),

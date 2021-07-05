@@ -45,7 +45,7 @@ dependencies:
   fluttertoast: ^8.0,7
   form_validation: ^2.0.0
   shared_preferences: ^2.0.6
-  intl: ^0.16.1
+  intl: ^0.17.0
 
 dev_dependencies:
   test: ^1.17.5

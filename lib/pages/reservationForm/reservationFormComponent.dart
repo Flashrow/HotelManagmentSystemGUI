@@ -5,6 +5,7 @@ import 'package:hotel_management_system/components/HeadingText.dart';
 import 'package:hotel_management_system/components/filledRoundedButton.dart';
 import 'package:hotel_management_system/models/Interim/GuestInfo.dart';
 import 'package:hotel_management_system/models/Interim/ReservationBlueprint.dart';
+import 'package:hotel_management_system/pages/reservationConfirmed/reservationConfirmed.dart';
 import 'package:hotel_management_system/pages/reservationForm/customerData.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
 import 'package:intl/intl.dart';
@@ -61,7 +62,7 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                       padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
                       child: HeadingText(text: 'Rezerwacja'),
                     ),
-                    Expanded(child: Container()),
+                    SizedBox(height: 36),
                     Row(
                       children: [
                         Expanded(child: Container()),
@@ -225,8 +226,12 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                     SizedBox(
                       height: 10,
                     ),
-                    for (GuestInfo _guest in this.widget.reservation!.guests)
-                      CustomerData(guest: _guest),
+                    Expanded(
+                      child: ListView.builder(
+                          itemCount: this.widget.reservation!.guests.length,
+                          itemBuilder: (context, index) => CustomerData(
+                              guest: this.widget.reservation!.guests[index])),
+                    ),
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -253,7 +258,7 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                         ),
                       ),
                     ),
-                    Expanded(child: Container()),
+                    SizedBox(height: 36),
                     Row(
                       children: [
                         Expanded(child: Container()),
@@ -263,7 +268,15 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                         FilledRoundedButton(
                           buttonText: 'dokonaj rezerwacji',
                           onPresesd: () => {
-                            context.read<ApiClient>().database.addNewReservation(this.widget.reservation)
+                            context
+                                .read<ApiClient>()
+                                .database
+                                .addNewReservation(this.widget.reservation)
+                                .then((value) {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      ReservationConfirmed()));
+                            })
                           },
                         ),
                       ],
