@@ -15,7 +15,7 @@ abstract class ReservationApiClient {
   factory ReservationApiClient(Dio dio, {String baseUrl}) = _ReservationApiClient;
 
   @POST(Apis.addReservation)
-  Future<int> addReservation(@Body() AddReservationDTO addReservationDTO);
+  Future<HttpResponse> addReservation(@Body() AddReservationDTO addReservationDTO);
 
   @GET(Apis.getMyResidences)
   Future<List<Residence>> getMyResidences();

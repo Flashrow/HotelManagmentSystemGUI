@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/components/filledRoundedButton.dart';
+import 'package:hotel_management_system/models/models.dart';
 
 import 'FullPageDateRangePickerDialog.dart';
 
 class RoomCard extends StatelessWidget {
-  const RoomCard({Key? key, this.roomSize, this.roomName, this.price}) : super(key: key);
+  const RoomCard({
+    Key? key,
+    this.room,
+  }) : super(key: key);
 
-  final int? roomSize;
-  final int? price;
-  final String? roomName;
+  final Room? room;
 
   expandMore() {
     print("Expand pressed");
   }
 
-  book(BuildContext context) {
+  void book(BuildContext context) {
     print("Booked pressed");
-    _openDateRangePickerDialog(context);
-  }
-
-  void _openDateRangePickerDialog(BuildContext context) {
     Navigator.of(context).push(new MaterialPageRoute<Null>(
         builder: (BuildContext context) {
-          return FullPageDataRangePickerDialog();
+          return FullPageDataRangePickerDialog(room: room);
         },
         fullscreenDialog: true));
   }
@@ -31,12 +29,13 @@ class RoomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var roomSizeWidget = Row(
       children: [
-        Icon(Icons.people_outline, size: 24.0, color: Theme.of(context).primaryColor),
+        Icon(Icons.people_outline,
+            size: 24.0, color: Theme.of(context).primaryColor),
         Padding(
           padding: const EdgeInsets.only(
             left: 7.0,
           ),
-          child: Text(roomSize.toString()),
+          child: Text(room!.size.toString()),
         )
       ],
     );
@@ -45,7 +44,7 @@ class RoomCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          roomName!,
+          "Pokój " + room!.description,
           style: TextStyle(
             fontSize: 20,
             color: Theme.of(context).colorScheme.secondary,
@@ -57,46 +56,52 @@ class RoomCard extends StatelessWidget {
             width: 300.0,
             height: 2.0,
             child: Container(
-              decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondary),
+              decoration:
+                  BoxDecoration(color: Theme.of(context).colorScheme.secondary),
             ),
           ),
         )
       ],
     );
 
-    var listTitleWidget = (String title) => Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: Text("$title:"),
-        );
-
-    var listItemWidget = (String text) => Padding(
-          padding: const EdgeInsets.only(left: 10.0, bottom: 5.0),
-          child: Text("- $text"),
-        );
-
-    var listsWidget = Expanded(
-      child: Column(
-        children: [
+    var listsWidget = Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        if (room!.equipmentQuantities!.length > 0)
+          SizedBox(
+            width: double.infinity,
+            child: Text(
+              "Wyposażenie:",
+              textAlign: TextAlign.start,
+            ),
+          ),
+        SizedBox(
+          height: 16,
+        ),
+        for (var index = 0; index < room!.equipmentQuantities!.length; index += 3)
           Padding(
-            padding: const EdgeInsets.only(right: 30.0),
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  children: [listTitleWidget("Wyposażenie"), listItemWidget("TV")],
-                ),
-                Column(
-                  children: [listTitleWidget("Wyposażenie"), listItemWidget("TV")],
-                ),
-                Column(
-                  children: [listTitleWidget("Wyposażenie"), listItemWidget("TV")],
-                ),
+                if (index < room!.equipmentQuantities!.length)
+                  Text("- " + room!.equipmentQuantities![index].equipment.name)
+                else
+                  Container(),
+                if (index + 1 < room!.equipmentQuantities!.length)
+                  Text("- " + room!.equipmentQuantities![index + 1].equipment.name)
+                else
+                  Container(),
+                if (index + 2 < room!.equipmentQuantities!.length)
+                  Text("- " + room!.equipmentQuantities![index + 2].equipment.name)
+                else
+                  Container(),
               ],
             ),
-          )
-        ],
-      ),
+          ),
+      ],
     );
+
     return Padding(
       padding: EdgeInsets.only(bottom: 30.0, right: 10.0),
       child: Container(
@@ -110,7 +115,7 @@ class RoomCard extends StatelessWidget {
               color: Colors.black12,
               blurRadius: 2.0,
               spreadRadius: 0.0,
-              offset: Offset(2.0, 2.0), // shadow direction: bottom right
+              offset: Offset(2.0, 2.0),
             )
           ],
           color: Colors.white,
@@ -132,6 +137,7 @@ class RoomCard extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(18.0),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -140,21 +146,22 @@ class RoomCard extends StatelessWidget {
                             roomSizeWidget,
                           ],
                         ),
-                        listsWidget,
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: listsWidget,
+                        ),
+                        Expanded(child: Container()),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Expanded(
                               child: Text(
-                                "Cena: ${price}zł",
+                                "Cena: ${room!.price.toString()}zł / doba",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.w600, color: Theme.of(context).colorScheme.secondary),
-                              ),
-                            ),
-                            TextButton(
-                              onPressed: expandMore,
-                              child: Text(
-                                "więcej".toUpperCase(),
+                                    fontWeight: FontWeight.w600,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondary),
                               ),
                             ),
                             SizedBox(
@@ -162,7 +169,11 @@ class RoomCard extends StatelessWidget {
                             ),
                             FilledRoundedButton(
                               buttonText: "rezerwuj",
-                              onPresesd: () => book(context),
+                              onPresesd: () => {
+                                book(
+                                  context,
+                                ),
+                              },
                             )
                           ],
                         )

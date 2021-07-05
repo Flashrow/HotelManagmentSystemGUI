@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:hotel_management_system/API/Apis.dart';
 import 'package:hotel_management_system/AppConfig.dart';
-import 'package:hotel_management_system/constants/KitchenTimeOfDayEnum.dart';
+import 'package:hotel_management_system/constants/ClientFoodPreferenceTimeOfDayType.dart';
 import 'package:hotel_management_system/models/Client.dart';
 import 'package:hotel_management_system/models/DTO/AddReservationDTO.dart';
 import 'package:hotel_management_system/models/DTO/KitchenDishesDTO.dart';
@@ -20,7 +20,7 @@ abstract class StaffApiClient {
   Future<Staff> getMyDetails();
 
   @GET(Apis.getFoodPreferences)
-  Future<KitchenDishesDTO> getFoodPreferences(@Path('time-of-day') KitchenTimeOfDayEnum timeOfDay);
+  Future<KitchenDishesDTO> getFoodPreferences(@Path('time-of-day') ClientFoodPreferenceTimeOfDayType timeOfDay);
 
   @GET(Apis.getRoomIssues)
   Future<RoomIssue> getRoomIssues(@Path('room-id') int roomId);
