@@ -2,23 +2,15 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/API/ApiClient.dart';
-import 'package:hotel_management_system/components/filledRoundedButton.dart';
 import 'package:hotel_management_system/components/navigationComponent.dart';
-import 'package:hotel_management_system/components/outlinedRoundedButton.dart';
 import 'package:hotel_management_system/components/topBar.dart';
 import 'package:hotel_management_system/components/userVerification.dart';
 import 'package:hotel_management_system/models/Client.dart';
 import 'package:hotel_management_system/models/DTO/SingleActiveRoomDTO.dart';
 import 'package:hotel_management_system/models/Room/Room.dart';
-import 'package:hotel_management_system/pages/reception/payment_components/clientDataWidget.dart';
-import 'package:hotel_management_system/pages/reception/payment_components/clientFoodWidget.dart';
-import 'package:hotel_management_system/utils/colorTheme.dart';
-import 'package:hotel_management_system/utils/whoAmI.dart';
 
 import 'edit_components/editClientWidget.dart';
 import 'payment_components/clientPaymentWidget.dart';
-import 'payment_components/clientStayWidget.dart';
-import 'payment_components/clientTopBarWidget.dart';
 import 'package:provider/provider.dart';
 
 class ReceptionScreen extends StatefulWidget {
@@ -73,6 +65,8 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
     super.initState();
     context.read<ApiClient>().database.getActiveRooms().then(
           (value) => setState(() {
+            print("value: ");
+            print(value);
             raw = value;
             filteredRoom = value;
           }),
@@ -85,7 +79,7 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
 
     Future<List<SingleActiveRoomDTO>> activeRooms = apiClient.database.getActiveRooms();
 
-    Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
+    //Map arguments =//ModalRoute.of(context)!.settings.arguments as Map;
     var swapWidget;
     if (myWidget == true) {
       swapWidget = new EditClientWidget(key: UniqueKey(), roomData: temp);
@@ -97,14 +91,14 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
       title: swapWidget,
     );
     return UserVerification(
-      routeRoles: ["ROLE_RECEPTION", "ROLE_ADMIN"],
+      routeRoles: ["ROLE_RECEPTION"],
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Row(
           children: <Widget>[
             Container(
               width: 300,
-              child: NavigationComponent(navigationRole: arguments['role']),
+              child: NavigationComponent(navigationRole: ["ROLE_RECEPTION", "ROLE_ADMIN"]),
             ),
             Expanded(
               child: Column(
