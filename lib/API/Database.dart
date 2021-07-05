@@ -48,10 +48,6 @@ class Database {
     return _rooms.getAllRooms();
   }
 
-  Future<List<SingleActiveRoomDTO>> getActiveRooms() {
-    return staff.getActiveRooms();
-  }
-
   Future<List<DateTime>> getBlackoutDates(int id) async {
     List<DateTime> blackoutDates = [];
     List<BlackoutTimeDTO> blackoutRanges = await _rooms.getRoomBlackoutDays(id);
