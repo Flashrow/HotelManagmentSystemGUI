@@ -1,10 +1,7 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/components/HeadingText.dart';
 import 'package:hotel_management_system/components/filledRoundedButton.dart';
 import 'package:hotel_management_system/components/outlinedRoundedButton.dart';
-import 'package:hotel_management_system/components/textFieldComponent.dart';
-import 'package:hotel_management_system/components/passwordFieldComponent.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
 
 class ReservationConfirmedComponent extends StatelessWidget {
@@ -68,7 +65,9 @@ class ReservationConfirmedComponent extends StatelessWidget {
                     ),
                     FilledRoundedButton(
                       buttonText: 'zobacz swoje rezerwacje',
-                      onPresesd: () => {},
+                      onPresesd: () {
+                        Navigator.of(context).pushNamed("Guest/Home");
+                      },
                     ),
                     Expanded(child: Container()),
                     Container(
@@ -78,7 +77,9 @@ class ReservationConfirmedComponent extends StatelessWidget {
                           Expanded(child: Container()),
                           OutlinedRoundedButton(
                             buttonText: 'kontynuuj',
-                            onPresesd: () => {},
+                            onPresesd: () {
+                              Navigator.of(context).pushNamed("FrontPage");
+                            },
                           ),
                         ],
                       ),

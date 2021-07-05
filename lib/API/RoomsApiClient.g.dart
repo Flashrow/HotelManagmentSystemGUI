@@ -48,17 +48,19 @@ class _RoomsApiClient implements RoomsApiClient {
   }
 
   @override
-  Future<BlackoutTimeDTO> getRoomBlackoutDays(roomId) async {
+  Future<List<BlackoutTimeDTO>> getRoomBlackoutDays(roomId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BlackoutTimeDTO>(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<BlackoutTimeDTO>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/rooms/$roomId/blackoutDays',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BlackoutTimeDTO.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) => BlackoutTimeDTO.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
