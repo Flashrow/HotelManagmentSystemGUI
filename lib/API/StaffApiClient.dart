@@ -23,7 +23,7 @@ abstract class StaffApiClient {
   Future<KitchenDishesDTO> getFoodPreferences(@Path('time-of-day') ClientFoodPreferenceTimeOfDayType timeOfDay);
 
   @GET(Apis.getRoomIssues)
-  Future<RoomIssue> getRoomIssues(@Path('room-id') int roomId);
+  Future<List<RoomIssue>> getRoomsIssues();
 
   @POST(Apis.startRoomIssue)
   Future<HttpResponse> startRoomIssue(@Path('issue-id') int issueId);

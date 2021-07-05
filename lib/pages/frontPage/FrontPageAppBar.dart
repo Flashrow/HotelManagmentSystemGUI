@@ -1,21 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/components/outlinedRoundedButton.dart';
+import 'package:hotel_management_system/pages/login/loginScreen.dart';
+import 'package:hotel_management_system/pages/register/registerScreen.dart';
+import 'package:hotel_management_system/utils/whoAmI.dart';
+import 'package:provider/provider.dart';
 
-class FrontPageAppBar extends StatelessWidget implements PreferredSizeWidget {
+class FrontPageAppBar extends StatefulWidget {
   const FrontPageAppBar({
     Key? key,
   }) : super(key: key);
 
-  signIn() {
-    print("SignIn clicked");
+  @override
+  _FrontPageAppBarState createState() => _FrontPageAppBarState();
+}
+
+class _FrontPageAppBarState extends State<FrontPageAppBar> {
+  signIn(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => LoginScreen()),
+    ).then((value) {
+      setState(() => {});
+    });
   }
 
-  signUp() {
-    print("SignUp clicked");
+  signUp(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => RegisterScreen()),
+    ).then((value) {
+      setState(() => {});
+    });
+  }
+
+  goToDashboard(BuildContext context, ApiClient apiClient) {
+    Navigator.pushNamed(
+      context,
+      NavigationController.getPath(apiClient.auth.getSingleRole(apiClient.auth.userRoles)),
+      arguments: {
+        'role': apiClient.auth.userRoles,
+      },
+    );
   }
 
   @override
-  AppBar build(BuildContext context) {
+  Widget build(BuildContext context) {
+    ApiClient api = context.watch<ApiClient>();
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0.0,
@@ -26,26 +57,30 @@ class FrontPageAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           child: ButtonBar(
             children: [
-              TextButton(
-                onPressed: signUp,
-                child: Text(
-                  "Zarejestruj się".toUpperCase(),
+              if (!api.auth.isAuthorized)
+                TextButton(
+                  onPressed: () => signUp(context),
+                  child: Text(
+                    "Zarejestruj się".toUpperCase(),
+                  ),
                 ),
-              ),
               SizedBox(
                 width: 20.0,
               ),
-              OutlinedRoundedButton(
-                buttonText: "Zaloguj się",
-                onPresesd: signIn,
-              )
+              if (!api.auth.isAuthorized)
+                OutlinedRoundedButton(
+                  buttonText: "Zaloguj się",
+                  onPresesd: () => signIn(context),
+                ),
+              if (api.auth.isAuthorized)
+                OutlinedRoundedButton(
+                  buttonText: "Dashboard",
+                  onPresesd: () => goToDashboard(context, api),
+                )
             ],
           ),
         )
       ],
     );
   }
-
-  @override
-  Size get preferredSize => new Size.fromHeight(83.0);
 }

@@ -12,40 +12,38 @@ class FrontPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     Future<List<Room>> _getRooms() async {
       return await context.read<ApiClient>().database.getRooms();
     }
 
     List<Room> rooms = [];
-    
+
     return FutureBuilder(
       future: _getRooms(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting)
+          return Center(child: CircularProgressIndicator());
+        else if (snapshot.hasData) {
+          rooms = snapshot.data;
+        } else if (snapshot.hasError)
+          return Text("ERROR: ${snapshot.error}");
+        else
+          return Text('None');
 
-         if (snapshot.connectionState == ConnectionState.waiting)
-              return Center(child: CircularProgressIndicator());
-            else if (snapshot.hasData) {
-              rooms = snapshot.data;
-            } else if (snapshot.hasError)
-              return Text("ERROR: ${snapshot.error}");
-            else
-              return Text('None');
-            
-            if(rooms.isEmpty)
-            return Padding(
-              padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-              child: Text("Brak pokoi"),
-            );
+        if (rooms.isEmpty)
+          return Padding(
+            padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+            child: Text("Brak pokoi"),
+          );
 
         return Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: FrontPageAppBar(),
           body: SizedBox(
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                FrontPageAppBar(),
                 HeadingText(text: "Oferta hotelu"),
                 SizedBox(height: 130.0),
                 Flexible(

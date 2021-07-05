@@ -46,18 +46,20 @@ class _StaffApiClient implements StaffApiClient {
   }
 
   @override
-  Future<RoomIssue> getRoomIssues(roomId) async {
+  Future<List<RoomIssue>> getRoomsIssues() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<RoomIssue>(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<RoomIssue>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(
-                    _dio.options, '/staff/roomService/$roomId/getRoomIssues',
+                    _dio.options, '/staff/roomService/getAllOngoingRoomIssues',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = RoomIssue.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) => RoomIssue.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
