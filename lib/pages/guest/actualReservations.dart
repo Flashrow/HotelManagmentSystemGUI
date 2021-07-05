@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/components/basicContainerShadow.dart';
-import 'package:hotel_management_system/pages/guest/tileTitleBar.dart';
+import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/components/IconText.dart';
+import 'package:hotel_management_system/components/basicContainerShadow.dart';
+import 'package:hotel_management_system/models/Residence.dart';
+import 'package:hotel_management_system/pages/guest/popup/cancelReservationDialog.dart';
+import 'package:hotel_management_system/pages/guest/tileTitleBar.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class ActualReservations extends StatefulWidget {
   ActualReservations({Key? key}) : super(key: key);
@@ -11,6 +16,18 @@ class ActualReservations extends StatefulWidget {
 }
 
 class _ActualReservationsState extends State<ActualReservations> {
+  List<Residence> residences = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<ApiClient>().database.getMyResidences().then((residences) {
+      setState(() {
+        this.residences = residences;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BasicContainerShadow(
@@ -29,13 +46,7 @@ class _ActualReservationsState extends State<ActualReservations> {
             ),
             Expanded(
               child: ListView(
-                children: [
-                  singleReservationRow(),
-                  singleReservationRow(),
-                  singleReservationRow(),
-                  singleReservationRow(),
-                  singleReservationRow(),
-                ],
+                children: [for (var residence in residences) singleReservationRow(residence)],
               ),
             ),
           ],
@@ -44,7 +55,8 @@ class _ActualReservationsState extends State<ActualReservations> {
     );
   }
 
-  Widget singleReservationRow() {
+  Widget singleReservationRow(Residence residence) {
+    var dateFormatter = new DateFormat('yyyy-MM-dd');
     return Padding(
       padding: const EdgeInsets.fromLTRB(48, 16, 48, 16),
       child: Column(
@@ -53,13 +65,15 @@ class _ActualReservationsState extends State<ActualReservations> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Pokój 4-os",
+                residence.roomId.toString(),
                 style: TextStyle(
                   fontSize: 16,
                 ),
               ),
               Text(
-                "12.08.2019 - 22.08.2019",
+                dateFormatter.format(DateTime.parse(residence.startDate)) +
+                    ' - ' +
+                    dateFormatter.format(DateTime.parse(residence.endDate)),
                 style: TextStyle(
                   fontSize: 16,
                 ),
@@ -73,20 +87,25 @@ class _ActualReservationsState extends State<ActualReservations> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconText(
-                    icon: Icons.credit_card,
-                    fontSize: 14,
-                    text: "Opłać",
-                  ),
-                  IconText(
-                    icon: Icons.calendar_today,
-                    fontSize: 14,
-                    text: "Zmień datę",
-                  ),
+                  // IconText(
+                  //   icon: Icons.credit_card,
+                  //   fontSize: 14,
+                  //   text: "Opłać",
+                  // ),
+                  // IconText(
+                  //   icon: Icons.calendar_today,
+                  //   fontSize: 14,
+                  //   text: "Zmień datę",
+                  // ),
                   IconText(
                     icon: Icons.report,
                     fontSize: 14,
                     text: "Zgłoś problem",
+                    onTap: () => Navigator.of(context).push(new MaterialPageRoute<Null>(
+                        builder: (BuildContext context) {
+                          return CancelReservationDialog();
+                        },
+                        fullscreenDialog: true)),
                   ),
                   IconText(
                     icon: Icons.cancel,
