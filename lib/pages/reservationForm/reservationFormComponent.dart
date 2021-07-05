@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:hotel_management_system/components/HeadingText.dart';
 import 'package:hotel_management_system/components/filledRoundedButton.dart';
 import 'package:hotel_management_system/components/outlinedRoundedButton.dart';
-import 'package:hotel_management_system/components/textFieldComponent.dart';
-import 'package:hotel_management_system/models/Room/Room.dart';
+import 'package:hotel_management_system/models/ReservationBlueprint.dart';
 import 'package:hotel_management_system/pages/reservationForm/customerData.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
 
 class ReservationFormComponent extends StatefulWidget {
-  final Room? room;
-  const ReservationFormComponent({Key? key, required this.room}) : super(key: key);
+  final ReservationBlueprint? reservation;
+  const ReservationFormComponent({Key? key, required this.reservation}) : super(key: key);
 
   @override
   _ReservationFormComponentState createState() =>
@@ -24,9 +23,6 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
     return Center(
       child: Container(
         decoration: BoxDecoration(
-          //border: Border.all(
-          //  color: Colors.black,
-          //),
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
         child: Row(
@@ -55,7 +51,7 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                       children: [
                         Expanded(child: Container()),
                         Text(
-                         "Pokój " + this.widget.room!.description.toString(),
+                         "Pokój " + this.widget.reservation!.room!.description.toString(),
                           style: TextStyle(
                             fontSize: 20,
                           ),
@@ -70,7 +66,6 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                 image: AssetImage('images/people_outline.png'),
-                                //fit: BoxFit.fitHeight,
                               ),
                             ),
                           ),
@@ -79,7 +74,7 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                           width: 10,
                         ),
                         Text(
-                          "2",
+                          this.widget.reservation!.room!.size.toString(),
                           style: TextStyle(
                             fontSize: 20,
                           ),
@@ -92,19 +87,25 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                     ),
                     Row(
                       children: [
-                        CustomTextField(
-                          titleText: 'Data zameldowania',
-                          hintText: 'Data',
-                          //onChange: () => {},
+                        Expanded(child: Container(),),
+                        Column(
+                          children: [
+                            Text('Data zameldowania: ', style: TextStyle(color: Theme.of(context).primaryColor),),
+                            SizedBox(height: 8),
+                            Text('22.02.2021', style: TextStyle(fontSize: 24),),
+                          ],
                         ),
                         SizedBox(
-                          width: 20,
+                          width: 40,
                         ),
-                        CustomTextField(
-                          titleText: 'Data wymeldowania',
-                          hintText: 'Data',
-                          //onChange: () => {},
+                        Column(
+                          children: [
+                            Text('Data wymeldowania: ', style: TextStyle(color: Theme.of(context).primaryColor),),
+                            SizedBox(height: 8),
+                            Text('27.02.2021', style: TextStyle(fontSize: 24),),
+                          ],
                         ),
+                        Expanded(child: Container(),),
                       ],
                     ),
                     SizedBox(
@@ -113,9 +114,6 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        // border: Border.all(
-                        //   color: Colors.black,
-                        // ),
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                         boxShadow: [
                           BoxShadow(
@@ -123,7 +121,7 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                             blurRadius: 11.0,
                             spreadRadius: 0.0,
                             offset: Offset(
-                                0.0, 4.0), // shadow direction: bottom right
+                                0.0, 4.0),
                           ),
                         ],
                       ),
@@ -144,7 +142,6 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     image: AssetImage('images/today.png'),
-                                    //fit: BoxFit.cover,
                                   ),
                                 ),
                               ),

@@ -1,4 +1,4 @@
-import 'package:hotel_management_system/models/FoodPreference/AddFoodPreference.dart';
+import 'package:hotel_management_system/models/DTO/AddFoodPreferenceDTO.dart';
 import 'package:hotel_management_system/models/Room/Room.dart';
 
 class ReservationBlueprint{
@@ -7,5 +7,5 @@ class ReservationBlueprint{
   DateTime? endTime;
   double fullPrice = 0.0;
   List<String> guests = [];
-  List<AddFoodPreference> foodPreferences = [];
+  List<AddFoodPreferenceDTO> foodPreferences = [];
 }

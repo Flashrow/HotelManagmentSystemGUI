@@ -1,6 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
 
 @JsonSerializable()
-class ClientFoodPreferenceType{
-
-}
+enum ClientFoodPreferenceType { STADARD, VEGETATIAN, VEGAN, SPECIAL }

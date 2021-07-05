@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: colorTheme.themeData,
-      initialRoute: 'Login',
+      initialRoute: 'FrontPage',
       routes: {
         'Reception': (context) => ReceptionScreen(),
         'Kitchen': (context) => KitchenScreen(),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/models/DatePicker/DateRangePickerModel.dart';
+import 'package:hotel_management_system/models/ReservationBlueprint.dart';
 import 'package:hotel_management_system/models/Room/Room.dart';
 import 'package:hotel_management_system/pages/login/loginScreen.dart';
 import 'package:hotel_management_system/pages/reservationForm/reservationForm.dart';
@@ -23,12 +24,13 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker> {
   bool isDateRangeSelected = false;
   DateRangePickerModel dates = new DateRangePickerModel();
   double _costPerDay = 0;
-  double _wholeCost = 0;
   Function? confirmButton;
+  ReservationBlueprint? reservation = ReservationBlueprint();
 
   @override
   void initState() {
     _costPerDay = this.widget.room!.price;
+    reservation?.room = this.widget.room;
     super.initState();
   }
 
@@ -37,7 +39,7 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker> {
       if (args.value is PickerDateRange) {
         dates.startDate = args.value.startDate;
         dates.endDate = args.value.endDate ?? args.value.startDate;
-        _wholeCost = dates.days * _costPerDay;
+        reservation?.fullPrice = dates.days * _costPerDay;
         
         validateDateRange();
       }
@@ -69,13 +71,13 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker> {
               {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ReservationForm(room: this.widget.room)),
+                  MaterialPageRoute(builder: (context) => ReservationForm(reservation: this.reservation)),
                 )
               }
           });
     else
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => ReservationForm(room: this.widget.room)));
+          context, MaterialPageRoute(builder: (context) => ReservationForm(reservation: this.reservation)));
 
     print("Confirm pressed");
   }
@@ -221,7 +223,7 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker> {
               ),
               ListTile(
                 leading: Text("Koszt"),
-                trailing: Text("${_wholeCost}zł"),
+                trailing: Text("${reservation?.fullPrice}zł"),
               ),
             ],
           ),
