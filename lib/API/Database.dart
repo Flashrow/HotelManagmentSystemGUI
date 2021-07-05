@@ -1,12 +1,16 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:hotel_management_system/API/ReservationApiClient.dart';
 import 'package:hotel_management_system/API/RoomsApiClient.dart';
+import 'package:hotel_management_system/API/StaffApiClient.dart';
 import 'package:hotel_management_system/models/DTO/AddFoodPreferenceDTO.dart';
 import 'package:hotel_management_system/models/DTO/AddReservationDTO.dart';
 import 'package:hotel_management_system/models/DTO/BlackoutTimeDTO.dart';
 import 'package:hotel_management_system/models/Interim/GuestInfo.dart';
 import 'package:hotel_management_system/models/Interim/ReservationBlueprint.dart';
 import 'package:hotel_management_system/models/Room/Room.dart';
+import 'package:hotel_management_system/models/RoomIssue.dart';
 import 'package:intl/intl.dart';
 import 'package:retrofit/dio.dart';
 
@@ -15,10 +19,26 @@ class Database {
 
   late RoomsApiClient _rooms;
   late ReservationApiClient _reservationApiClient;
+  late StaffApiClient staff;
   Database(Dio dio) {
     _dio = dio;
     _rooms = RoomsApiClient(_dio);
     _reservationApiClient = ReservationApiClient(_dio);
+    staff = StaffApiClient(_dio);
+  }
+
+  Future<List<RoomIssue>> getRoomsIssue() {
+    List<RoomIssue> issues = [];
+    issues.add(RoomIssue(
+        id: 1,
+        roomIssueStatus: 'roomIssueStatus',
+        roomIssueType: 'roomIssueType',
+        roomId: 1,
+        clientId: 1,
+        date: 'date',
+        description: 'description'));
+    //return Future<List<RoomIssue>>.value(issues);
+    return staff.getRoomsIssues();
   }
 
   Future<List<Room>> getRooms() {
@@ -33,8 +53,8 @@ class Database {
       DateTime _start = DateTime.parse(range.start);
       DateTime _end = DateTime.parse(range.end);
       final daysToGenerate = _end.difference(_start).inDays;
-      List<DateTime> blackoutRange = List.generate(daysToGenerate,
-          (i) => DateTime(_start.year, _start.month, _start.day + (i)));
+      List<DateTime> blackoutRange =
+          List.generate(daysToGenerate, (i) => DateTime(_start.year, _start.month, _start.day + (i)));
       blackoutDates.addAll(blackoutRange);
     }
 
@@ -49,9 +69,7 @@ class Database {
     print("fullprice: " + newReservation.fullPrice.toString());
     print("guests number: " + newReservation.guests.length.toString());
     print("guest name: " + newReservation.guests.first.name.toString());
-    print("guest preference: " +
-        newReservation.guests.first.foodPreference!.first.timeOfDayType
-            .toString());
+    print("guest preference: " + newReservation.guests.first.foodPreference!.first.timeOfDayType.toString());
 
     List<AddFoodPreferenceDTO> foodPreferences = [];
 

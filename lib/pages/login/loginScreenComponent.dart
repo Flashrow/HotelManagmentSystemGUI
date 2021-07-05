@@ -6,6 +6,7 @@ import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/components/HeadingText.dart';
 import 'package:hotel_management_system/components/filledRoundedButton.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
+import 'package:hotel_management_system/utils/whoAmI.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreenComponent extends StatelessWidget {
@@ -13,19 +14,17 @@ class LoginScreenComponent extends StatelessWidget {
 
   navigate(ApiClient apiClient, BuildContext context) {
     if (apiClient.auth.isAuthorized) {
-      Navigator.pop(context);
-
-      // TODO code below should be placed in origin widget/screen
-      // after succesful login LoginScreen shold be popped
-      // you can run this code using  Navigator.push(...).then(() => {});
-
-      // Navigator.pushNamed(
-      //   context,
-      //   NavigationController.getPath(apiClient.auth.getSingleRole(apiClient.auth.userRoles)),
-      //   arguments: {
-      //     'role': apiClient.auth.userRoles,
-      //   },
-      // );
+      if (Navigator.canPop(context)) {
+        Navigator.pop(context);
+      } else {
+        Navigator.pushNamed(
+          context,
+          NavigationController.getPath(apiClient.auth.getSingleRole(apiClient.auth.userRoles)),
+          arguments: {
+            'role': apiClient.auth.userRoles,
+          },
+        );
+      }
     }
   }
 
