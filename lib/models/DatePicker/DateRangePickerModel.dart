@@ -7,7 +7,7 @@ class DateRangePickerModel {
   List<DateTime> blackoutDays = [];
 
   int get days {
-    if (startDate != null) return (endDate ?? startDate)!.difference(startDate!).inDays;
+    if (startDate != null) return (endDate ?? startDate)!.difference(startDate!).inDays + 1;
     return 0;
   }
 

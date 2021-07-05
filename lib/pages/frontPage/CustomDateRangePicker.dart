@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/models/DatePicker/DateRangePickerModel.dart';
-import 'package:hotel_management_system/models/ReservationBlueprint.dart';
+import 'package:hotel_management_system/models/Interim/ReservationBlueprint.dart';
 import 'package:hotel_management_system/models/Room/Room.dart';
 import 'package:hotel_management_system/pages/login/loginScreen.dart';
 import 'package:hotel_management_system/pages/reservationForm/reservationForm.dart';
@@ -61,6 +61,8 @@ class CustomDateRangePickerState extends State<CustomDateRangePicker> {
   }
 
   confirm() {
+    reservation?.startDate = dates.startDate;
+    reservation?.endDate = dates.endDate;
     if (!this.widget.context!.read<ApiClient>().auth.isAuthorized)
       Navigator.push(
         context,

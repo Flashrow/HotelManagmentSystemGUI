@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/models/ReservationBlueprint.dart';
+import 'package:hotel_management_system/models/Interim/ReservationBlueprint.dart';
 import 'package:hotel_management_system/pages/reservationForm/reservationFormComponent.dart';
 
 class ReservationForm extends StatelessWidget {
