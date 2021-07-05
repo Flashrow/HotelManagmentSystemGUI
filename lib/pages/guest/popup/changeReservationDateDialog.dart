@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/components/popupWithTitle.dart';
-import 'package:hotel_management_system/models/DatePicker/DateRangePickerModel.dart';
+import 'package:hotel_management_system/models/Room/Room.dart';
 import 'package:hotel_management_system/pages/frontPage/CustomDateRangePicker.dart';
 
 class ChangeReservationDateDialog extends StatelessWidget {
-  const ChangeReservationDateDialog({Key? key}) : super(key: key);
+  final Room? room;
+  const ChangeReservationDateDialog({Key? key, required this.room}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class ChangeReservationDateDialog extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(width: 700),
-            CustomDateRangePicker(),
+            CustomDateRangePicker(room: this.room, context: context,),
           ],
         ),
       ),

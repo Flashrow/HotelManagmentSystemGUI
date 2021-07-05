@@ -1,22 +1,17 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/components/HeadingText.dart';
-import 'package:hotel_management_system/components/filledRoundedButton.dart';
-import 'package:hotel_management_system/components/outlinedRoundedButton.dart';
 import 'package:hotel_management_system/components/textFieldComponent.dart';
-import 'package:hotel_management_system/components/passwordFieldComponent.dart';
-import 'package:hotel_management_system/utils/colorTheme.dart';
-import 'dart:convert';
-
-enum Food { breakfast, lunch, dinner, lunchDinner }
+import 'package:hotel_management_system/constants/ClientFoodPreferenceTimeOfDayType.dart';
+import 'package:hotel_management_system/models/Interim/GuestInfo.dart';
 
 class Meal {
-  final Food foodType;
+  final ClientFoodPreferenceTimeOfDayType foodType;
   Meal(this.foodType);
 }
 
 class CustomerData extends StatefulWidget {
-  const CustomerData({Key? key}) : super(key: key);
+  const CustomerData({Key? key, required this.guest}) : super(key: key);
+
+  final GuestInfo? guest;
 
   @override
   _CustomerDataState createState() => _CustomerDataState();
@@ -29,9 +24,10 @@ class _CustomerDataState extends State<CustomerData> {
   bool boolLunchDinner = false;
   List<Meal> meals = [];
 
-  void onCategorySelected(bool selected, Food foodType) {
+  void onCategorySelected(bool selected, ClientFoodPreferenceTimeOfDayType foodType) {
     if (selected == true) {
       meals.add(Meal(foodType));
+      this.widget.guest?.addTimeOfDayType(foodType);
     } else {
       meals.removeLast();
     }
@@ -46,7 +42,9 @@ class _CustomerDataState extends State<CustomerData> {
           CustomTextField(
             titleText: 'Imię i nazwisko',
             hintText: 'Podaj dane lokatora',
-            //onChange: () => {},
+            onChange: (String _name) => {
+              this.widget.guest?.name = _name,
+            },
           ),
           Expanded(
             child: Column(
@@ -60,8 +58,7 @@ class _CustomerDataState extends State<CustomerData> {
                         setState(() {
                           boolBreakfast = agreementValue!;
                         });
-                        onCategorySelected(boolBreakfast, Food.breakfast);
-                        //print(meals);
+                        onCategorySelected(boolBreakfast, ClientFoodPreferenceTimeOfDayType.BREAKFAST);
                       },
                       activeColor: Theme.of(context).colorScheme.primary,
                     ),
@@ -79,8 +76,7 @@ class _CustomerDataState extends State<CustomerData> {
                         setState(() {
                           boolLunch = agreementValue!;
                         });
-                        onCategorySelected(boolLunch, Food.lunch);
-                        //print(meals);
+                        onCategorySelected(boolLunch, ClientFoodPreferenceTimeOfDayType.DINNER);
                       },
                       activeColor: Theme.of(context).colorScheme.primary,
                     ),
@@ -92,7 +88,6 @@ class _CustomerDataState extends State<CustomerData> {
                         color: Colors.black87,
                       ),
                     ),
-                    //Expanded(child: Container()),
                   ],
                 ),
                 Row(
@@ -103,8 +98,7 @@ class _CustomerDataState extends State<CustomerData> {
                         setState(() {
                           boolLunchDinner = agreementValue!;
                         });
-                        onCategorySelected(boolLunchDinner, Food.lunchDinner);
-                        //print(meals);
+                        onCategorySelected(boolLunchDinner, ClientFoodPreferenceTimeOfDayType.DINNER_SUPPER);
                       },
                       activeColor: Theme.of(context).colorScheme.primary,
                     ),
@@ -122,8 +116,7 @@ class _CustomerDataState extends State<CustomerData> {
                         setState(() {
                           boolDinner = agreementValue!;
                         });
-                        onCategorySelected(boolDinner, Food.dinner);
-                        //print(meals);
+                        onCategorySelected(boolDinner, ClientFoodPreferenceTimeOfDayType.SUPPER);
                       },
                       activeColor: Theme.of(context).colorScheme.primary,
                     ),
@@ -135,7 +128,6 @@ class _CustomerDataState extends State<CustomerData> {
                         color: Colors.black87,
                       ),
                     ),
-                    //Expanded(child: Container()),
                   ],
                 ),
               ],

@@ -16,18 +16,19 @@ class _ReservationApiClient implements ReservationApiClient {
   String? baseUrl;
 
   @override
-  Future<int> addReservation(addReservationDTO) async {
+  Future<HttpResponse<dynamic>> addReservation(addReservationDTO) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(addReservationDTO.toJson());
-    final _result = await _dio.fetch<int>(_setStreamType<int>(
+    final _result = await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(
         Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
             .compose(_dio.options, '/reservations/addReservation',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data!;
-    return value;
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
   }
 
   @override
