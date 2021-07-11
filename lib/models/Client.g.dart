@@ -18,7 +18,7 @@ Client _$ClientFromJson(Map<String, dynamic> json) {
     city: json['city'] as String,
     address: json['address'] as String,
     phoneNumber: json['phoneNumber'] as String,
-    password: json['password'] as String,
+    password: json['password'] as String?,
     roomIssues: (json['roomIssues'] as List<dynamic>?)
         ?.map((e) => RoomIssue.fromJson(e as Map<String, dynamic>))
         .toList(),

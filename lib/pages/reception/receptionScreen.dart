@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/components/navigationComponent.dart';
@@ -8,10 +6,10 @@ import 'package:hotel_management_system/components/userVerification.dart';
 import 'package:hotel_management_system/models/Client.dart';
 import 'package:hotel_management_system/models/DTO/SingleActiveRoomDTO.dart';
 import 'package:hotel_management_system/models/Room/Room.dart';
+import 'package:provider/provider.dart';
 
 import 'edit_components/editClientWidget.dart';
 import 'payment_components/clientPaymentWidget.dart';
-import 'package:provider/provider.dart';
 
 class ReceptionScreen extends StatefulWidget {
   ReceptionScreen({Key? key}) : super(key: key);
@@ -63,14 +61,18 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<ApiClient>().database.getActiveRooms().then(
-          (value) => setState(() {
-            print("value: ");
-            print(value);
-            raw = value;
-            filteredRoom = value;
-          }),
-        );
+    try {
+      context.read<ApiClient>().database.getActiveRooms().then(
+            (value) => setState(() {
+              print("value: ");
+              print(value);
+              raw = value;
+              filteredRoom = value;
+            }),
+          );
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override

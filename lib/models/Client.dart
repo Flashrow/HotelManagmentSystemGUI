@@ -17,7 +17,7 @@ class Client {
   final String city;
   final String address;
   final String phoneNumber;
-  final String password;
+  String? password;
   final List<String> roles;
   final List<RoomIssue>? roomIssues;
   final List<Reservation>? reservations;
@@ -34,7 +34,7 @@ class Client {
     required this.city,
     required this.address,
     required this.phoneNumber,
-    required this.password,
+    this.password,
     this.roomIssues,
     this.reservations,
     this.checkedIns,
