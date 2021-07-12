@@ -6,6 +6,7 @@ import 'package:hotel_management_system/components/userVerification.dart';
 import 'package:hotel_management_system/models/Client.dart';
 import 'package:hotel_management_system/models/DTO/SingleActiveRoomDTO.dart';
 import 'package:hotel_management_system/models/Room/Room.dart';
+import 'package:hotel_management_system/models/singleUser.dart';
 import 'package:provider/provider.dart';
 
 import 'edit_components/editClientWidget.dart';
@@ -32,7 +33,7 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
         price: 500,
         size: 5,
       ),
-      client: Client(
+      client: SingleUser(
           country: 'kraj',
           address: 'adres',
           city: 'miasto',

@@ -11,7 +11,7 @@ SingleActiveRoomDTO _$SingleActiveRoomDTOFromJson(Map<String, dynamic> json) {
     startDate: json['startDate'] as String,
     endDate: json['endDate'] as String,
     room: Room.fromJson(json['room'] as Map<String, dynamic>),
-    client: Client.fromJson(json['client'] as Map<String, dynamic>),
+    client: json['client'],
   );
 }
 
