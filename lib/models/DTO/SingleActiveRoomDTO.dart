@@ -1,8 +1,5 @@
-import 'package:hotel_management_system/models/Client.dart';
-import 'package:hotel_management_system/models/Reservation.dart';
-import 'package:hotel_management_system/models/Residence.dart';
 import 'package:hotel_management_system/models/Room/Room.dart';
-import 'package:hotel_management_system/models/singleUser.dart';
+import 'package:hotel_management_system/models/SingleUser.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'SingleActiveRoomDTO.g.dart';

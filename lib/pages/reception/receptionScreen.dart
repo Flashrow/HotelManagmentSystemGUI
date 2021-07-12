@@ -3,10 +3,9 @@ import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/components/navigationComponent.dart';
 import 'package:hotel_management_system/components/topBar.dart';
 import 'package:hotel_management_system/components/userVerification.dart';
-import 'package:hotel_management_system/models/Client.dart';
 import 'package:hotel_management_system/models/DTO/SingleActiveRoomDTO.dart';
 import 'package:hotel_management_system/models/Room/Room.dart';
-import 'package:hotel_management_system/models/singleUser.dart';
+import 'package:hotel_management_system/models/SingleUser.dart';
 import 'package:provider/provider.dart';
 
 import 'edit_components/editClientWidget.dart';

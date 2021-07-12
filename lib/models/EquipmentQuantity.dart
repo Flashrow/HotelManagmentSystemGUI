@@ -9,11 +9,14 @@ class EquipmentQuantity {
   final int quantity;
 
   @JsonKey(name: 'roomId')
-  final int roomId;
+  final int? roomId;
+
+  @JsonKey(name: 'room')
+  final int? room;
 
   final Equipment equipment;
 
-  EquipmentQuantity({required this.id, required this.quantity, required this.roomId, required this.equipment});
+  EquipmentQuantity({required this.id, required this.quantity, this.roomId, this.room, required this.equipment});
 
   factory EquipmentQuantity.fromJson(Map<String, dynamic> json) => _$EquipmentQuantityFromJson(json);
   Map<String, dynamic> toJson() => _$EquipmentQuantityToJson(this);
