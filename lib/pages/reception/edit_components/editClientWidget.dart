@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/components/filledRoundedButton.dart';
+import 'package:hotel_management_system/models/DTO/SingleActiveRoomDTO.dart';
 
 import 'editClientDataWidget.dart';
 import 'editClientFoodWidget.dart';
@@ -7,11 +8,8 @@ import 'editClientStayWidget.dart';
 import 'editClientTopBarWidget.dart';
 
 class EditClientWidget extends StatelessWidget {
-  final String clientName;
-  const EditClientWidget({
-    Key? key,
-    required this.clientName,
-  }) : super(key: key);
+  final SingleActiveRoomDTO roomData;
+  const EditClientWidget({Key? key, required this.roomData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +17,13 @@ class EditClientWidget extends StatelessWidget {
       padding: const EdgeInsets.only(top: 64, left: 16, right: 32),
       child: Column(
         children: [
-          EditClientTopBar(),
+          EditClientTopBar(
+            clientName: roomData.client.firstName,
+            clientSurName: roomData.client.lastName,
+            roomNumber: roomData.room.number.toString(),
+            stayEnd: '',
+            stayStart: '',
+          ),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -33,20 +37,20 @@ class EditClientWidget extends StatelessWidget {
                 Row(
                   children: [
                     EditClientDataWidget(
-                      name: clientName,
-                      surname: "surname",
-                      city: 'city',
-                      country: 'country',
-                      phoneNumber: 'phoneNumber',
-                      postCode: 'postCode',
-                      streetName: 'streetName',
+                      name: roomData.client.firstName,
+                      surname: roomData.client.lastName,
+                      city: roomData.client.city,
+                      country: roomData.client.country,
+                      phoneNumber: roomData.client.phoneNumber,
+                      postCode: roomData.client.postCode,
+                      streetName: roomData.client.address,
                     ),
                     EditClientStayWidget(
-                      bedsNumber: 'bedsNumber',
-                      roomNumber: 'roomNumber',
-                      roomType: 'roomType',
-                      stayEnd: 'stayEnd',
-                      stayStart: 'stayStart',
+                      bedsNumber: roomData.room.size.toString(),
+                      roomNumber: roomData.room.id.toString(),
+                      roomType: "standard",
+                      stayEnd: roomData.endDate.split("T")[0],
+                      stayStart: roomData.startDate.split("T")[0],
                     ),
                   ],
                 ),

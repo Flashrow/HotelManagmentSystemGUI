@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
 
 class EditClientTopBar extends StatelessWidget {
-  const EditClientTopBar({Key? key}) : super(key: key);
+  final String roomNumber;
+  final String clientName;
+  final String clientSurName;
+  final String stayEnd;
+  final String stayStart;
+  const EditClientTopBar(
+      {Key? key,
+      required this.roomNumber,
+      required this.clientName,
+      required this.clientSurName,
+      required this.stayEnd,
+      required this.stayStart})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +30,9 @@ class EditClientTopBar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text('Pokój 105'),
-              Text('Bużyńska Anna'),
-              Text('05.05.2021-12.05.2021'),
+              Text('Pokój ' + roomNumber),
+              Text(clientName + ' ' + clientSurName),
+              Text(stayStart + '-' + stayEnd),
               Text('Edycja'),
             ],
           ),

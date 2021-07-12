@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'Client.dart';
+part of 'SingleUser.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Client _$ClientFromJson(Map<String, dynamic> json) {
-  return Client(
+SingleUser _$SingleUserFromJson(Map<String, dynamic> json) {
+  return SingleUser(
     id: json['id'] as int,
     firstName: json['firstName'] as String,
     lastName: json['lastName'] as String,
@@ -19,19 +19,11 @@ Client _$ClientFromJson(Map<String, dynamic> json) {
     address: json['address'] as String,
     phoneNumber: json['phoneNumber'] as String,
     password: json['password'] as String?,
-    roomIssues: (json['roomIssues'] as List<dynamic>?)
-        ?.map((e) => RoomIssue.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    reservations: (json['reservations'] as List<dynamic>?)
-        ?.map((e) => Reservation.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    checkedIns: (json['checkedIns'] as List<dynamic>?)
-        ?.map((e) => CheckedIn.fromJson(e as Map<String, dynamic>))
-        .toList(),
   );
 }
 
-Map<String, dynamic> _$ClientToJson(Client instance) => <String, dynamic>{
+Map<String, dynamic> _$SingleUserToJson(SingleUser instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
@@ -43,7 +35,4 @@ Map<String, dynamic> _$ClientToJson(Client instance) => <String, dynamic>{
       'phoneNumber': instance.phoneNumber,
       'password': instance.password,
       'roles': instance.roles,
-      'roomIssues': instance.roomIssues,
-      'reservations': instance.reservations,
-      'checkedIns': instance.checkedIns,
     };

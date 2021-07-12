@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
 
 class ClientStayWidget extends StatelessWidget {
-  const ClientStayWidget({Key? key}) : super(key: key);
+  final String stayStart;
+  final String stayEnd;
+  final String roomNumber;
+  final String roomType;
+  final String bedsNumber;
+  const ClientStayWidget(
+      {Key? key,
+      required this.stayStart,
+      required this.stayEnd,
+      required this.roomNumber,
+      required this.roomType,
+      required this.bedsNumber})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +54,7 @@ class ClientStayWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      child: Text('05.05.2021' + ' - ' + '12.05.2021'),
+                      child: Text(stayStart + ' - ' + stayEnd),
                       alignment: Alignment.center,
                     ),
                     SizedBox(height: 10),
@@ -50,16 +62,16 @@ class ClientStayWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          child: Text('Pokój 105'),
+                          child: Text('Pokój ' + roomNumber),
                         ),
                         Expanded(
-                          child: Text('Typ Standard'),
+                          child: Text('Typ ' + roomType),
                         ),
                       ],
                     ),
                     SizedBox(height: 10),
                     Container(
-                      child: Text('Łóżka 5'),
+                      child: Text('Łóżka ' + bedsNumber),
                     ),
                   ],
                 ),
