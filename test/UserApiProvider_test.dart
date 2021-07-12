@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/API/UserApiClient.dart';
 import 'package:test/test.dart';
 
@@ -28,6 +29,22 @@ main() {
 
       try {
         final res = await userProvider.getUserDetails();
+        print(res);
+      } catch (e) {
+        print(e);
+      }
+    },
+  );
+
+  test(
+    'Kitchen getFoodPreferences',
+    () async {
+      final apiClient = ApiClient();
+      await apiClient.auth.signInStaff("ROLE_KITCHEN", "string");
+      print("is authorized: " + apiClient.auth.isAuthorized.toString());
+      String timeOfDay = "SUPPER";
+      try {
+        final res = await apiClient.database.getFoodPreferences("SUPPER");
         print(res);
       } catch (e) {
         print(e);

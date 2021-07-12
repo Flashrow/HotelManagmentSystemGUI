@@ -3,10 +3,13 @@ import 'package:group_button/group_button.dart';
 import 'package:hotel_management_system/pages/kitchen/ActiveMeal.dart';
 import 'package:provider/provider.dart';
 
-class MealButtons extends StatelessWidget {
+class MealButtons extends StatelessWidget{
   const MealButtons({
     Key? key,
+    required this.updateMeal,
   }) : super(key: key);
+
+  final Function()? updateMeal;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,7 @@ class MealButtons extends StatelessWidget {
       spacing: 10,
       isRadio: true,
       direction: Axis.horizontal,
-      onSelected: (index, isSelected) => context.read<ActiveMeal>().setActiveMeal(index),
+      onSelected: (index, isSelected) => {context.read<ActiveMeal>().setActiveMeal(index), updateMeal},
       buttons: ["Śniadanie", "Obiad", "Obiado-kolacja", "Kolacja"],
       selectedButton: context.read<ActiveMeal>().activeMeal.index,
       selectedTextStyle: TextStyle(
