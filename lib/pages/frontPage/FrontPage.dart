@@ -25,9 +25,11 @@ class FrontPage extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         else if (snapshot.hasData) {
           rooms = snapshot.data;
-        } else if (snapshot.hasError)
+        } else if (snapshot.hasError) {
+          print(snapshot.error);
+          print(snapshot.stackTrace);
           return Text("ERROR: ${snapshot.error}");
-        else
+        } else
           return Text('None');
 
         if (rooms.isEmpty)

@@ -1,12 +1,9 @@
-import 'package:hotel_management_system/models/CheckedIn.dart';
-import 'package:hotel_management_system/models/Reservation.dart';
-import 'package:hotel_management_system/models/RoomIssue.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'Client.g.dart';
+part 'SingleUser.g.dart';
 
 @JsonSerializable()
-class Client {
+class SingleUser {
   final int id;
 
   final String firstName;
@@ -19,11 +16,8 @@ class Client {
   final String phoneNumber;
   String? password;
   final List<String> roles;
-  final List<RoomIssue>? roomIssues;
-  final List<Reservation>? reservations;
-  final List<CheckedIn>? checkedIns;
 
-  Client({
+  SingleUser({
     required this.id,
     required this.firstName,
     required this.lastName,
@@ -35,11 +29,8 @@ class Client {
     required this.address,
     required this.phoneNumber,
     this.password,
-    this.roomIssues,
-    this.reservations,
-    this.checkedIns,
   });
 
-  factory Client.fromJson(Map<String, dynamic> json) => _$ClientFromJson(json);
-  Map<String, dynamic> toJson() => _$ClientToJson(this);
+  factory SingleUser.fromJson(Map<String, dynamic> json) => _$SingleUserFromJson(json);
+  Map<String, dynamic> toJson() => _$SingleUserToJson(this);
 }

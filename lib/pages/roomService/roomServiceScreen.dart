@@ -9,9 +9,10 @@ class RoomServiceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
     return Scaffold(
       body: DashboardLayout(
-        navigationRole: ['ROLE_ROOM_SERVICE'],
+        navigationRole: arguments['role'],
         child: RoomServiceScreenComponent(),
       ),
       backgroundColor: Colors.white,

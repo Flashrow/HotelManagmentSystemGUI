@@ -3,6 +3,9 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:hotel_management_system/API/ReservationApiClient.dart';
 import 'package:hotel_management_system/API/RoomsApiClient.dart';
+import 'package:hotel_management_system/models/DTO/SingleActiveRoomDTO.dart';
+
+import 'StaffApiClient.dart';
 import 'package:hotel_management_system/API/StaffApiClient.dart';
 import 'package:hotel_management_system/models/DTO/AddFoodPreferenceDTO.dart';
 import 'package:hotel_management_system/models/DTO/AddReservationDTO.dart';
@@ -48,6 +51,10 @@ class Database {
 
   Future<List<Room>> getRooms() {
     return _rooms.getAllRooms();
+  }
+
+  Future<List<SingleActiveRoomDTO>> getActiveRooms() {
+    return staff.getActiveRooms();
   }
 
   Future<List<DateTime>> getBlackoutDates(int id) async {
