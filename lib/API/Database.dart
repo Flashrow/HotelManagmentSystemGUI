@@ -10,6 +10,7 @@ import 'package:hotel_management_system/models/DTO/BlackoutTimeDTO.dart';
 import 'package:hotel_management_system/models/DTO/KitchenDishesDTO.dart';
 import 'package:hotel_management_system/models/Interim/GuestInfo.dart';
 import 'package:hotel_management_system/models/Interim/ReservationBlueprint.dart';
+import 'package:hotel_management_system/models/Residence.dart';
 import 'package:hotel_management_system/models/Room/Room.dart';
 import 'package:hotel_management_system/models/RoomIssue.dart';
 import 'package:intl/intl.dart';
@@ -26,6 +27,10 @@ class Database {
     _rooms = RoomsApiClient(_dio);
     _reservationApiClient = ReservationApiClient(_dio);
     staff = StaffApiClient(_dio);
+  }
+
+  Future<List<Residence>> getMyResidences() {
+    return _reservationApiClient.getMyResidences();
   }
 
   Future<List<RoomIssue>> getRoomsIssue() {

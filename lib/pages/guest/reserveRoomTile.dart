@@ -6,6 +6,10 @@ import 'package:hotel_management_system/pages/guest/tileTitleBar.dart';
 class ReserveRoomtile extends StatelessWidget {
   const ReserveRoomtile({Key? key}) : super(key: key);
 
+  goToFrontPage(context) {
+    Navigator.pushNamed(context, 'FrontPage');
+  }
+
   @override
   Widget build(BuildContext context) {
     return BasicContainerShadow(
@@ -27,6 +31,7 @@ class ReserveRoomtile extends StatelessWidget {
             text: "Przejdź do rezerwacji",
             color: Theme.of(context).primaryColor,
             padding: const EdgeInsets.fromLTRB(60, 14, 60, 14),
+            onPressed: () => goToFrontPage(context),
           ),
         ],
       ),
