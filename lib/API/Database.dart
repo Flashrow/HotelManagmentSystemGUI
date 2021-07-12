@@ -7,6 +7,7 @@ import 'package:hotel_management_system/API/StaffApiClient.dart';
 import 'package:hotel_management_system/models/DTO/AddFoodPreferenceDTO.dart';
 import 'package:hotel_management_system/models/DTO/AddReservationDTO.dart';
 import 'package:hotel_management_system/models/DTO/BlackoutTimeDTO.dart';
+import 'package:hotel_management_system/models/DTO/KitchenDishesDTO.dart';
 import 'package:hotel_management_system/models/Interim/GuestInfo.dart';
 import 'package:hotel_management_system/models/Interim/ReservationBlueprint.dart';
 import 'package:hotel_management_system/models/Room/Room.dart';
@@ -89,5 +90,9 @@ class Database {
           endDate: dateFormatter.format(newReservation.endDate!),
           foodPreferences: foodPreferences,
         ));
+  }
+
+  Future<KitchenDishesDTO> getFoodPreferences(String timeOfDay){
+    return this.staff.getFoodPreferences(timeOfDay);
   }
 }
