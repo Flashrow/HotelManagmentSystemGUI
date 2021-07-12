@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/components/dashboardLayout.dart';
-import 'package:hotel_management_system/pages/guest/reservationHistory.dart';
 import 'package:hotel_management_system/pages/guest/reserveRoomTile.dart';
 
 import 'actualReservations.dart';
@@ -25,7 +24,6 @@ class GuestMainScreenWidget extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ReservationHistory(),
                 ReserveRoomtile(),
                 ActualReservations(),
               ],

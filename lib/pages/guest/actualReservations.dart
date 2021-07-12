@@ -3,7 +3,7 @@ import 'package:hotel_management_system/API/ApiClient.dart';
 import 'package:hotel_management_system/components/IconText.dart';
 import 'package:hotel_management_system/components/basicContainerShadow.dart';
 import 'package:hotel_management_system/models/Residence.dart';
-import 'package:hotel_management_system/pages/guest/popup/cancelReservationDialog.dart';
+import 'package:hotel_management_system/pages/guest/popup/addRoomIssueDialog.dart';
 import 'package:hotel_management_system/pages/guest/tileTitleBar.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -65,7 +65,7 @@ class _ActualReservationsState extends State<ActualReservations> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                residence.roomId.toString(),
+                'Pokoj ' + residence.roomId.toString(),
                 style: TextStyle(
                   fontSize: 16,
                 ),
@@ -87,30 +87,19 @@ class _ActualReservationsState extends State<ActualReservations> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // IconText(
-                  //   icon: Icons.credit_card,
-                  //   fontSize: 14,
-                  //   text: "Opłać",
-                  // ),
-                  // IconText(
-                  //   icon: Icons.calendar_today,
-                  //   fontSize: 14,
-                  //   text: "Zmień datę",
-                  // ),
                   IconText(
                     icon: Icons.report,
                     fontSize: 14,
                     text: "Zgłoś problem",
-                    onTap: () => Navigator.of(context).push(new MaterialPageRoute<Null>(
-                        builder: (BuildContext context) {
-                          return CancelReservationDialog();
-                        },
-                        fullscreenDialog: true)),
-                  ),
-                  IconText(
-                    icon: Icons.cancel,
-                    fontSize: 14,
-                    text: "Anuluj",
+                    onTap: () => showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AddRoomIssueDialog(
+                          roomId: residence.roomId,
+                          clientId: residence.reservations[0].clientId,
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

@@ -11,8 +11,7 @@ AddRoomIssueDTO _$AddRoomIssueDTOFromJson(Map<String, dynamic> json) {
     description: json['description'] as String,
     roomId: json['roomId'] as int,
     roomIssueType: json['roomIssueType'] as String,
-    clientsId:
-        (json['clientsId'] as List<dynamic>?)?.map((e) => e as int).toList(),
+    clientsId: json['clientsId'] as int,
   );
 }
 

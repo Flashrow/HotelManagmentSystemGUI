@@ -7,9 +7,14 @@ class AddRoomIssueDTO {
   final String description;
   final int roomId;
   final String roomIssueType;
-  final List<int>? clientsId;
+  final int clientsId;
 
-  AddRoomIssueDTO({required this.description, required this.roomId, required this.roomIssueType, this.clientsId});
+  AddRoomIssueDTO({
+    required this.description,
+    required this.roomId,
+    required this.roomIssueType,
+    required this.clientsId,
+  });
 
   factory AddRoomIssueDTO.fromJson(Map<String, dynamic> json) => _$AddRoomIssueDTOFromJson(json);
   Map<String, dynamic> toJson() => _$AddRoomIssueDTOToJson(this);

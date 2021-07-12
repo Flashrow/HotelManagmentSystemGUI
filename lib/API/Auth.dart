@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/API/UserApiClient.dart';
+import 'package:hotel_management_system/models/DTO/AddRoomIssueDTO.dart';
 import 'package:hotel_management_system/models/User/UserDetails.dart';
 import 'package:hotel_management_system/utils/utils.dart';
+import 'package:retrofit/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Auth with ChangeNotifier {
@@ -26,6 +28,10 @@ class Auth with ChangeNotifier {
     print("roles");
     print(_userClient.whatRolesAmI().toString());
     return _userClient.whatRolesAmI();
+  }
+
+  Future<HttpResponse> addRoomIssue(AddRoomIssueDTO addRoomIssueDTO) {
+    return _userClient.addMyRoomIssue(addRoomIssueDTO);
   }
 
   bool checkForClient(List<String> myRoles) {
