@@ -20,7 +20,7 @@ class Apis {
   static const String addPayment = '$reservations/addPayment';
   static const String staff = '/staff';
   static const String getMyDetails = '$staff/getMyDetails';
-  static const String getFoodPreferences = '$staff/getFoodPreferences';
+  static const String getFoodPreferences = '$staff/kitchen/getFoodPreferences/{time-of-day}';
   static const String getRoomIssues = '$staff/roomService/getAllOngoingRoomIssues';
   static const String startRoomIssue = '$staff/roomService/startIssue/{issue-id}';
   static const String resolveRoomIssues = '$staff/roomService/resolveIssue/{issue-id}';

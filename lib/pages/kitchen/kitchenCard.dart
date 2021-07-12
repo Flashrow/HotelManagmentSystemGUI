@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
 class KitchenCard extends StatelessWidget {
-  const KitchenCard({Key? key, required this.count, required this.title}) : super(key: key);
+  const KitchenCard({
+    Key? key,
+    required this.count,
+    required this.title,
+    required this.headerColor,
+  }) : super(key: key);
 
+  final Color? headerColor;
   final String title;
   final int count;
 
@@ -27,7 +33,7 @@ class KitchenCard extends StatelessWidget {
                     topLeft: Radius.circular(10.0),
                     bottomRight: Radius.circular(10.0),
                   ),
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: this.headerColor,
                 ),
                 child: Center(
                   child: Text(

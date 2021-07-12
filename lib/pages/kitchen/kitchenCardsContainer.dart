@@ -13,11 +13,13 @@ class KitchenCardsContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    Meals activeMeal = context.watch<ActiveMeal>().activeMeal;
+    print("Kitchen Cards Container build " + activeMeal.toString());
+
     getFoodPreferences() {
       String timeOfDay;
-      print("active meal: " + context.read<ActiveMeal>().activeMeal.toString());
-      switch (context.read<ActiveMeal>().activeMeal) {
+      print("active meal: " + activeMeal.toString());
+      switch (activeMeal) {
         case Meals.breakfast:
           timeOfDay = "BREAKFAST";
           break;
@@ -31,7 +33,7 @@ class KitchenCardsContainer extends StatelessWidget {
           timeOfDay = "SUPPER";
           break;
       }
-      context.read<ApiClient>().database.getFoodPreferences(timeOfDay);
+      return context.read<ApiClient>().database.getFoodPreferences(timeOfDay);
     }
 
     KitchenDishesDTO kitchenDishes = KitchenDishesDTO(standard: 0, vegan: 0, vegetarian: 0, clientFoodPreferences: []);
@@ -50,24 +52,36 @@ class KitchenCardsContainer extends StatelessWidget {
           else
             return Text('None');
 
-          return Wrap(
-            spacing: 20.0,
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(300, 0, 300, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    KitchenCard(
+                      title: "Standard",
+                      count: kitchenDishes.standard,
+                      headerColor: Theme.of(context).colorScheme.secondary,
+                    ),
+                    KitchenCard(
+                      title: "Wegetariańskie",
+                      count: kitchenDishes.vegetarian,
+                      headerColor: Theme.of(context).colorScheme.secondary,
+                    ),
+                    KitchenCard(
+                      title: "Wegańskie",
+                      count: kitchenDishes.vegan,
+                      headerColor: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ],
+                ),
+              ),
               KitchenCard(
                 title: "Wszystkie",
                 count: kitchenDishes.standard + kitchenDishes.vegan + kitchenDishes.vegetarian,
-              ),
-              KitchenCard(
-                title: "Standard",
-                count: kitchenDishes.standard,
-              ),
-              KitchenCard(
-                title: "Wegetariańskie",
-                count: kitchenDishes.vegetarian,
-              ),
-              KitchenCard(
-                title: "Wegańskie",
-                count: kitchenDishes.vegan,
+                headerColor: Theme.of(context).colorScheme.primary,
               ),
             ],
           );

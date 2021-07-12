@@ -36,11 +36,12 @@ class _StaffApiClient implements StaffApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<KitchenDishesDTO>(
-            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/staff/getFoodPreferences',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<KitchenDishesDTO>(Options(
+                method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+            .compose(
+                _dio.options, '/staff/kitchen/getFoodPreferences/$timeOfDay',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = KitchenDishesDTO.fromJson(_result.data!);
     return value;
   }

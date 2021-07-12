@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 
 import 'kitchenCardsContainer.dart';
 import 'mealButtons.dart';
-import 'mealList.dart';
 
 class KitchenScreen extends StatefulWidget {
   const KitchenScreen({Key? key}) : super(key: key);
@@ -39,18 +38,8 @@ class _KitchenScreenState extends State<KitchenScreen> {
             children: [
               SizedBox(height: 50),
               MealButtons(updateMeal: updateTimeOfDay,),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    flex: 4,
-                    child: KitchenCardsContainer(),
-                  ),
-                  Expanded(
-                    flex: 6,
-                    child: MealList(),
-                  ),
-                ],
+              Expanded(
+                child: KitchenCardsContainer(),
               )
             ],
           ),
