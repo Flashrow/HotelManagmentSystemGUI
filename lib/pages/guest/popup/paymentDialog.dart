@@ -18,6 +18,7 @@ class _PaymentDialogState extends State<PaymentDialog> {
       icon: Icons.attach_money,
       button1Text: "cofnij",
       button2Text: "przechodzę",
+      onButton1Pressed: () => Navigator.of(context).pop(),
       content: Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
         child: Column(
@@ -93,8 +94,7 @@ class _PaymentDialogState extends State<PaymentDialog> {
               child: SizedBox(
                 width: double.infinity,
                 child: Text("Przejdź do płatności",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                    textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold)),
               ),
             ),
           ],

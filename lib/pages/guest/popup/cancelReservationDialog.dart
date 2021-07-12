@@ -11,6 +11,7 @@ class CancelReservationDialog extends StatelessWidget {
       icon: Icons.info,
       button1Text: "Cofnij",
       button2Text: "Anuluj rezerwację",
+      onButton1Pressed: () => Navigator.of(context).pop(),
       content: Padding(
         padding: const EdgeInsets.fromLTRB(36, 36, 36, 8),
         child: SizedBox(
@@ -25,8 +26,7 @@ class CancelReservationDialog extends StatelessWidget {
                         text:
                             'W przypadku anulowania rezerwacji w terminie przynajmniej 48h przed rezerwowaną datą zaliczka zostanie zwrócona. Dla rezerwacji anulowanej z powodu gościa poniżej 48h przed rezerwowaną datą jest przewidywany jedynie zwrot kosztów pobytu w przypadku jeżeli został on opłacony,'),
                     TextSpan(
-                        text:
-                            ' w takim przypadku kwota zaliczki nie zostanie zwrócona.',
+                        text: ' w takim przypadku kwota zaliczki nie zostanie zwrócona.',
                         style: TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 ),
