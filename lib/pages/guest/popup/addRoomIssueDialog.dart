@@ -25,6 +25,8 @@ class _AddRoomIssueDialogState extends State<AddRoomIssueDialog> {
       clientsId: widget.clientId,
     );
 
+    print(getRoomIssueType());
+
     context.read<ApiClient>().auth.addRoomIssue(addRoomIssueDTO).then((value) {
       print("RoomIssue created");
       Navigator.of(context).pop();
@@ -40,7 +42,7 @@ class _AddRoomIssueDialogState extends State<AddRoomIssueDialog> {
       case 2:
         return "EQUIPMENT_BROKEN";
       case 3:
-        return "EQUIPMENT_MISSING ";
+        return "EQUIPMENT_MISSING";
       default:
         return "DIRTY";
     }
