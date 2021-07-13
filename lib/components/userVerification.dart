@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/API/ApiClient.dart';
+import 'package:hotel_management_system/pages/login/loginScreen.dart';
 import 'package:provider/provider.dart';
 
 class UserVerification extends StatelessWidget {
-  const UserVerification({Key? key, required this.child, required this.routeRoles}) : super(key: key);
+  const UserVerification(
+      {Key? key, required this.child, required this.routeRoles})
+      : super(key: key);
   final Widget child;
   final List<String> routeRoles;
 
@@ -32,7 +35,7 @@ class UserVerification extends StatelessWidget {
           if (checkRole(routeRoles, snapshot.data ?? []))
             return child;
           else
-            return Text("error404");
+            return LoginScreen();
         } else
           return Text("loading");
       },

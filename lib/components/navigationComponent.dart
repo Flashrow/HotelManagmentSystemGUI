@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/API/ApiClient.dart';
+import 'package:hotel_management_system/pages/login/loginScreen.dart';
 import 'package:hotel_management_system/utils/whoAmI.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +30,11 @@ List<NavigationName> createNavigationList(List<String> navigationRole) {
 
 logout(BuildContext context) {
   context.read<ApiClient>().auth.logout().then((value) {
-    Navigator.pushNamed(context, 'Login');
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+      (route) => false,
+    );
   });
 }
 
