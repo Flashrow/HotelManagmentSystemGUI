@@ -13,12 +13,10 @@ import 'package:provider/provider.dart';
 
 class ReservationFormComponent extends StatefulWidget {
   final ReservationBlueprint? reservation;
-  const ReservationFormComponent({Key? key, required this.reservation})
-      : super(key: key);
+  const ReservationFormComponent({Key? key, required this.reservation}) : super(key: key);
 
   @override
-  _ReservationFormComponentState createState() =>
-      _ReservationFormComponentState();
+  _ReservationFormComponentState createState() => _ReservationFormComponentState();
 }
 
 class _ReservationFormComponentState extends State<ReservationFormComponent> {
@@ -67,13 +65,7 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                       children: [
                         Expanded(child: Container()),
                         Text(
-                          "Pokój " +
-                              this
-                                  .widget
-                                  .reservation!
-                                  .room!
-                                  .description
-                                  .toString(),
+                          "Pokój " + this.widget.reservation!.room!.description.toString(),
                           style: TextStyle(
                             fontSize: 20,
                           ),
@@ -116,14 +108,11 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                           children: [
                             Text(
                               'Data zameldowania: ',
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor),
+                              style: TextStyle(color: Theme.of(context).primaryColor),
                             ),
                             SizedBox(height: 8),
                             Text(
-                              dateFormatter.format(
-                                  this.widget.reservation?.startDate ??
-                                      DateTime.now()),
+                              dateFormatter.format(this.widget.reservation?.startDate ?? DateTime.now()),
                               style: TextStyle(fontSize: 24),
                             ),
                           ],
@@ -135,14 +124,11 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                           children: [
                             Text(
                               'Data wymeldowania: ',
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor),
+                              style: TextStyle(color: Theme.of(context).primaryColor),
                             ),
                             SizedBox(height: 8),
                             Text(
-                              dateFormatter.format(
-                                  this.widget.reservation?.endDate ??
-                                      DateTime.now()),
+                              dateFormatter.format(this.widget.reservation?.endDate ?? DateTime.now()),
                               style: TextStyle(fontSize: 24),
                             ),
                           ],
@@ -178,8 +164,7 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                                         .widget
                                         .reservation!
                                         .endDate!
-                                        .difference(
-                                            this.widget.reservation!.startDate!)
+                                        .difference(this.widget.reservation!.startDate!)
                                         .inDays +
                                     1)
                                 .toString()),
@@ -228,9 +213,10 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                     ),
                     Expanded(
                       child: ListView.builder(
+                          key: UniqueKey(),
                           itemCount: this.widget.reservation!.guests.length,
-                          itemBuilder: (context, index) => CustomerData(
-                              guest: this.widget.reservation!.guests[index])),
+                          itemBuilder: (context, index) =>
+                              CustomerData(key: UniqueKey(), guest: this.widget.reservation!.guests[index])),
                     ),
                     Container(
                       decoration: BoxDecoration(
@@ -251,9 +237,7 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                           children: [
                             Text("Kwota do zapłaty:"),
                             Expanded(child: Container()),
-                            Text(
-                                this.widget.reservation?.fullPrice.toString() ??
-                                    "-"),
+                            Text(this.widget.reservation?.fullPrice.toString() ?? "-"),
                           ],
                         ),
                       ),
@@ -268,14 +252,9 @@ class _ReservationFormComponentState extends State<ReservationFormComponent> {
                         FilledRoundedButton(
                           buttonText: 'dokonaj rezerwacji',
                           onPresesd: () => {
-                            context
-                                .read<ApiClient>()
-                                .database
-                                .addNewReservation(this.widget.reservation)
-                                .then((value) {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      ReservationConfirmed()));
+                            context.read<ApiClient>().database.addNewReservation(this.widget.reservation).then((value) {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) => ReservationConfirmed()));
                             })
                           },
                         ),
