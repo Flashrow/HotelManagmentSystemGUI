@@ -400,7 +400,7 @@ class _RegisterScreenComponentState extends State<RegisterScreenComponent> {
                             ),
                             OutlinedRoundedButton(
                               buttonText: 'powrót',
-                              onPresesd: () => {},
+                              onPresesed: () => {Navigator.of(context).pop()},
                             ),
                             SizedBox(
                               width: 20,

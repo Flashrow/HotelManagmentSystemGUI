@@ -113,7 +113,7 @@ class _ReservationFormStep2ComponentState
                         Expanded(child: Container()),
                         OutlinedRoundedButton(
                           buttonText: 'dodaj pokój',
-                          onPresesd: () => {},
+                          onPresesed: () => {Navigator.of(context).pop()},
                         ),
                         SizedBox(
                           width: 20,
