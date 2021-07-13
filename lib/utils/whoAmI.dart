@@ -1,6 +1,14 @@
 import 'package:hotel_management_system/components/navigationComponent.dart';
 
-enum MyRole { ROLE_ADMIN, ROLE_CLIENT, ROLE_STAFF, ROLE_MANAGER, ROLE_KITCHEN, ROLE_ROOM_SERVICE, ROLE_RECEPTION }
+enum MyRole {
+  ROLE_ADMIN,
+  ROLE_CLIENT,
+  ROLE_STAFF,
+  ROLE_MANAGER,
+  ROLE_KITCHEN,
+  ROLE_ROOM_SERVICE,
+  ROLE_RECEPTION
+}
 
 class NavigationController {
   static String getPath(String myRole) {
@@ -33,42 +41,79 @@ class NavigationController {
     return "Login";
   }
 
-  static List<NavigationName> getNavigation(String myRole) {
-    List<NavigationName> navigationList = [];
+  static bool checkNavigationElement(
+      List<NavigationName> navigationElements, String navigationName) {
+    bool occured = false;
+    navigationElements.forEach((element) {
+      if (element.buttonName == navigationName) occured = true;
+    });
+
+    if (!occured)
+      return true;
+    else
+      return false;
+  }
+
+  static List<NavigationName> getNavigation(List<NavigationName> navigationList, String myRole) {
     switch (myRole) {
       case "ROLE_ADMIN":
         {
-          navigationList.add(NavigationName(buttonName: "Reception", buttonRoute: "Reception"));
-          navigationList.add(NavigationName(buttonName: "Kitchen", buttonRoute: "Kitchen"));
-          navigationList.add(NavigationName(buttonName: "Staff", buttonRoute: "Admin/Staff"));
-          navigationList.add(NavigationName(buttonName: "Rooms", buttonRoute: "Admin/Rooms"));
-          navigationList.add(NavigationName(buttonName: "Guest", buttonRoute: "Guest"));
+          if (checkNavigationElement(navigationList, "Reception")) {
+            print("Reception not occured");
+            navigationList.add(NavigationName(
+                buttonName: "Reception", buttonRoute: "Reception"));
+          }
+
+          if (checkNavigationElement(navigationList, "Kitchen"))
+            navigationList.add(
+                NavigationName(buttonName: "Kitchen", buttonRoute: "Kitchen"));
+
+          if (checkNavigationElement(navigationList, "Staff"))
+            navigationList.add(NavigationName(
+                buttonName: "Staff", buttonRoute: "Admin/Staff"));
+
+          if (checkNavigationElement(navigationList, "Rooms"))
+            navigationList.add(NavigationName(
+                buttonName: "Rooms", buttonRoute: "Admin/Rooms"));
           return navigationList;
         }
       case "ROLE_CLIENT":
         {
-          navigationList.add(NavigationName(buttonName: "Home", buttonRoute: "Guest/Home"));
+          if (checkNavigationElement(navigationList, "Home"))
+            navigationList.add(
+                NavigationName(buttonName: "Home", buttonRoute: "Guest/Home"));
           return navigationList;
         }
       case "ROLE_KITCHEN":
         {
-          navigationList.add(NavigationName(buttonName: "Kitchen", buttonRoute: "Kitchen"));
+          if (checkNavigationElement(navigationList, "Kitchen"))
+            navigationList.add(
+                NavigationName(buttonName: "Kitchen", buttonRoute: "Kitchen"));
           return navigationList;
         }
       case "ROLE_RECEPTION":
         {
-          navigationList.add(NavigationName(buttonName: "Reception", buttonRoute: "Reception"));
+          if (checkNavigationElement(navigationList, "Reception")) {
+            print("Reception not occured");
+            navigationList.add(NavigationName(
+                buttonName: "Reception", buttonRoute: "Reception"));
+          }
+
           return navigationList;
         }
       case "ROLE_ROOM_SERVICE":
         {
-          navigationList.add(NavigationName(buttonName: "RoomService", buttonRoute: "RoomService"));
+          if (checkNavigationElement(navigationList, "RoomService"))
+            navigationList.add(NavigationName(
+                buttonName: "RoomService", buttonRoute: "RoomService"));
           return navigationList;
         }
       case "ROLE_STAFF":
+        print("Adding staff permissions");
         // TODO: Handle this case.
         break;
       case "ROLE_MANAGER":
+        print("Adding manager permissions");
         // TODO: Handle this case.
         break;
     }
