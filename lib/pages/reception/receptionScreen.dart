@@ -50,7 +50,7 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
   filterListBySurname(String surname) {
     List<SingleActiveRoomDTO> empty = [];
     raw.forEach((element) {
-      if (element.client.lastName.contains(surname)) empty.add(element);
+      if ((element.client.lastName.toLowerCase() + element.client.firstName.toLowerCase()).contains(surname.toLowerCase())) empty.add(element);
     });
     setState(() {
       filteredRoom = empty;
@@ -130,7 +130,7 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
                                                 color: Theme.of(context).primaryColor,
                                               ),
                                               borderRadius: BorderRadius.all(Radius.circular(30))),
-                                          hintText: "Numer Pokoju",
+                                          hintText: "Szukaj gościa...",
                                           hintStyle: TextStyle(color: Theme.of(context).primaryColor)),
                                       style: TextStyle(color: Theme.of(context).primaryColor),
                                     ),

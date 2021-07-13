@@ -140,13 +140,6 @@ class _AddRoomIssueDialogState extends State<AddRoomIssueDialog> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 40, 16),
-              child: SizedBox(
-                width: double.infinity,
-                child: Text("Zapisz", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold)),
-              ),
-            ),
           ],
         ),
       ),
