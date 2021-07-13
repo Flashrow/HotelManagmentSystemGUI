@@ -26,10 +26,8 @@ class NavigationController {
           return "RoomService";
         }
       case "ROLE_STAFF":
-        // TODO: Handle this case.
         break;
       case "ROLE_MANAGER":
-        // TODO: Handle this case.
         break;
     }
     return "Login";
@@ -50,7 +48,6 @@ class NavigationController {
       case "ROLE_CLIENT":
         {
           navigationList.add(NavigationName(buttonName: "Home", buttonRoute: "Guest/Home"));
-          navigationList.add(NavigationName(buttonName: "Stay", buttonRoute: "Guest/Stay"));
           return navigationList;
         }
       case "ROLE_KITCHEN":
