@@ -70,12 +70,12 @@ class _FrontPageAppBarState extends State<FrontPageAppBar> {
               if (!api.auth.isAuthorized)
                 OutlinedRoundedButton(
                   buttonText: "Zaloguj się",
-                  onPresesd: () => signIn(context),
+                  onPresesed: () => signIn(context),
                 ),
               if (api.auth.isAuthorized)
                 OutlinedRoundedButton(
                   buttonText: "Dashboard",
-                  onPresesd: () => goToDashboard(context, api),
+                  onPresesed: () => goToDashboard(context, api),
                 )
             ],
           ),

@@ -1,13 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/components/HeadingText.dart';
-import 'package:hotel_management_system/components/dashboardLayout.dart';
-import 'package:hotel_management_system/components/filledRoundedButton.dart';
-import 'package:hotel_management_system/components/navigationComponent.dart';
 import 'package:hotel_management_system/components/outlinedRoundedButton.dart';
-import 'package:hotel_management_system/components/topBar.dart';
 import 'package:hotel_management_system/pages/adminScreen/staffComponent.dart';
-import 'package:hotel_management_system/pages/reservationFormStep2/roomComponent.dart';
 import 'package:hotel_management_system/utils/colorTheme.dart';
 
 class AdminScreenComponent extends StatefulWidget {
@@ -196,7 +190,7 @@ class _AdminScreenComponentState extends State<AdminScreenComponent> {
               ),
               OutlinedRoundedButton(
                 buttonText: 'Nowy user',
-                onPresesd: () => {},
+                onPresesed: () => {Navigator.of(context).pop()},
               ),
               SizedBox(
                 height: 32,

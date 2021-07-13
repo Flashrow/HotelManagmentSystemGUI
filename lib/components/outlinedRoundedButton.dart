@@ -4,11 +4,11 @@ class OutlinedRoundedButton extends StatelessWidget {
   const OutlinedRoundedButton({
     Key? key,
     this.buttonText,
-    this.onPresesd,
+    this.onPresesed,
   }) : super(key: key);
 
   final String? buttonText;
-  final Function? onPresesd;
+  final Function? onPresesed;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class OutlinedRoundedButton extends StatelessWidget {
           EdgeInsets.symmetric(horizontal: 40.0, vertical: 15.0),
         ),
       ),
-      onPressed: onPresesd as void Function()?,
+      onPressed: onPresesed as void Function()?,
       child: Text(
         buttonText!.toUpperCase(),
         style: TextStyle(

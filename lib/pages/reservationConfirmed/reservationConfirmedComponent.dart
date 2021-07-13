@@ -77,7 +77,7 @@ class ReservationConfirmedComponent extends StatelessWidget {
                           Expanded(child: Container()),
                           OutlinedRoundedButton(
                             buttonText: 'kontynuuj',
-                            onPresesd: () {
+                            onPresesed: () {
                               Navigator.of(context).pushNamed("FrontPage");
                             },
                           ),
