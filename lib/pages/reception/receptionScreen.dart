@@ -194,16 +194,6 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
                                                       mainAxisAlignment: MainAxisAlignment.end,
                                                       children: [
                                                         IconButton(
-                                                          icon: Icon(Icons.restaurant_menu_outlined),
-                                                          onPressed: () => {"restaurant_menu_outlined"},
-                                                          splashRadius: 25,
-                                                        ),
-                                                        IconButton(
-                                                          icon: Icon(Icons.room_service_outlined),
-                                                          onPressed: () => {print("room_service_outlined")},
-                                                          splashRadius: 25,
-                                                        ),
-                                                        IconButton(
                                                           icon: Icon(Icons.attach_money),
                                                           onPressed: () => {
                                                             if (myWidget == true)

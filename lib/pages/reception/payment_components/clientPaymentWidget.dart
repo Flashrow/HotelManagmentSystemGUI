@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/components/filledRoundedButton.dart';
 import 'package:hotel_management_system/models/DTO/SingleActiveRoomDTO.dart';
 
 import 'clientDataWidget.dart';
@@ -19,6 +18,11 @@ class ClientPaymentWidget extends StatefulWidget {
 }
 
 class _ClientPaymentWidgetState extends State<ClientPaymentWidget> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -81,13 +85,18 @@ class _ClientPaymentWidgetState extends State<ClientPaymentWidget> {
                     Expanded(child: Container()),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 16.0, top: 16.0),
-                  child: Container(
-                      child: FilledRoundedButton(
-                    buttonText: "przyjmij opłate",
-                    onPresesd: () => {},
-                  )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    // Padding(
+                    //   padding: const EdgeInsets.only(bottom: 16.0, top: 16.0),
+                    //   child: Container(
+                    //       child: FilledRoundedButton(
+                    //     buttonText: "przyjmij opłate",
+                    //     onPresesd: acceptPaymentFunction,
+                    //   )),
+                    // ),
+                  ],
                 ),
               ],
             ),
