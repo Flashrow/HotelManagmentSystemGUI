@@ -407,7 +407,7 @@ class _RegisterScreenComponentState extends State<RegisterScreenComponent> {
                             ),
                             FilledRoundedButton(
                               buttonText: 'stwórz konto',
-                              onPresesd: bloc.submitClient,
+                              onPresesd: () => bloc.submitClient(context),
                             ),
                           ],
                         ),

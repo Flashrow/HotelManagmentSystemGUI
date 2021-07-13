@@ -64,7 +64,7 @@ class ClientBloc {
     _rulesAccept.close();
   }
 
-  submitClient() async {
+  submitClient(BuildContext context) async {
     if (formkey!.currentState!.validate()) {
       if (!_rulesAccept.hasValue || _rulesAccept.value == false) {
         showErrorToast('Zaakceptuj regulamin');
@@ -94,7 +94,7 @@ class ClientBloc {
             repeatedPassword: _repeatedPassword.value,
             surname: _surname.value);
         showSuccessToast('Zarejestrowano poprawnie');
-        //TODO: navigation
+        Navigator.of(context).pop();
       } catch (e) {
         showErrorToast('Podano błędne dane');
       }
